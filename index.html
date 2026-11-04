@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>IzzGmail — Setor Gmail Fresh</title>
+<style>
+  /* ===== RETRO BLUE STRIPE THEME ===== */
+  :root {
+    --bg: #0b0e14;
+    --primary: #2563eb; /* Retro Blue */
+    --primary-light: #60a5fa;
+    --secondary: #facc15; /* Kuning Kontras */
+    --success: #4ade80; /* Hijau */
+    --danger: #f87171; /* Merah */
+    --black: #000000;
+    --white: #ffffff;
+    --border: 3px solid #000000;
+    --shadow: 4px 4px 0px 0px #000000;
+    --shadow-sm: 2px 2px 0px 0px #000000;
+    --shadow-active: 0px 0px 0px 0px #000000;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Courier New', Courier, monospace; font-weight: bold;}
+  
+  body {
+    background-color: var(--primary-light);
+    /* Retro Blue Stripe Background */
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 15px,
+      rgba(37, 99, 235, 0.15) 15px,
+      rgba(37, 99, 235, 0.15) 30px
+    );
+    color: var(--black);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+  }
+
+  /* ===== APP CONTAINER ===== */
+  .app {
+    width: 100%;
+    max-width: 420px;
+    background: var(--white);
+    border: var(--border);
+    border-radius: 12px;
+    box-shadow: 8px 8px 0px 0px var(--primary);
+    overflow: hidden;
+    min-height: 700px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ===== SCREENS ===== */
+  .screen {
+    display: none;
+    flex-direction: column;
+    padding: 24px 20px;
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 90px;
+  }
+  .screen.active { display: flex; }
+
+  /* Typography */
+  h1, h2, h3, h4 { text-transform: uppercase; letter-spacing: -0.5px; }
+  
+  .logo {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    color: var(--primary);
+    text-shadow: 2px 2px 0px var(--secondary), 4px 4px 0px var(--black);
+    user-select: none;
+    text-transform: uppercase;
+  }
+
+  .sub-logo {
+    text-align: center;
+    color: var(--black);
+    font-size: 14px;
+    margin-bottom: 24px;
+    background: var(--secondary);
+    border: var(--border);
+    display: inline-block;
+    align-self: center;
+    padding: 4px 12px;
+    box-shadow: var(--shadow-sm);
+    transform: rotate(-1deg);
+  }
+
+  /* ===== TABS ===== */
+  .auth-tabs {
+    display: flex;
+    background: var(--white);
+    border: var(--border);
+    border-radius: 8px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .auth-tabs button {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    background: transparent;
+    color: var(--black);
+    font-size: 16px;
+    cursor: pointer;
+    transition: .1s;
+  }
+  .auth-tabs button.active {
+    background: var(--primary);
+    color: var(--white);
+    text-shadow: 1px 1px 0px var(--black);
+  }
+  .auth-tabs button:first-child { border-right: var(--border); }
+
+  /* ===== FORM ===== */
+  .form-group { margin-bottom: 16px; }
+  .form-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .form-group input, .form-group textarea {
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--white);
+    border: var(--border);
+    border-radius: 8px;
+    color: var(--black);
+    font-size: 16px;
+    outline: none;
+    box-shadow: var(--shadow-sm);
+    transition: .1s;
+  }
+  .form-group input:focus, .form-group textarea:focus {
+    box-shadow: var(--shadow);
+    transform: translate(-1px, -1px);
+    background: #f0f9ff;
+  }
+
+  /* ===== BUTTONS ===== */
+  .btn {
+    width: 100%;
+    padding: 16px;
+    border: var(--border);
+    border-radius: 8px;
+    font-size: 16px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: .1s;
+    box-shadow: var(--shadow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn:active {
+    transform: translate(3px, 3px);
+    box-shadow: var(--shadow-active);
+  }
+  .btn-primary { background: var(--primary); color: var(--white); text-shadow: 1px 1px 0px var(--black); }
+  .btn-secondary { background: var(--secondary); color: var(--black); }
+  .btn-success { background: var(--success); color: var(--black); }
+  .btn-danger { background: var(--danger); color: var(--white); text-shadow: 1px 1px 0px var(--black); }
+  .btn-outline { background: var(--white); color: var(--black); }
+  
+  .btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--white);
+    color: var(--black);
+    border: var(--border);
+    border-radius: 8px;
+    padding: 14px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 15px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  .btn-google:active { transform: translate(3px, 3px); box-shadow: var(--shadow-active); }
+  .btn-google svg { width: 20px; height: 20px; }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--black);
+    font-size: 12px;
+    margin: 16px 0;
+    text-transform: uppercase;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 3px;
+    background: var(--black);
+  }
+
+  /* ===== BOTTOM NAV ===== */
+  .bottom-nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
+    background: var(--white);
+    border-top: var(--border);
+    padding: 8px 8px 12px;
+    justify-content: space-around;
+    z-index: 10;
+  }
+  .bottom-nav button {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: transparent;
+    border: none;
+    color: var(--black);
+    font-size: 11px;
+    cursor: pointer;
+    padding: 8px 0;
+    border-radius: 8px;
+  }
+  .bottom-nav button.active {
+    background: var(--primary);
+    color: var(--white);
+    border: 2px solid var(--black);
+  }
+  .bottom-nav .icon { font-size: 22px; }
+
+  /* ===== CARDS & PANELS ===== */
+  .neo-card {
+    background: var(--white);
+    border: var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .neo-card-primary { background: var(--primary-light); }
+  .neo-card-secondary { background: var(--secondary); }
+
+  .balance-card {
+    text-align: center;
+  }
+  .balance-card .label { font-size: 14px; text-transform: uppercase; margin-bottom: 8px; }
+  .balance-card .amount {
+    font-size: 36px;
+    font-weight: 900;
+    background: var(--white);
+    border: var(--border);
+    padding: 8px;
+    box-shadow: var(--shadow-sm);
+    display: inline-block;
+  }
+
+  .greeting { font-size: 20px; margin-bottom: 8px; text-transform: uppercase; }
+  .desc { font-size: 14px; line-height: 1.5; margin-bottom: 20px; background: var(--white); padding: 10px; border: var(--border); border-radius: 8px; }
+
+  .action-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .action-grid .btn { padding: 16px 8px; font-size: 14px; }
+
+  .stats-row { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; }
+  .stat-box {
+    flex: 1;
+    background: var(--white);
+    border: var(--border);
+    border-radius: 8px;
+    padding: 14px 8px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+  .stat-box .num { font-size: 22px; font-weight: 900; }
+  .stat-box .lbl { font-size: 11px; text-transform: uppercase; margin-top: 4px; }
+  .stat-green { background: var(--success); }
+  .stat-yellow { background: var(--secondary); }
+  .stat-red { background: var(--danger); color: var(--white); }
+
+  /* ===== RULES BOX ===== */
+  .rules-box {
+    background: var(--white);
+    border: var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .rules-box h4 { background: var(--primary); color: var(--white); padding: 6px 10px; display: inline-block; margin-bottom: 10px; border: 2px solid var(--black); text-shadow: 1px 1px 0px var(--black); }
+  .rules-box ol { padding-left: 20px; }
+  .rules-box li { margin-bottom: 6px; }
+  .rules-box .note { margin-top: 12px; padding: 10px; background: var(--danger); color: var(--white); border: 2px solid var(--black); font-size: 12px; text-shadow: 1px 1px 0px var(--black); }
+
+  /* ===== GENERATE GMAIL ===== */
+  .generate-box {
+    background: var(--secondary);
+    border: var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-sm);
+  }
+  .generate-box .email {
+    font-size: 16px;
+    background: var(--white);
+    padding: 10px;
+    border: 2px solid var(--black);
+    margin-bottom: 12px;
+    word-break: break-all;
+  }
+  .price-tag {
+    text-align: center;
+    font-size: 16px;
+    background: var(--success);
+    border: var(--border);
+    padding: 10px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* ===== E-WALLET ===== */
+  .method-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+  .method-btn {
+    padding: 16px 6px;
+    background: var(--white);
+    border: var(--border);
+    border-radius: 8px;
+    color: var(--black);
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+  }
+  .method-btn:active { transform: translate(2px, 2px); box-shadow: var(--shadow-active); }
+  .method-btn.selected { background: var(--primary); color: var(--white); text-shadow: 1px 1px 0px var(--black); }
+
+  /* ===== HISTORY & ADMIN CARDS ===== */
+  .history-card, .admin-user, .withdraw-card {
+    background: var(--white);
+    border: var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-sm);
+  }
+  .history-card .row, .withdraw-card .row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 8px;
+    border-bottom: 2px dashed #ccc;
+    padding-bottom: 4px;
+  }
+  .history-card .row:last-child, .withdraw-card .row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border: 2px solid var(--black);
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  .badge-sukses { background: var(--success); }
+  .badge-pending { background: var(--secondary); }
+  .badge-ditolak { background: var(--danger); color: var(--white); text-shadow: 1px 1px 0px var(--black); }
+
+  /* ===== PROFIL ===== */
+  .profile-header { text-align: center; margin-bottom: 24px; }
+  .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: var(--secondary);
+    border: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    font-weight: 900;
+    color: var(--black);
+    margin: 0 auto 16px;
+    box-shadow: var(--shadow);
+  }
+  .profile-info {
+    background: var(--primary-light);
+    border: var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+  }
+  .profile-info .row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 2px solid var(--black);
+    font-size: 15px;
+  }
+  .profile-info .row:last-child { border-bottom: none; }
+
+  /* ===== LEADERBOARD ===== */
+  .leader-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--white);
+    border: var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+  .leader-rank {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--black);
+    background: var(--primary-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .leader-rank.gold { background: var(--secondary); }
+  .leader-rank.silver { background: #cbd5e1; }
+  .leader-rank.bronze { background: #fdba74; }
+
+  /* ===== ADMIN DASHBOARD ===== */
+  .admin-stat {
+    background: var(--primary);
+    color: var(--white);
+    border: var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    text-align: center;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+    text-shadow: 2px 2px 0px var(--black);
+  }
+  .admin-stat .num { font-size: 48px; font-weight: 900; margin-bottom: 8px; }
+  .admin-stat .lbl { font-size: 14px; text-transform: uppercase; }
+  
+  .section-title {
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    background: var(--secondary);
+    border: var(--border);
+    padding: 8px 12px;
+    display: inline-block;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .admin-user .uname {
+    font-size: 16px;
+    background: var(--primary-light);
+    padding: 8px;
+    border: 2px solid var(--black);
+    margin-bottom: 12px;
+  }
+
+  /* Admin Gmail Row */
+  .admin-gmail-row {
+    background: #f8fafc;
+    border: 2px solid var(--black);
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+  .admin-gmail-row .email {
+    font-size: 13px;
+    word-break: break-all;
+    flex: 1;
+  }
+  .admin-gmail-row .actions {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .admin-gmail-row .actions .btn {
+    padding: 8px 10px;
+    font-size: 14px;
+    width: auto;
+    box-shadow: 2px 2px 0px 0px var(--black);
+  }
+  .admin-gmail-row .actions .btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px 0px 0px var(--black);
+  }
+
+  /* ===== CHAT (NEO-BRUTALISM) ===== */
+  #screen-chat, #screen-admin-chat { padding: 0; padding-bottom: 0; overflow: hidden; }
+  .chat-container { display: flex; flex-direction: column; height: 100%; min-height: 700px; }
+  .chat-header {
+    background: var(--primary);
+    color: var(--white);
+    padding: 16px 20px;
+    border-bottom: var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+    text-shadow: 1px 1px 0px var(--black);
+  }
+  .chat-header .back-btn { background: transparent; border: none; color: var(--white); font-size: 24px; cursor: pointer; }
+  .chat-header .avatar-admin {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--secondary);
+    border: 2px solid var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+  .chat-header .info { flex: 1; }
+  .chat-header .info .name { font-size: 16px; text-transform: uppercase; }
+  .chat-header .info .status { font-size: 12px; color: var(--success); }
+
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #e2e8f0;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.05) 10px, rgba(0,0,0,0.05) 20px);
+  }
+  .msg {
+    max-width: 80%;
+    padding: 12px 16px;
+    font-size: 14px;
+    position: relative;
+    border: var(--border);
+    box-shadow: var(--shadow-sm);
+  }
+  .msg.them {
+    align-self: flex-start;
+    background: var(--white);
+    border-radius: 12px 12px 12px 0;
+  }
+  .msg.me {
+    align-self: flex-end;
+    background: var(--primary-light);
+    border-radius: 12px 12px 0 12px;
+  }
+  .msg .time { font-size: 10px; margin-top: 6px; display: block; text-align: right; opacity: 0.7; }
+  
+  .chat-input-row {
+    display: flex;
+    gap: 10px;
+    padding: 12px 16px;
+    background: var(--white);
+    border-top: var(--border);
+    flex-shrink: 0;
+  }
+  .chat-input-row input {
+    flex: 1;
+    padding: 12px 16px;
+    background: var(--white);
+    border: var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+  }
+  .chat-input-row button {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    border: var(--border);
+    background: var(--secondary);
+    color: var(--black);
+    font-size: 20px;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+  }
+  .chat-input-row button:active { transform: translate(2px, 2px); box-shadow: var(--shadow-active); }
+
+  .chat-user-item {
+    background: var(--white);
+    border: var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+  .chat-user-item:active { transform: translate(2px, 2px); box-shadow: var(--shadow-active); }
+  .chat-user-item .uavatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: var(--white);
+    border: 2px solid var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .chat-user-item .uinfo { flex: 1; min-width: 0; }
+  .chat-user-item .uname { font-size: 15px; margin-bottom: 2px; }
+  .chat-user-item .ulast { font-size: 12px; color: #475569; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .unread-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--danger); border: 2px solid var(--black); flex-shrink: 0; }
+
+  /* ===== TOAST ===== */
+  .toast {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--secondary);
+    color: var(--black);
+    border: var(--border);
+    box-shadow: var(--shadow);
+    padding: 14px 24px;
+    font-size: 14px;
+    opacity: 0;
+    transition: .3s;
+    pointer-events: none;
+    z-index: 999;
+    white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast.error { background: var(--danger); color: var(--white); text-shadow: 1px 1px 0px var(--black); }
+
+  .loading { text-align: center; padding: 40px 0; font-size: 16px; text-transform: uppercase; }
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--white);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 16px;
+    box-shadow: var(--shadow-sm);
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .empty-state { text-align: center; padding: 40px 0; font-size: 14px; text-transform: uppercase; color: #64748b; }
+  
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--white); border-left: 2px solid var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--primary); border: 2px solid var(--black); }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ===== LOADING ===== -->
+  <div id="screen-loading" class="screen active">
+    <div class="loading">
+      <div class="spinner"></div>
+      Memuat IzzGmail...
+    </div>
+  </div>
+
+  <!-- ===== LOGIN ===== -->
+  <div id="screen-login" class="screen">
+    <div class="logo">IzzGmail</div>
+    <div class="sub-logo">Setor Gmail Fresh, Dapat Cuan!</div>
+
+    <div class="auth-tabs">
+      <button id="tab-login" class="active" onclick="switchAuth('login')">Login</button>
+      <button id="tab-daftar" onclick="switchAuth('daftar')">Daftar</button>
+    </div>
+
+    <div id="form-login">
+      <button class="btn-google" onclick="loginGoogle()">
+        <svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+        Login Google
+      </button>
+      <div class="divider">atau</div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="login-email" placeholder="email@contoh.com" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="login-pass" placeholder="Password" autocomplete="current-password">
+      </div>
+      <button class="btn btn-primary" id="btn-login" onclick="doLogin()">Login</button>
+    </div>
+
+    <div id="form-daftar" style="display:none;">
+      <button class="btn-google" onclick="loginGoogle()">
+        <svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+        Daftar Google
+      </button>
+      <div class="divider">atau</div>
+      <div class="form-group"><label>Email</label><input type="email" id="daftar-email" placeholder="email@contoh.com"></div>
+      <div class="form-group"><label>Nama</label><input type="text" id="daftar-nama" placeholder="Nama Lengkap"></div>
+      <div class="form-group"><label>Password</label><input type="password" id="daftar-pass" placeholder="Minimal 6 karakter"></div>
+      <div class="form-group"><label>Konfirmasi Password</label><input type="password" id="daftar-pass2" placeholder="Ulangi password"></div>
+      <button class="btn btn-primary" id="btn-daftar" onclick="doDaftar()">Daftar</button>
+    </div>
+  </div>
+
+  <!-- ===== UTAMA ===== -->
+  <div id="screen-utama" class="screen">
+    <div class="neo-card neo-card-primary balance-card">
+      <div class="label">Saldo Anda</div>
+      <div class="amount" id="saldo-display">Rp 0</div>
+    </div>
+    
+    <div class="greeting">Hai, <span id="nama-user">User</span> 👋</div>
+    <div class="desc">Selamat datang di <b>IzzGmail</b>, setorkan gmail fresh kamu untuk mendapatkan uang. Rate / harga per gmail <b>Rp 2.800</b></div>
+    
+    <div class="action-grid">
+      <button class="btn btn-secondary" onclick="showScreen('setor')">📤 SETOR</button>
+      <button class="btn btn-outline" onclick="showScreen('riwayat')">📜 Riwayat</button>
+      <button class="btn btn-outline" onclick="showScreen('ewallet')">💳 E-WALLET</button>
+      <button class="btn btn-outline" onclick="showScreen('setor')">📖 RULES</button>
+    </div>
+    
+    <div class="action-grid">
+      <button class="btn btn-outline" onclick="openChat()">💬 Izz Support</button>
+      <button class="btn btn-outline" onclick="showScreen('leaderboard')">🏆 Leaderboard</button>
+    </div>
+    
+    <div class="stats-row">
+      <div class="stat-box stat-green"><div class="num" id="stat-diterima">0</div><div class="lbl">Diterima</div></div>
+      <div class="stat-box stat-yellow"><div class="num" id="stat-pending">0</div><div class="lbl">Pending</div></div>
+      <div class="stat-box stat-red"><div class="num" id="stat-ditolak">0</div><div class="lbl">Ditolak</div></div>
+    </div>
+  </div>
+
+  <!-- ===== SETOR ===== -->
+  <div id="screen-setor" class="screen">
+    <div class="logo" style="font-size:24px;margin-bottom:16px;">IzzGmail</div>
+    
+    <div class="rules-box">
+      <h4>📋 Rules</h4>
+      <ol>
+        <li>Gmail wajib fresh/baru dibuat, bukan akun lama.</li>
+        <li>Nama Gmail wajib sesuai hasil generate di website, harus sama persis dan tidak boleh berbeda satu huruf pun.</li>
+        <li>Password wajib: <b>goldacok</b> (kecil semua / no kapital)</li>
+        <li>Setting umur Gmail minimal 18 tahun. Dilarang menyetorkan akun anak atau akun yang masih terhubung dengan Family Link.</li>
+        <li>Dilarang menambahkan nomor telepon atau email pemulihan.</li>
+      </ol>
+      <div class="note">⚠️ Wajib mematuhi semua rules yang berlaku. Pelanggaran aturan dapat menyebabkan akun diblokir.</div>
+    </div>
+
+    <button class="btn btn-primary" onclick="generateGmail()" style="margin-bottom:16px;">🔄 GENERATE GMAIL</button>
+
+    <div class="generate-box">
+      <div class="email" id="generated-email">-</div>
+      <button class="btn btn-outline" onclick="copyEmail()">📋 COPY EMAIL</button>
+    </div>
+
+    <div class="price-tag">Password : goldacok<br>Rp 2.800 / gmail</div>
+
+    <div class="form-group">
+      <label>Masukkan Gmail yang disetorkan (satu per baris)</label>
+      <textarea class="setor-input" id="input-setor" placeholder="izzgmail1@gmail.com&#10;izzgmail2@gmail.com" style="min-height:120px; resize:vertical;"></textarea>
+    </div>
+
+    <button class="btn btn-primary" id="btn-setor" onclick="doSetor()">SETOR SEKARANG</button>
+  </div>
+
+  <!-- ===== RIWAYAT ===== -->
+  <div id="screen-riwayat" class="screen">
+    <div class="section-title">📜 Riwayat Penarikan</div>
+    <div id="riwayat-list"><div class="loading"><div class="spinner"></div>Memuat...</div></div>
+  </div>
+
+  <!-- ===== E-WALLET ===== -->
+  <div id="screen-ewallet" class="screen">
+    <div class="neo-card neo-card-primary balance-card">
+      <div class="label">Saldo Anda</div>
+      <div class="amount" id="saldo-ewallet">Rp 0</div>
+    </div>
+    
+    <div class="section-title">Pilih Metode</div>
+    <div class="method-grid">
+      <div class="method-btn" onclick="selectMethod(this,'DANA')">DANA</div>
+      <div class="method-btn" onclick="selectMethod(this,'GOPAY')">GOPAY</div>
+      <div class="method-btn" onclick="selectMethod(this,'OVO')">OVO</div>
+    </div>
+    
+    <div class="form-group"><label>Nama Penerima</label><input type="text" id="wd-nama" placeholder="Nama sesuai e-wallet"></div>
+    <div class="form-group"><label>Nomor E-Wallet</label><input type="tel" id="wd-nomor" placeholder="08xxxxxxxxxx"></div>
+    <div class="form-group"><label>Jumlah Penarikan (Rp)</label><input type="number" id="wd-jumlah" placeholder="Minimal 10000"></div>
+    
+    <button class="btn btn-primary" id="btn-withdraw" onclick="doWithdraw()">Konfirmasi Penarikan</button>
+  </div>
+
+  <!-- ===== PROFIL ===== -->
+  <div id="screen-profil" class="screen">
+    <div class="profile-header">
+      <div class="avatar" id="avatar-user">U</div>
+    </div>
+    
+    <div class="profile-info">
+      <div class="row"><span>Nama</span><span id="profil-nama">-</span></div>
+      <div class="row"><span>Email</span><span id="profil-email">-</span></div>
+      <div class="row"><span>Saldo</span><span id="profil-saldo">Rp 0</span></div>
+    </div>
+    
+    <button class="btn btn-outline" onclick="gantiPassword()" style="margin-bottom:16px;">🔐 GANTI PASSWORD</button>
+    <button class="btn btn-danger" onclick="logout()">🚪 LOGOUT</button>
+  </div>
+
+  <!-- ===== LEADERBOARD ===== -->
+  <div id="screen-leaderboard" class="screen">
+    <div class="section-title" style="text-align:center; display:block;">🏆 TOP PENYETOR</div>
+    <div id="leaderboard-list"><div class="loading"><div class="spinner"></div>Memuat...</div></div>
+  </div>
+
+  <!-- ===== CHAT (USER) ===== -->
+  <div id="screen-chat" class="screen">
+    <div class="chat-container">
+      <div class="chat-header">
+        <button class="back-btn" onclick="showScreen('utama')">←</button>
+        <div class="avatar-admin">👑</div>
+        <div class="info">
+          <div class="name">Izz Support</div>
+          <div class="status">Admin Online</div>
+        </div>
+      </div>
+      <div class="chat-messages" id="chat-messages"></div>
+      <div class="chat-input-row">
+        <input type="text" id="chat-input" placeholder="Tulis pesan..." onkeypress="if(event.key==='Enter')sendMessage()">
+        <button onclick="sendMessage()" id="chat-send-btn">➤</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ADMIN DASHBOARD ===== -->
+  <div id="screen-admin" class="screen">
+    <div class="logo" style="font-size:20px;margin-bottom:16px;">👑 Admin Panel</div>
+    
+    <div class="admin-stat">
+      <div class="num" id="admin-total">0</div>
+      <div class="lbl">Total Gmail Disetorkan</div>
+    </div>
+
+    <div class="section-title">💬 Chat Masuk</div>
+    <div id="admin-chat-list"><div class="loading"><div class="spinner"></div>Memuat...</div></div>
+
+    <div class="section-title" style="margin-top:20px;">📥 Setoran Pending</div>
+    <div id="admin-setoran-list"><div class="loading"><div class="spinner"></div>Memuat...</div></div>
+    
+    <div class="section-title" style="margin-top:20px;">💸 Penarikan Pending</div>
+    <div id="admin-withdraw-list"><div class="loading"><div class="spinner"></div>Memuat...</div></div>
+    
+    <button class="btn btn-danger" style="margin-top:20px;" onclick="logout()">🚪 Logout Admin</button>
+    <button class="btn btn-outline" style="margin-top:12px;" onclick="showScreen('utama')">← Ke Beranda</button>
+  </div>
+
+  <!-- ===== ADMIN CHAT ===== -->
+  <div id="screen-admin-chat" class="screen">
+    <div class="chat-container">
+      <div class="chat-header">
+        <button class="back-btn" onclick="showScreen('admin')">←</button>
+        <div class="avatar-admin" id="admin-chat-avatar">U</div>
+        <div class="info">
+          <div class="name" id="admin-chat-name">User</div>
+          <div class="status">User</div>
+        </div>
+      </div>
+      <div class="chat-messages" id="admin-chat-messages"></div>
+      <div class="chat-input-row">
+        <input type="text" id="admin-chat-input" placeholder="Balas pesan..." onkeypress="if(event.key==='Enter')adminSendMessage()">
+        <button onclick="adminSendMessage()">➤</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== BOTTOM NAV ===== -->
+  <div class="bottom-nav" id="bottom-nav">
+    <button data-screen="utama" onclick="showScreen('utama')" class="active"><span class="icon">🏠</span>Beranda</button>
+    <button data-screen="setor" onclick="showScreen('setor')"><span class="icon">📤</span>Setor</button>
+    <button data-screen="ewallet" onclick="showScreen('ewallet')"><span class="icon">💳</span>Wallet</button>
+    <button data-screen="profil" onclick="showScreen('profil')"><span class="icon">👤</span>Profil</button>
+  </div>
+
+</div>
+
+<div id="toast" class="toast"></div>
+
+<!-- Firebase SDK v10 -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import {
+  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+  signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged,
+  sendPasswordResetEmail
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import {
+  getFirestore, doc, setDoc, getDoc, updateDoc, collection,
+  addDoc, query, where, orderBy, limit, getDocs, serverTimestamp,
+  increment, onSnapshot
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+/* ============ CONFIG FIREBASE ANDA ============ */
+const firebaseConfig = {
+  apiKey: "AIzaSyCjcXJaCfqmeCublb0YaWfLJaOVLz_zGow",
+  authDomain: "login-izz.firebaseapp.com",
+  projectId: "login-izz",
+  storageBucket: "login-izz.firebasestorage.app",
+  messagingSenderId: "743044536844",
+  appId: "1:743044536844:web:f8ce49878b79f272252c29",
+  measurementId: "G-7M2C2413CF"
+};
+
+/* 🔥 GANTI EMAIL INI DENGAN EMAIL ANDA (Yang akan jadi Admin) */
+const OWNER_EMAILS = [
+  "admin@izzgmail.com" // GANTI DENGAN EMAIL YANG AKAN ANDA PAKAI UNTUK LOGIN ADMIN
+];
+
+const RATE_PER_GMAIL = 2800;
+/* ============================================================ */
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+let currentUser = null;
+let currentProfile = null;
+let method = '';
+let generatedEmail = '';
+let chatUnsubscribe = null;
+let adminChatUnsub = null;
+let adminChatListUnsub = null;
+let currentAdminChatUid = null;
+
+/* ===== HELPERS ===== */
+function showToast(msg, isError = false) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (isError ? ' error' : '');
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(() => t.className = 'toast', 3000);
+}
+function rupiah(n) { return 'Rp ' + (Number(n) || 0).toLocaleString('id-ID'); }
+function isAdmin(email) {
+  return OWNER_EMAILS.map(e => e.toLowerCase()).includes((email || '').toLowerCase());
+}
+function formatTime(ts) {
+  if (!ts) return '';
+  const d = ts.toDate ? ts.toDate() : new Date(ts);
+  return d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+}
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function showScreen(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById('screen-' + name);
+  if (el) el.classList.add('active');
+
+  const nav = document.getElementById('bottom-nav');
+  if (currentUser && name !== 'login') {
+    nav.style.display = 'flex';
+    nav.querySelectorAll('button').forEach(b => b.classList.toggle('active', b.dataset.screen === name));
+  } else {
+    nav.style.display = 'none';
+  }
+
+  if (name === 'utama') loadDashboard();
+  if (name === 'ewallet') updateSaldoUI();
+  if (name === 'profil') loadProfil();
+  if (name === 'riwayat') loadRiwayat();
+  if (name === 'leaderboard') loadLeaderboard();
+  if (name === 'admin') loadAdmin();
+}
+
+/* ===== AUTH ===== */
+function switchAuth(tab) {
+  document.querySelectorAll('.auth-tabs button').forEach((b, i) => {
+    b.classList.toggle('active', (tab === 'login' && i === 0) || (tab === 'daftar' && i === 1));
+  });
+  document.getElementById('form-login').style.display = tab === 'login' ? 'block' : 'none';
+  document.getElementById('form-daftar').style.display = tab === 'daftar' ? 'block' : 'none';
+}
+
+async function doLogin() {
+  const email = document.getElementById('login-email').value.trim().toLowerCase();
+  const pass = document.getElementById('login-pass').value;
+  if (!email || !pass) return showToast('Isi email dan password', true);
+  const btn = document.getElementById('btn-login');
+  btn.disabled = true; btn.textContent = 'Memproses...';
+  try {
+    await signInWithEmailAndPassword(auth, email, pass);
+    showToast(isAdmin(email) ? 'Login admin berhasil 👑' : 'Login berhasil!');
+  } catch (e) {
+    showToast(terjemahError(e.code), true);
+  } finally {
+    btn.disabled = false; btn.textContent = 'Login';
+  }
+}
+
+async function doDaftar() {
+  const email = document.getElementById('daftar-email').value.trim().toLowerCase();
+  const nama = document.getElementById('daftar-nama').value.trim();
+  const pass = document.getElementById('daftar-pass').value;
+  const pass2 = document.getElementById('daftar-pass2').value;
+  if (!email || !nama || !pass || !pass2) return showToast('Semua field wajib diisi', true);
+  if (pass !== pass2) return showToast('Password tidak sama', true);
+  if (pass.length < 6) return showToast('Password minimal 6 karakter', true);
+  const btn = document.getElementById('btn-daftar');
+  btn.disabled = true; btn.textContent = 'Memproses...';
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, email, pass);
+    await setDoc(doc(db, 'users', cred.user.uid), {
+      nama, email, saldo: 0, totalSetor: 0, createdAt: serverTimestamp()
+    });
+    showToast('Daftar berhasil! Silakan login.');
+    switchAuth('login');
+    document.getElementById('login-email').value = email;
+  } catch (e) {
+    showToast(terjemahError(e.code), true);
+  } finally {
+    btn.disabled = false; btn.textContent = 'Daftar';
+  }
+}
+
+async function loginGoogle() {
+  try {
+    const provider = new GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: 'select_account' });
+    const cred = await signInWithPopup(auth, provider);
+    const ref = doc(db, 'users', cred.user.uid);
+    const snap = await getDoc(ref);
+    if (!snap.exists()) {
+      await setDoc(ref, {
+        nama: cred.user.displayName || cred.user.email.split('@')[0],
+        email: cred.user.email, saldo: 0, totalSetor: 0, createdAt: serverTimestamp()
+      });
+    }
+  } catch (e) {
+    showToast(terjemahError(e.code), true);
+  }
+}
+
+async function logout() {
+  cleanupChatListeners();
+  await signOut(auth);
+  showToast('Berhasil logout');
+}
+
+function cleanupChatListeners() {
+  if (chatUnsubscribe) { chatUnsubscribe(); chatUnsubscribe = null; }
+  if (adminChatUnsub) { adminChatUnsub(); adminChatUnsub = null; }
+  if (adminChatListUnsub) { adminChatListUnsub(); adminChatListUnsub = null; }
+  currentAdminChatUid = null;
+}
+
+function terjemahError(code) {
+  const map = {
+    'auth/invalid-email': 'Email tidak valid',
+    'auth/user-not-found': 'Akun tidak ditemukan',
+    'auth/wrong-password': 'Password salah',
+    'auth/invalid-credential': 'Email atau password salah',
+    'auth/email-already-in-use': 'Email sudah terdaftar',
+    'auth/weak-password': 'Password terlalu lemah',
+    'auth/too-many-requests': 'Terlalu banyak percobaan, coba lagi nanti',
+    'auth/popup-closed-by-user': 'Login Google dibatalkan',
+    'auth/operation-not-allowed': 'Login Google belum diaktifkan di Firebase Console',
+    'auth/unauthorized-domain': 'Domain ini belum diizinkan. Tambahkan di Firebase → Authentication → Settings → Authorized domains',
+    'auth/popup-blocked': 'Popup diblokir browser. Izinkan popup untuk situs ini',
+    'auth/cancelled-popup-request': 'Popup sedang dibuka, tunggu sebentar',
+    'auth/network-request-failed': 'Koneksi internet bermasalah'
+  };
+  return map[code] || 'Terjadi kesalahan: ' + code;
+}
+
+/* ===== AUTH STATE ===== */
+onAuthStateChanged(auth, async (user) => {
+  currentUser = user;
+  if (user) {
+    const snap = await getDoc(doc(db, 'users', user.uid));
+    currentProfile = snap.exists()
+      ? snap.data()
+      : { nama: user.email.split('@')[0], email: user.email, saldo: 0, totalSetor: 0 };
+    if (isAdmin(user.email)) showScreen('admin');
+    else showScreen('utama');
+  } else {
+    currentProfile = null;
+    cleanupChatListeners();
+    showScreen('login');
+  }
+});
+
+/* ===== DASHBOARD ===== */
+async function loadDashboard() {
+  if (!currentUser) return;
+  const snap = await getDoc(doc(db, 'users', currentUser.uid));
+  currentProfile = snap.data();
+  document.getElementById('saldo-display').textContent = rupiah(currentProfile.saldo);
+  document.getElementById('nama-user').textContent = currentProfile.nama;
+  const q = query(collection(db, 'setoran'), where('uid', '==', currentUser.uid));
+  const s = await getDocs(q);
+  let diterima = 0, pending = 0, ditolak = 0;
+  s.forEach(d => {
+    const st = d.data().status;
+    if (st === 'diterima') diterima++;
+    else if (st === 'pending') pending++;
+    else if (st === 'ditolak') ditolak++;
+  });
+  document.getElementById('stat-diterima').textContent = diterima;
+  document.getElementById('stat-pending').textContent = pending;
+  document.getElementById('stat-ditolak').textContent = ditolak;
+}
+
+function updateSaldoUI() {
+  if (!currentProfile) return;
+  document.getElementById('saldo-ewallet').textContent = rupiah(currentProfile.saldo);
+}
+
+/* ===== SETOR ===== */
+function generateGmail() {
+  const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  let name = 'izz';
+  for (let i = 0; i < 7; i++) name += chars[Math.floor(Math.random() * chars.length)];
+  generatedEmail = name + '@gmail.com';
+  document.getElementById('generated-email').textContent = generatedEmail;
+  showToast('Gmail berhasil digenerate!');
+}
+function copyEmail() {
+  if (!generatedEmail) return showToast('Generate gmail dulu', true);
+  navigator.clipboard.writeText(generatedEmail)
+    .then(() => showToast('Email dicopy: ' + generatedEmail))
+    .catch(() => showToast('Gagal copy, salin manual: ' + generatedEmail, true));
+}
+async function doSetor() {
+  const raw = document.getElementById('input-setor').value.trim();
+  if (!raw) return showToast('Masukkan gmail yang akan disetor', true);
+  const gmails = raw.split('\n').map(g => g.trim()).filter(g => /^[^\s@]+@gmail\.com$/i.test(g));
+  if (gmails.length === 0) return showToast('Format gmail tidak valid', true);
+  const btn = document.getElementById('btn-setor');
+  btn.disabled = true; btn.textContent = 'Mengirim...';
+  try {
+    for (const g of gmails) {
+      await addDoc(collection(db, 'setoran'), {
+        uid: currentUser.uid, user: currentProfile.nama, email: currentProfile.email,
+        gmail: g, status: 'pending', createdAt: serverTimestamp()
+      });
+    }
+    document.getElementById('input-setor').value = '';
+    showToast(gmails.length + ' gmail berhasil disetor!');
+    loadDashboard();
+  } catch (e) {
+    showToast('Gagal setor: ' + e.message, true);
+  } finally {
+    btn.disabled = false; btn.textContent = 'SETOR SEKARANG';
+  }
+}
+
+/* ===== E-WALLET ===== */
+function selectMethod(el, m) {
+  document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  method = m;
+}
+async function doWithdraw() {
+  const nama = document.getElementById('wd-nama').value.trim();
+  const nomor = document.getElementById('wd-nomor').value.trim();
+  const jumlah = parseInt(document.getElementById('wd-jumlah').value) || 0;
+  if (!method) return showToast('Pilih metode penarikan', true);
+  if (!nama || !nomor) return showToast('Isi nama dan nomor e-wallet', true);
+  if (jumlah < 10000) return showToast('Minimal penarikan Rp 10.000', true);
+  if (jumlah > currentProfile.saldo) return showToast('Saldo tidak cukup', true);
+  const btn = document.getElementById('btn-withdraw');
+  btn.disabled = true; btn.textContent = 'Memproses...';
+  try {
+    await updateDoc(doc(db, 'users', currentUser.uid), { saldo: increment(-jumlah) });
+    await addDoc(collection(db, 'penarikan'), {
+      uid: currentUser.uid, user: currentProfile.nama,
+      nama, nomor, method, jumlah, status: 'pending', createdAt: serverTimestamp()
+    });
+    document.getElementById('wd-nama').value = '';
+    document.getElementById('wd-nomor').value = '';
+    document.getElementById('wd-jumlah').value = '';
+    currentProfile.saldo -= jumlah;
+    updateSaldoUI();
+    showToast('Penarikan ' + rupiah(jumlah) + ' sedang diproses');
+  } catch (e) {
+    showToast('Gagal: ' + e.message, true);
+  } finally {
+    btn.disabled = false; btn.textContent = 'Konfirmasi Penarikan';
+  }
+}
+
+/* ===== RIWAYAT ===== */
+async function loadRiwayat() {
+  const el = document.getElementById('riwayat-list');
+  el.innerHTML = '<div class="loading"><div class="spinner"></div>Memuat...</div>';
+  try {
+    const q = query(collection(db, 'penarikan'), where('uid', '==', currentUser.uid), orderBy('createdAt', 'desc'));
+    const s = await getDocs(q);
+    if (s.empty) { el.innerHTML = '<div class="empty-state">Belum ada riwayat penarikan</div>'; return; }
+    el.innerHTML = '';
+    s.forEach(d => {
+      const r = d.data();
+      const badge = r.status === 'sukses' ? 'badge-sukses' : r.status === 'ditolak' ? 'badge-ditolak' : 'badge-pending';
+      el.innerHTML += `
+        <div class="history-card">
+          <div class="row"><span>A/N</span><span>${escapeHtml(r.nama)}</span></div>
+          <div class="row"><span>Nomor</span><span>${escapeHtml(r.nomor)}</span></div>
+          <div class="row"><span>Metode</span><span>${r.method}</span></div>
+          <div class="row"><span>Jumlah Penarikan</span><span>${rupiah(r.jumlah)}</span></div>
+          <div class="row"><span>Status</span><span class="badge ${badge}">${r.status.toUpperCase()}</span></div>
+        </div>`;
+    });
+  } catch (e) {
+    el.innerHTML = '<div class="empty-state">Gagal memuat: ' + e.message + '</div>';
+  }
+}
+
+/* ===== PROFIL ===== */
+function loadProfil() {
+  if (!currentProfile) return;
+  document.getElementById('profil-nama').textContent = currentProfile.nama;
+  document.getElementById('profil-email').textContent = currentProfile.email;
+  document.getElementById('profil-saldo').textContent = rupiah(currentProfile.saldo);
+  document.getElementById('avatar-user').textContent = (currentProfile.nama || 'U').charAt(0).toUpperCase();
+}
+async function gantiPassword() {
+  if (!confirm('Kirim link reset password ke ' + currentUser.email + '?')) return;
+  try {
+    await sendPasswordResetEmail(auth, currentUser.email);
+    showToast('Link reset dikirim ke email Anda');
+  } catch (e) {
+    showToast(terjemahError(e.code), true);
+  }
+}
+
+/* ===== LEADERBOARD ===== */
+async function loadLeaderboard() {
+  const el = document.getElementById('leaderboard-list');
+  el.innerHTML = '<div class="loading"><div class="spinner"></div>Memuat...</div>';
+  try {
+    const q = query(collection(db, 'users'), orderBy('totalSetor', 'desc'), limit(10));
+    const s = await getDocs(q);
+    if (s.empty) { el.innerHTML = '<div class="empty-state">Belum ada data</div>'; return; }
+    el.innerHTML = '';
+    let rank = 1;
+    s.forEach(d => {
+      const u = d.data();
+      const cls = rank === 1 ? 'gold' : rank === 2 ? 'silver' : rank === 3 ? 'bronze' : '';
+      el.innerHTML += `
+        <div class="leader-item">
+          <div class="leader-rank ${cls}">${rank}</div>
+          <div class="leader-info">
+            <div class="name">${escapeHtml(u.nama)}</div>
+            <div class="count">${u.totalSetor || 0} Gmail</div>
+          </div>
+        </div>`;
+      rank++;
+    });
+  } catch (e) {
+    el.innerHTML = '<div class="empty-state">Gagal: ' + e.message + '</div>';
+  }
+}
+
+/* ===== CHAT USER ===== */
+function openChat() {
+  if (!currentUser) return;
+  showScreen('chat');
+  const msgsEl = document.getElementById('chat-messages');
+  msgsEl.innerHTML = '<div class="chat-empty">👋 Halo! Selamat datang di Izz Support.<br>Ada yang bisa kami bantu?</div>';
+  ensureChatDoc();
+  if (chatUnsubscribe) { chatUnsubscribe(); chatUnsubscribe = null; }
+  const q = query(
+    collection(db, 'chats', currentUser.uid, 'messages'),
+    orderBy('createdAt', 'asc'),
+    limit(200)
+  );
+  chatUnsubscribe = onSnapshot(q, (snap) => {
+    if (snap.empty) {
+      msgsEl.innerHTML = '<div class="chat-empty">👋 Halo! Selamat datang di Izz Support.<br>Ada yang bisa kami bantu?</div>';
+      return;
+    }
+    msgsEl.innerHTML = '';
+    snap.forEach(d => {
+      const m = d.data();
+      const cls = m.from === 'user' ? 'me' : 'them';
+      msgsEl.innerHTML += `
+        <div class="msg ${cls}">
+          ${escapeHtml(m.text)}
+          <span class="time">${formatTime(m.createdAt)}</span>
+        </div>`;
+    });
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+  });
+  markUserRead();
+}
+async function ensureChatDoc() {
+  const ref = doc(db, 'chats', currentUser.uid);
+  const snap = await getDoc(ref);
+  if (!snap.exists()) {
+    await setDoc(ref, {
+      userNama: currentProfile.nama, userEmail: currentProfile.email,
+      lastMessage: '', lastAt: serverTimestamp(),
+      unreadAdmin: 0, unreadUser: 0
+    });
+  }
+}
+async function markUserRead() {
+  try { await updateDoc(doc(db, 'chats', currentUser.uid), { unreadUser: 0 }); } catch (e) {}
+}
+async function sendMessage() {
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text || !currentUser) return;
+  input.value = '';
+  const btn = document.getElementById('chat-send-btn');
+  btn.disabled = true;
+  try {
+    await ensureChatDoc();
+    await addDoc(collection(db, 'chats', currentUser.uid, 'messages'), {
+      from: 'user', text, createdAt: serverTimestamp()
+    });
+    await updateDoc(doc(db, 'chats', currentUser.uid), {
+      lastMessage: text, lastAt: serverTimestamp(),
+      unreadAdmin: increment(1)
+    });
+  } catch (e) {
+    showToast('Gagal kirim: ' + e.message, true);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+/* ===== ADMIN ===== */
+async function loadAdmin() {
+  if (!isAdmin(currentUser.email)) {
+    showToast('Akses ditolak. Anda bukan admin.', true);
+    showScreen('utama');
+    return;
+  }
+  
+  const allSetoran = await getDocs(collection(db, 'setoran'));
+  document.getElementById('admin-total').textContent = allSetoran.size.toLocaleString('id-ID');
+
+  // CHAT LIST
+  const chatEl = document.getElementById('admin-chat-list');
+  chatEl.innerHTML = '<div class="loading"><div class="spinner"></div>Memuat...</div>';
+  if (adminChatListUnsub) { adminChatListUnsub(); adminChatListUnsub = null; }
+  const qChat = query(collection(db, 'chats'), orderBy('lastAt', 'desc'), limit(50));
+  adminChatListUnsub = onSnapshot(qChat, (snap) => {
+    if (snap.empty) {
+      chatEl.innerHTML = '<div class="empty-state">Belum ada chat</div>';
+      return;
+    }
+    chatEl.innerHTML = '';
+    snap.forEach(d => {
+      const c = d.data();
+      const uid = d.id;
+      const unread = c.unreadAdmin || 0;
+      chatEl.innerHTML += `
+        <div class="chat-user-item" onclick="openAdminChat('${uid}','${escapeHtml(c.userNama || 'User')}')">
+          <div class="uavatar">${(c.userNama || 'U').charAt(0).toUpperCase()}</div>
+          <div class="uinfo">
+            <div class="uname">${escapeHtml(c.userNama || 'User')}</div>
+            <div class="ulast">${escapeHtml(c.lastMessage || 'Belum ada pesan')}</div>
+          </div>
+          ${unread > 0 ? '<div class="unread-dot"></div>' : ''}
+        </div>`;
+    });
+  });
+
+  // SETORAN PENDING (PER BARIS GMAIL)
+  const setoranEl = document.getElementById('admin-setoran-list');
+  setoranEl.innerHTML = '<div class="loading"><div class="spinner"></div>Memuat...</div>';
+  const qSetor = query(collection(db, 'setoran'), where('status', '==', 'pending'), orderBy('createdAt', 'desc'), limit(50));
+  const sSetor = await getDocs(qSetor);
+  
+  if (sSetor.empty) {
+    setoranEl.innerHTML = '<div class="empty-state">Tidak ada setoran pending</div>';
+  } else {
+    const grouped = {};
+    sSetor.forEach(d => {
+      const r = d.data();
+      const key = r.uid;
+      if (!grouped[key]) {
+        grouped[key] = { user: r.user, email: r.email, uid: r.uid, items: [] };
+      }
+      grouped[key].items.push({ id: d.id, gmail: r.gmail });
+    });
+
+    setoranEl.innerHTML = '';
+    Object.values(grouped).forEach(g => {
+      let gmailRows = '';
+      g.items.forEach(item => {
+        gmailRows += `
+          <div class="admin-gmail-row">
+            <div class="email">${escapeHtml(item.gmail)}</div>
+            <div class="actions">
+              <button class="btn btn-success" onclick="approveSetoran('${item.id}','${g.uid}',1)">✅</button>
+              <button class="btn btn-danger" onclick="rejectSetoran('${item.id}')">❌</button>
+            </div>
+          </div>
+        `;
+      });
+
+      setoranEl.innerHTML += `
+        <div class="admin-user">
+          <div class="uname">NAMA : ${escapeHtml(g.user)}</div>
+          <div class="gmail-list">${gmailRows}</div>
+        </div>
+      `;
+    });
+  }
+
+  // PENARIKAN PENDING
+  const wEl = document.getElementById('admin-withdraw-list');
+  wEl.innerHTML = '<div class="loading"><div class="spinner"></div>Memuat...</div>';
+  const qW = query(collection(db, 'penarikan'), where('status', '==', 'pending'), orderBy('createdAt', 'desc'), limit(50));
+  const sW = await getDocs(qW);
+  if (sW.empty) {
+    wEl.innerHTML = '<div class="empty-state">Tidak ada penarikan pending</div>';
+  } else {
+    wEl.innerHTML = '';
+    sW.forEach(d => {
+      const r = d.data();
+      wEl.innerHTML += `
+        <div class="withdraw-card">
+          <div class="row"><span>Nama</span><span>${escapeHtml(r.user)}</span></div>
+          <div class="row"><span>A/N</span><span>${escapeHtml(r.nama)}</span></div>
+          <div class="row"><span>Nomor</span><span>${escapeHtml(r.nomor)}</span></div>
+          <div class="row"><span>Metode</span><span>${r.method}</span></div>
+          <div class="row"><span>Jumlah</span><span>${rupiah(r.jumlah)}</span></div>
+          <button class="btn btn-success" style="margin-top:10px;" onclick="approveWithdraw('${d.id}')">✅ SUKSES</button>
+        </div>`;
+    });
+  }
+}
+
+function openAdminChat(uid, nama) {
+  if (!isAdmin(currentUser.email)) return;
+  currentAdminChatUid = uid;
+  showScreen('admin-chat');
+  document.getElementById('admin-chat-name').textContent = nama;
+  document.getElementById('admin-chat-avatar').textContent = (nama || 'U').charAt(0).toUpperCase();
+  const msgsEl = document.getElementById('admin-chat-messages');
+  msgsEl.innerHTML = '<div class="loading"><div class="spinner"></div>Memuat...</div>';
+  updateDoc(doc(db, 'chats', uid), { unreadAdmin: 0 }).catch(() => {});
+  if (adminChatUnsub) { adminChatUnsub(); adminChatUnsub = null; }
+  const q = query(
+    collection(db, 'chats', uid, 'messages'),
+    orderBy('createdAt', 'asc'),
+    limit(200)
+  );
+  adminChatUnsub = onSnapshot(q, (snap) => {
+    if (snap.empty) {
+      msgsEl.innerHTML = '<div class="chat-empty">Belum ada pesan</div>';
+      return;
+    }
+    msgsEl.innerHTML = '';
+    snap.forEach(d => {
+      const m = d.data();
+      const cls = m.from === 'admin' ? 'me' : 'them';
+      msgsEl.innerHTML += `
+        <div class="msg ${cls}">
+          ${escapeHtml(m.text)}
+          <span class="time">${formatTime(m.createdAt)}</span>
+        </div>`;
+    });
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+  });
+}
+
+async function adminSendMessage() {
+  if (!isAdmin(currentUser.email) || !currentAdminChatUid) return;
+  const input = document.getElementById('admin-chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  try {
+    await addDoc(collection(db, 'chats', currentAdminChatUid, 'messages'), {
+      from: 'admin', text, createdAt: serverTimestamp()
+    });
+    await updateDoc(doc(db, 'chats', currentAdminChatUid), {
+      lastMessage: text, lastAt: serverTimestamp(),
+      unreadUser: increment(1)
+    });
+  } catch (e) {
+    showToast('Gagal kirim: ' + e.message, true);
+  }
+}
+
+async function approveSetoran(setoranId, uid, count) {
+  if (!isAdmin(currentUser.email)) return;
+  if (!confirm('Terima gmail ini? Saldo user +' + rupiah(RATE_PER_GMAIL * count))) return;
+  try {
+    await updateDoc(doc(db, 'setoran', setoranId), { status: 'diterima' });
+    await updateDoc(doc(db, 'users', uid), {
+      saldo: increment(RATE_PER_GMAIL * count),
+      totalSetor: increment(count)
+    });
+    showToast('Gmail diterima, saldo user ditambah ' + rupiah(RATE_PER_GMAIL * count));
+    loadAdmin();
+  } catch (e) { showToast('Gagal: ' + e.message, true); }
+}
+
+async function rejectSetoran(id) {
+  if (!isAdmin(currentUser.email)) return;
+  if (!confirm('Tolak gmail ini?')) return;
+  await updateDoc(doc(db, 'setoran', id), { status: 'ditolak' });
+  showToast('Gmail ditolak');
+  loadAdmin();
+}
+
+async function approveWithdraw(id) {
+  if (!isAdmin(currentUser.email)) return;
+  if (!confirm('Tandai penarikan ini SUKSES?')) return;
+  await updateDoc(doc(db, 'penarikan', id), { status: 'sukses' });
+  showToast('Penarikan ditandai sukses');
+  loadAdmin();
+}
+
+/* =========================================================
+   🔧 EXPOSE KE GLOBAL — WAJIB AGAR onclick DI HTML BERFUNGSI
+   ========================================================= */
+window.switchAuth = switchAuth;
+window.doLogin = doLogin;
+window.doDaftar = doDaftar;
+window.loginGoogle = loginGoogle;
+window.logout = logout;
+window.showScreen = showScreen;
+window.generateGmail = generateGmail;
+window.copyEmail = copyEmail;
+window.doSetor = doSetor;
+window.selectMethod = selectMethod;
+window.doWithdraw = doWithdraw;
+window.gantiPassword = gantiPassword;
+window.openChat = openChat;
+window.sendMessage = sendMessage;
+window.adminSendMessage = adminSendMessage;
+window.openAdminChat = openAdminChat;
+window.approveSetoran = approveSetoran;
+window.rejectSetoran = rejectSetoran;
+window.approveWithdraw = approveWithdraw;
+
+showScreen('loading');
+</script>
+</body>
+  </html>
