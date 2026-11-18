@@ -7,69 +7,73 @@
 <style>
   /* ===== RETRO BLUE STRIPE THEME ===== */
   :root {
-    --bg: #0b0e14;
-    --primary: #2563eb; /* Retro Blue */
+    --primary: #2563eb;
     --primary-light: #60a5fa;
-    --secondary: #facc15; /* Kuning Kontras */
-    --success: #4ade80; /* Hijau */
-    --danger: #f87171; /* Merah */
+    --secondary: #facc15;
+    --success: #4ade80;
+    --danger: #f87171;
+    --captcha: #a78bfa;
     --black: #000000;
     --white: #ffffff;
-    --border: 3px solid #000000;
-    --shadow: 4px 4px 0px 0px #000000;
-    --shadow-sm: 2px 2px 0px 0px #000000;
-    --shadow-active: 0px 0px 0px 0px #000000;
   }
 
   *{margin:0;padding:0;box-sizing:border-box;font-family:'Courier New', Courier, monospace; font-weight: bold;}
   
   body {
     background-color: var(--primary-light);
-    /* Retro Blue Stripe Background */
-    background-image: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 15px,
-      rgba(37, 99, 235, 0.15) 15px,
-      rgba(37, 99, 235, 0.15) 30px
-    );
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 15px, rgba(37, 99, 235, 0.15) 15px, rgba(37, 99, 235, 0.15) 30px);
     color: var(--black);
-    min-height: 100vh;
+    height: 100vh;
+    height: 100dvh;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 16px;
+    padding: 0;
+    overflow: hidden;
   }
 
-  /* ===== APP CONTAINER ===== */
   .app {
     width: 100%;
-    max-width: 420px;
-    background: var(--white);
-    border: var(--border);
-    border-radius: 12px;
-    box-shadow: 8px 8px 0px 0px var(--primary);
-    overflow: hidden;
-    min-height: 700px;
-    position: relative;
+    max-width: 480px;
+    height: 100%;
+    background: transparent; 
+    border: none;
+    box-shadow: none;
     display: flex;
     flex-direction: column;
+    position: relative;
+    overflow: hidden;
   }
 
-  /* ===== SCREENS ===== */
   .screen {
     display: none;
     flex-direction: column;
-    padding: 24px 20px;
     flex: 1;
+    padding: 16px;
+    padding-bottom: 80px;
     overflow-y: auto;
-    padding-bottom: 90px;
+    overflow-x: hidden;
   }
   .screen.active { display: flex; }
 
-  /* Typography */
-  h1, h2, h3, h4 { text-transform: uppercase; letter-spacing: -0.5px; }
-  
+  /* ===== MENU LOGIN ===== */
+  #screen-login {
+    background: transparent;
+    border: none;
+    margin: auto;
+    width: 100%;
+    padding: 24px 16px;
+    height: fit-content;
+  }
+
+  .login-box {
+    background: var(--white);
+    border: 3px solid var(--black);
+    border-radius: 12px;
+    box-shadow: 8px 8px 0px 0px var(--primary);
+    padding: 24px 20px;
+  }
+
   .logo {
     text-align: center;
     font-size: 32px;
@@ -88,22 +92,21 @@
     font-size: 14px;
     margin-bottom: 24px;
     background: var(--secondary);
-    border: var(--border);
+    border: 3px solid var(--black);
     display: inline-block;
     align-self: center;
     padding: 4px 12px;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 2px 2px 0px 0px var(--black);
     transform: rotate(-1deg);
   }
 
-  /* ===== TABS ===== */
   .auth-tabs {
     display: flex;
     background: var(--white);
-    border: var(--border);
+    border: 3px solid var(--black);
     border-radius: 8px;
     margin-bottom: 24px;
-    box-shadow: var(--shadow);
+    box-shadow: 4px 4px 0px 0px var(--black);
     overflow: hidden;
   }
   .auth-tabs button {
@@ -121,9 +124,8 @@
     color: var(--white);
     text-shadow: 1px 1px 0px var(--black);
   }
-  .auth-tabs button:first-child { border-right: var(--border); }
+  .auth-tabs button:first-child { border-right: 3px solid var(--black); }
 
-  /* ===== FORM ===== */
   .form-group { margin-bottom: 16px; }
   .form-group label {
     display: block;
@@ -131,84 +133,67 @@
     margin-bottom: 6px;
     text-transform: uppercase;
   }
-  .form-group input, .form-group textarea {
+  .form-group input, .form-group textarea, .form-group select {
     width: 100%;
     padding: 14px 16px;
     background: var(--white);
-    border: var(--border);
+    border: 3px solid var(--black);
     border-radius: 8px;
     color: var(--black);
     font-size: 16px;
     outline: none;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 2px 2px 0px 0px var(--black);
     transition: .1s;
   }
   .form-group input:focus, .form-group textarea:focus {
-    box-shadow: var(--shadow);
+    box-shadow: 4px 4px 0px 0px var(--black);
     transform: translate(-1px, -1px);
     background: #f0f9ff;
   }
+  .form-group input:disabled {
+    background: #e5e7eb;
+    color: #888;
+    cursor: not-allowed;
+  }
 
-  /* ===== BUTTONS ===== */
   .btn {
     width: 100%;
     padding: 16px;
-    border: var(--border);
+    border: 3px solid var(--black);
     border-radius: 8px;
     font-size: 16px;
     text-transform: uppercase;
     cursor: pointer;
     transition: .1s;
-    box-shadow: var(--shadow);
+    box-shadow: 4px 4px 0px 0px var(--black);
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
+    position: relative;
   }
-  .btn:active {
-    transform: translate(3px, 3px);
-    box-shadow: var(--shadow-active);
-  }
+  .btn:active { transform: translate(3px, 3px); box-shadow: 0px 0px 0px 0px var(--black); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: translate(3px, 3px); box-shadow: 0px 0px 0px 0px var(--black); }
+  
   .btn-primary { background: var(--primary); color: var(--white); text-shadow: 1px 1px 0px var(--black); }
   .btn-secondary { background: var(--secondary); color: var(--black); }
   .btn-success { background: var(--success); color: var(--black); }
   .btn-danger { background: var(--danger); color: var(--white); text-shadow: 1px 1px 0px var(--black); }
   .btn-outline { background: var(--white); color: var(--black); }
-  
-  .btn-google {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background: var(--white);
-    color: var(--black);
-    border: var(--border);
-    border-radius: 8px;
-    padding: 14px;
-    cursor: pointer;
-    width: 100%;
-    font-size: 15px;
-    box-shadow: var(--shadow);
-    margin-bottom: 20px;
-    text-transform: uppercase;
-  }
-  .btn-google:active { transform: translate(3px, 3px); box-shadow: var(--shadow-active); }
-  .btn-google svg { width: 20px; height: 20px; }
+  .btn-captcha { background: var(--captcha); color: var(--black); }
 
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: var(--black);
-    font-size: 12px;
-    margin: 16px 0;
-    text-transform: uppercase;
-  }
-  .divider::before, .divider::after {
-    content: '';
-    flex: 1;
-    height: 3px;
-    background: var(--black);
+  /* TOMBOL NOTIF TITIK MERAH */
+  .notif-dot {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 18px;
+    height: 18px;
+    background: var(--danger);
+    border: 2px solid var(--black);
+    border-radius: 50%;
+    display: none;
+    z-index: 15;
   }
 
   /* ===== BOTTOM NAV ===== */
@@ -219,593 +204,708 @@
     right: 0;
     display: none;
     background: var(--white);
-    border-top: var(--border);
-    padding: 8px 8px 12px;
+    border-top: 3px solid var(--black);
+    padding: 6px 4px 10px;
     justify-content: space-around;
     z-index: 10;
+    box-shadow: 0px -4px 0px rgba(0,0,0,0.05);
   }
   .bottom-nav button {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
+    justify-content: center;
+    gap: 2px;
     background: transparent;
     border: none;
     color: var(--black);
-    font-size: 11px;
+    font-size: 10px;
     cursor: pointer;
-    padding: 8px 0;
+    padding: 6px 0;
     border-radius: 8px;
+    transition: 0.15s ease;
+    text-transform: uppercase;
+    position: relative;
   }
+  .bottom-nav button:active { transform: scale(0.95); }
   .bottom-nav button.active {
     background: var(--primary);
     color: var(--white);
-    border: 2px solid var(--black);
+    box-shadow: inset 0 0 0 2px var(--black);
   }
-  .bottom-nav .icon { font-size: 22px; }
-
-  /* ===== CARDS & PANELS ===== */
-  .neo-card {
-    background: var(--white);
-    border: var(--border);
-    border-radius: 12px;
-    box-shadow: var(--shadow);
-    padding: 20px;
-    margin-bottom: 20px;
+  .bottom-nav button.active svg { fill: var(--white); stroke: var(--white); }
+  .bottom-nav svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: var(--black);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: 0.15s ease;
   }
-  .neo-card-primary { background: var(--primary-light); }
-  .neo-card-secondary { background: var(--secondary); }
 
-  .balance-card {
+  /* ===== MENU SELAIN LOGIN ===== */
+  .page-title {
     text-align: center;
-  }
-  .balance-card .label { font-size: 14px; text-transform: uppercase; margin-bottom: 8px; }
-  .balance-card .amount {
-    font-size: 36px;
+    font-size: 34px;
     font-weight: 900;
-    background: var(--white);
-    border: var(--border);
-    padding: 8px;
-    box-shadow: var(--shadow-sm);
-    display: inline-block;
-  }
-
-  .greeting { font-size: 20px; margin-bottom: 8px; text-transform: uppercase; }
-  .desc { font-size: 14px; line-height: 1.5; margin-bottom: 20px; background: var(--white); padding: 10px; border: var(--border); border-radius: 8px; }
-
-  .action-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-  .action-grid .btn { padding: 16px 8px; font-size: 14px; }
-
-  .stats-row { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; }
-  .stat-box {
-    flex: 1;
-    background: var(--white);
-    border: var(--border);
-    border-radius: 8px;
-    padding: 14px 8px;
-    text-align: center;
-    box-shadow: var(--shadow-sm);
-  }
-  .stat-box .num { font-size: 22px; font-weight: 900; }
-  .stat-box .lbl { font-size: 11px; text-transform: uppercase; margin-top: 4px; }
-  .stat-green { background: var(--success); }
-  .stat-yellow { background: var(--secondary); }
-  .stat-red { background: var(--danger); color: var(--white); }
-
-  /* ===== RULES BOX ===== */
-  .rules-box {
-    background: var(--white);
-    border: var(--border);
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 20px;
-    box-shadow: var(--shadow-sm);
-    font-size: 13px;
-    line-height: 1.6;
-  }
-  .rules-box h4 { background: var(--primary); color: var(--white); padding: 6px 10px; display: inline-block; margin-bottom: 10px; border: 2px solid var(--black); text-shadow: 1px 1px 0px var(--black); }
-  .rules-box ol { padding-left: 20px; }
-  .rules-box li { margin-bottom: 6px; }
-  .rules-box .note { margin-top: 12px; padding: 10px; background: var(--danger); color: var(--white); border: 2px solid var(--black); font-size: 12px; text-shadow: 1px 1px 0px var(--black); }
-
-  /* ===== GENERATE GMAIL ===== */
-  .generate-box {
-    background: var(--secondary);
-    border: var(--border);
-    border-radius: 8px;
-    padding: 16px;
-    text-align: center;
-    margin-bottom: 16px;
-    box-shadow: var(--shadow-sm);
-  }
-  .generate-box .email {
-    font-size: 16px;
-    background: var(--white);
-    padding: 10px;
-    border: 2px solid var(--black);
-    margin-bottom: 12px;
-    word-break: break-all;
-  }
-  .price-tag {
-    text-align: center;
-    font-size: 16px;
-    background: var(--success);
-    border: var(--border);
-    padding: 10px;
-    margin-bottom: 20px;
-    box-shadow: var(--shadow-sm);
-  }
-
-  /* ===== E-WALLET ===== */
-  .method-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-  .method-btn {
-    padding: 16px 6px;
-    background: var(--white);
-    border: var(--border);
-    border-radius: 8px;
-    color: var(--black);
-    font-size: 14px;
-    text-align: center;
-    cursor: pointer;
-    box-shadow: var(--shadow-sm);
-  }
-  .method-btn:active { transform: translate(2px, 2px); box-shadow: var(--shadow-active); }
-  .method-btn.selected { background: var(--primary); color: var(--white); text-shadow: 1px 1px 0px var(--black); }
-
-  /* ===== HISTORY & ADMIN CARDS ===== */
-  .history-card, .admin-user, .withdraw-card {
-    background: var(--white);
-    border: var(--border);
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 16px;
-    box-shadow: var(--shadow-sm);
-  }
-  .history-card .row, .withdraw-card .row {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
+    letter-spacing: -1px;
     margin-bottom: 8px;
-    border-bottom: 2px dashed #ccc;
-    padding-bottom: 4px;
+    color: var(--white);
+    text-shadow: 
+      3px 3px 0px var(--primary),
+      6px 6px 0px var(--secondary),
+      9px 9px 0px var(--black);
+    text-transform: uppercase;
+    transform: rotate(-2deg);
+    -webkit-text-stroke: 1.5px var(--black);
   }
-  .history-card .row:last-child, .withdraw-card .row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-  .badge {
+
+  /* === JAM DIGITAL === */
+  .digital-clock-container {
+    text-align: center;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+  }
+  .digital-clock {
+    font-size: 18px;
+    background: var(--white);
+    border: 3px solid var(--black);
+    padding: 6px 16px;
+    border-radius: 8px;
+    box-shadow: 3px 3px 0px 0px var(--black);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .clock-time {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--primary);
+    text-shadow: 1px 1px 0px var(--secondary);
+  }
+
+  .balance-card { text-align: left; margin-bottom: 12px; background: var(--white); padding: 12px; border: 3px solid var(--black); border-radius: 8px; box-shadow: 4px 4px 0px 0px var(--black); display: inline-block; min-width: 50%; }
+  .balance-card .label { font-size: 12px; text-transform: uppercase; margin-bottom: 2px; color: #555; }
+  .balance-card .amount { font-size: 28px; font-weight: 900; display: block; }
+
+  .greeting-container {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .greeting-text {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--primary);
+    text-shadow: 2px 2px 0px var(--secondary), 3px 3px 0px var(--black);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .greeting-name {
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--black);
+    background: var(--secondary);
+    padding: 2px 12px;
+    border: 3px solid var(--black);
+    box-shadow: 3px 3px 0px 0px var(--black);
+    text-transform: uppercase;
+    transform: rotate(-2deg);
     display: inline-block;
-    padding: 4px 10px;
+  }
+
+  .site-status {
+    display: inline-block;
+    padding: 4px 12px;
     border: 2px solid var(--black);
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: 900;
+    margin-top: 4px;
+    margin-bottom: 12px;
     text-transform: uppercase;
   }
+  .status-open { background: var(--success); color: var(--black); }
+  .status-close { background: var(--danger); color: var(--white); text-shadow: 1px 1px 0px var(--black); }
+
+  .desc { font-size: 13px; line-height: 1.5; margin-bottom: 20px; background: rgba(255,255,255,0.9); padding: 10px; border-radius: 8px; }
+
+  /* === LAYOUT TOMBOL BERANDA BARU === */
+  .home-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .home-grid .btn {
+    padding: 12px 4px;
+    font-size: 11px;
+    text-align: center;
+    line-height: 1.2;
+    white-space: normal;
+  }
+  .home-grid .btn-full {
+    grid-column: span 3;
+    font-size: 14px;
+    padding: 14px;
+  }
+
+  .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 16px; }
+  .stat-box { background: var(--white); border: 3px solid var(--black); border-radius: 8px; padding: 8px; text-align: center; box-shadow: 2px 2px 0px 0px var(--black); }
+  .stat-box .num { font-size: 20px; font-weight: 900; }
+  .stat-box .lbl { font-size: 10px; text-transform: uppercase; margin-top: 2px; color: #555; }
+  .stat-green .num { color: var(--success); }
+  .stat-yellow .num { color: #d97706; }
+  .stat-red .num { color: var(--danger); }
+  .stat-purple .num { color: var(--captcha); }
+
+  .rules-box { background: var(--white); border: 3px solid var(--black); border-radius: 8px; padding: 16px; margin-bottom: 16px; font-size: 13px; line-height: 1.6; box-shadow: 4px 4px 0px 0px var(--black); }
+  .rules-box h4 { background: var(--primary); color: var(--white); padding: 6px 10px; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 10px; text-shadow: 1px 1px 0px var(--black); }
+  .rules-box ol { padding-left: 18px; }
+  .rules-box li { margin-bottom: 6px; }
+  .rules-box .note { margin-top: 12px; padding: 10px; background: var(--danger); color: var(--white); font-size: 12px; border: 2px solid var(--black); display: flex; align-items: flex-start; gap: 8px; text-shadow: 1px 1px 0px var(--black); }
+  .rules-box .note svg { flex-shrink: 0; margin-top: 2px; }
+
+  .generate-box { background: var(--white); border: 3px solid var(--black); border-radius: 8px; padding: 16px; text-align: center; margin-bottom: 16px; box-shadow: 4px 4px 0px 0px var(--black); }
+  .email-item { display: flex; align-items: center; justify-content: space-between; background: #f0f9ff; border: 2px solid var(--black); padding: 8px 12px; margin-bottom: 8px; border-radius: 4px; }
+  .email-item span { font-size: 14px; word-break: break-all; }
+  .email-item button { padding: 6px 10px; font-size: 12px; background: var(--primary); color: var(--white); border: 2px solid var(--black); cursor: pointer; box-shadow: 2px 2px 0px 0px var(--black); }
+  .email-item button:active { transform: translate(1px, 1px); box-shadow: 0px 0px 0px 0px var(--black); }
+  .email-item button:disabled { background: #ccc; color: #555; cursor: not-allowed; }
+
+  .price-tag { text-align: center; font-size: 14px; background: var(--white); border: 3px solid var(--black); border-radius: 8px; padding: 10px; margin-bottom: 16px; box-shadow: 2px 2px 0px 0px var(--black); }
+
+  .method-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+  .method-btn { padding: 12px 6px; background: var(--white); border: 3px solid var(--black); border-radius: 8px; color: var(--black); font-size: 14px; text-align: center; cursor: pointer; box-shadow: 2px 2px 0px 0px var(--black); }
+  .method-btn.selected { background: var(--primary); color: var(--white); border-bottom-color: var(--primary); }
+
+  .history-card, .admin-user, .withdraw-card { background: var(--white); border: 3px solid var(--black); border-radius: 8px; padding: 12px; margin-bottom: 12px; box-shadow: 4px 4px 0px 0px var(--black); }
+  .history-card .row, .withdraw-card .row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px; border-bottom: 2px dashed #ccc; padding-bottom: 4px; }
+  .history-card .row:last-child, .withdraw-card .row:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+  .badge { display: inline-block; padding: 2px 8px; font-size: 11px; text-transform: uppercase; border: 2px solid var(--black); }
   .badge-sukses { background: var(--success); }
   .badge-pending { background: var(--secondary); }
-  .badge-ditolak { background: var(--danger); color: var(--white); text-shadow: 1px 1px 0px var(--black); }
+  .badge-ditolak { background: var(--danger); color: var(--white); }
+  .badge-captcha { background: var(--captcha); color: var(--black); }
 
-  /* ===== PROFIL ===== */
-  .profile-header { text-align: center; margin-bottom: 24px; }
-  .avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background: var(--secondary);
-    border: var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 40px;
-    font-weight: 900;
-    color: var(--black);
-    margin: 0 auto 16px;
-    box-shadow: var(--shadow);
+  .profile-header { text-align: center; margin-bottom: 20px; display: flex; flex-direction: column; align-items: center; }
+  .avatar { 
+    width: 100px; height: 100px; border-radius: 50%; 
+    background: var(--primary-light); border: 3px solid var(--black); 
+    display: flex; align-items: center; justify-content: center; 
+    font-size: 40px; font-weight: 900; color: var(--white); 
+    text-shadow: 1px 1px 0px var(--black); margin-bottom: 12px; box-shadow: 4px 4px 0px 0px var(--black); 
+    overflow: hidden; position: relative; cursor: pointer;
   }
-  .profile-info {
-    background: var(--primary-light);
-    border: var(--border);
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 20px;
-    box-shadow: var(--shadow-sm);
-  }
-  .profile-info .row {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 2px solid var(--black);
-    font-size: 15px;
-  }
-  .profile-info .row:last-child { border-bottom: none; }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; display: none; }
+  .avatar.has-photo span { display: none; }
+  .avatar.has-photo img { display: block; }
 
-  /* ===== LEADERBOARD ===== */
-  .leader-item {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    background: var(--white);
-    border: var(--border);
-    border-radius: 8px;
-    padding: 12px 16px;
-    margin-bottom: 12px;
-    box-shadow: var(--shadow-sm);
+  .btn-upload {
+    background: var(--secondary); color: var(--black); border: 2px solid var(--black);
+    padding: 8px 16px; border-radius: 20px; font-size: 12px; cursor: pointer;
+    box-shadow: 2px 2px 0px 0px var(--black); margin-bottom: 12px; text-transform: uppercase;
   }
-  .leader-rank {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 2px solid var(--black);
-    background: var(--primary-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    flex-shrink: 0;
+  .btn-upload:active { transform: translate(1px, 1px); box-shadow: 0px 0px 0px 0px var(--black); }
+
+  .profile-info { margin-bottom: 16px; background: var(--white); border: 3px solid var(--black); border-radius: 8px; padding: 16px; box-shadow: 4px 4px 0px 0px var(--black); width: 100%; }
+  .profile-info .row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 2px dashed #ccc; font-size: 15px; }
+  .profile-info .row:last-child { border-bottom: none; padding-bottom: 0; }
+  .profile-info .row span:first-child { color: #555; }
+
+  /* CSS Khusus Referral */
+  .referral-box {
+    background: var(--white); border: 3px solid var(--black); border-radius: 8px;
+    padding: 16px; margin-bottom: 16px; text-align: center; box-shadow: 4px 4px 0px 0px var(--black);
   }
+  .referral-box .ref-code {
+    font-size: 24px; font-weight: 900; color: var(--primary);
+    background: #e0f2fe; border: 2px dashed var(--black); padding: 8px;
+    margin: 10px 0; letter-spacing: 2px;
+  }
+  .referral-box .ref-desc { font-size: 12px; color: #555; line-height: 1.4; margin-bottom: 12px; }
+
+  /* Leaderboard Tabs */
+  .lb-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+  .lb-tabs button {
+    flex: 1; padding: 10px; background: var(--white); border: 3px solid var(--black);
+    border-radius: 8px; font-size: 12px; text-transform: uppercase; cursor: pointer;
+    box-shadow: 2px 2px 0px 0px var(--black); transition: 0.1s;
+  }
+  .lb-tabs button.active {
+    background: var(--primary); color: var(--white);
+    transform: translate(2px, 2px); box-shadow: 0 0 0 0 var(--black);
+  }
+
+  .leader-item { display: flex; align-items: center; gap: 16px; background: var(--white); border: 3px solid var(--black); border-radius: 8px; padding: 12px; margin-bottom: 12px; box-shadow: 4px 4px 0px 0px var(--black); }
+  .leader-rank { width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--black); background: var(--white); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
   .leader-rank.gold { background: var(--secondary); }
   .leader-rank.silver { background: #cbd5e1; }
   .leader-rank.bronze { background: #fdba74; }
 
-  /* ===== ADMIN DASHBOARD ===== */
-  .admin-stat {
-    background: var(--primary);
-    color: var(--white);
-    border: var(--border);
-    border-radius: 8px;
-    padding: 24px;
-    text-align: center;
-    margin-bottom: 24px;
-    box-shadow: var(--shadow);
-    text-shadow: 2px 2px 0px var(--black);
-  }
-  .admin-stat .num { font-size: 48px; font-weight: 900; margin-bottom: 8px; }
-  .admin-stat .lbl { font-size: 14px; text-transform: uppercase; }
+  .admin-stat { text-align: left; margin-bottom: 20px; background: var(--white); border: 3px solid var(--black); padding: 16px; border-radius: 8px; box-shadow: 4px 4px 0px 0px var(--black); }
+  .admin-stat .num { font-size: 42px; font-weight: 900; }
+  .admin-stat .lbl { font-size: 14px; text-transform: uppercase; color: #555; }
   
-  .section-title {
-    font-size: 18px;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-    background: var(--secondary);
-    border: var(--border);
-    padding: 8px 12px;
-    display: inline-block;
-    box-shadow: var(--shadow-sm);
-  }
+  .section-title { font-size: 16px; text-transform: uppercase; margin-bottom: 12px; background: var(--secondary); border: 2px solid var(--black); padding: 6px 10px; display: inline-block; box-shadow: 2px 2px 0px 0px var(--black); }
 
-  .admin-user .uname {
-    font-size: 16px;
-    background: var(--primary-light);
-    padding: 8px;
-    border: 2px solid var(--black);
-    margin-bottom: 12px;
-  }
+  .admin-user .uname { font-size: 15px; background: var(--primary-light); padding: 8px; border: 2px solid var(--black); margin-bottom: 8px; }
 
-  /* Admin Gmail Row */
-  .admin-gmail-row {
-    background: #f8fafc;
-    border: 2px solid var(--black);
-    border-radius: 6px;
-    padding: 10px;
-    margin-bottom: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
-  }
-  .admin-gmail-row .email {
-    font-size: 13px;
-    word-break: break-all;
+  .admin-gmail-row { background: #f8fafc; border-bottom: 2px solid #ccc; padding: 8px 0; margin-bottom: 0; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .admin-gmail-row:last-child { border-bottom: none; }
+  .admin-gmail-row .email { font-size: 12px; word-break: break-all; flex: 1; }
+  .admin-gmail-row .actions { display: flex; gap: 4px; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
+  .admin-gmail-row .actions .btn { padding: 6px; font-size: 12px; width: auto; border: 2px solid var(--black); box-shadow: 2px 2px 0px 0px var(--black); min-width: 32px; text-align: center; }
+  .admin-gmail-row .actions .btn:active { transform: translate(1px, 1px); box-shadow: 0px 0px 0px 0px var(--black); }
+
+  /* ===== RIWAYAT TABS ===== */
+  .riwayat-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+  .riwayat-tabs button {
     flex: 1;
-  }
-  .admin-gmail-row .actions {
-    display: flex;
-    gap: 6px;
-    flex-shrink: 0;
-  }
-  .admin-gmail-row .actions .btn {
-    padding: 8px 10px;
-    font-size: 14px;
-    width: auto;
+    padding: 12px;
+    background: var(--white);
+    border: 3px solid var(--black);
+    border-radius: 8px;
+    font-size: 13px;
+    text-transform: uppercase;
+    cursor: pointer;
     box-shadow: 2px 2px 0px 0px var(--black);
+    transition: 0.1s;
   }
-  .admin-gmail-row .actions .btn:active {
-    transform: translate(2px, 2px);
-    box-shadow: 0px 0px 0px 0px var(--black);
-  }
-
-  /* ===== CHAT (NEO-BRUTALISM) ===== */
-  #screen-chat, #screen-admin-chat { padding: 0; padding-bottom: 0; overflow: hidden; }
-  .chat-container { display: flex; flex-direction: column; height: 100%; min-height: 700px; }
-  .chat-header {
+  .riwayat-tabs button.active {
     background: var(--primary);
     color: var(--white);
-    padding: 16px 20px;
-    border-bottom: var(--border);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-shrink: 0;
-    text-shadow: 1px 1px 0px var(--black);
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 0 var(--black);
   }
-  .chat-header .back-btn { background: transparent; border: none; color: var(--white); font-size: 24px; cursor: pointer; }
-  .chat-header .avatar-admin {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--secondary);
-    border: 2px solid var(--black);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-  }
-  .chat-header .info { flex: 1; }
-  .chat-header .info .name { font-size: 16px; text-transform: uppercase; }
-  .chat-header .info .status { font-size: 12px; color: var(--success); }
 
-  .chat-messages {
+  /* ===== ADMIN TABS ===== */
+  .admin-tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .admin-tabs button {
     flex: 1;
+    min-width: 70px;
+    padding: 10px 4px;
+    background: var(--white);
+    border: 3px solid var(--black);
+    border-radius: 8px;
+    font-size: 11px;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 2px 2px 0px 0px var(--black);
+    transition: 0.1s;
+  }
+  .admin-tabs button.active {
+    background: var(--primary);
+    color: var(--white);
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 0 var(--black);
+  }
+
+  /* === LOG SALDO ADMIN === */
+  .log-card {
+    background: var(--white); border: 3px solid var(--black); border-radius: 8px;
+    padding: 12px; margin-bottom: 10px; box-shadow: 3px 3px 0px 0px var(--black);
+    font-size: 13px;
+  }
+  .log-card .log-head { display: flex; justify-content: space-between; margin-bottom: 4px; font-weight: bold; }
+  .log-card .log-type { padding: 2px 6px; border: 2px solid var(--black); font-size: 10px; text-transform: uppercase; }
+  .log-type.ref { background: var(--secondary); }
+  .log-type.gmail { background: var(--success); }
+  .log-card .log-detail { font-size: 11px; color: #555; line-height: 1.3; }
+
+  /* ===== FIX TAMBAHAN: MODAL, TOAST, CHAT ===== */
+  .modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    padding: 20px;
+  }
+  .modal-content {
+    background: var(--white);
+    border: 3px solid var(--black);
+    border-radius: 12px;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+    max-height: 85vh;
     overflow-y: auto;
-    padding: 16px;
+    box-shadow: 8px 8px 0px 0px var(--black);
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    background: #e2e8f0;
-    background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.05) 10px, rgba(0,0,0,0.05) 20px);
   }
-  .msg {
-    max-width: 80%;
-    padding: 12px 16px;
-    font-size: 14px;
-    position: relative;
-    border: var(--border);
-    box-shadow: var(--shadow-sm);
-  }
-  .msg.them {
-    align-self: flex-start;
+  .modal-sticky-top {
+    position: sticky;
+    top: 0;
     background: var(--white);
-    border-radius: 12px 12px 12px 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    z-index: 10;
+    border-bottom: 2px dashed #ccc;
+    margin-bottom: 10px;
   }
-  .msg.me {
-    align-self: flex-end;
-    background: var(--primary-light);
-    border-radius: 12px 12px 0 12px;
-  }
-  .msg .time { font-size: 10px; margin-top: 6px; display: block; text-align: right; opacity: 0.7; }
-  
-  .chat-input-row {
-    display: flex;
-    gap: 10px;
-    padding: 12px 16px;
-    background: var(--white);
-    border-top: var(--border);
-    flex-shrink: 0;
-  }
-  .chat-input-row input {
-    flex: 1;
-    padding: 12px 16px;
-    background: var(--white);
-    border: var(--border);
-    border-radius: 8px;
-    font-size: 14px;
-    outline: none;
-  }
-  .chat-input-row button {
-    width: 48px;
-    height: 48px;
-    border-radius: 8px;
-    border: var(--border);
-    background: var(--secondary);
-    color: var(--black);
-    font-size: 20px;
-    cursor: pointer;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--shadow-sm);
-  }
-  .chat-input-row button:active { transform: translate(2px, 2px); box-shadow: var(--shadow-active); }
-
-  .chat-user-item {
-    background: var(--white);
-    border: var(--border);
-    border-radius: 8px;
-    padding: 14px 16px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    box-shadow: var(--shadow-sm);
-  }
-  .chat-user-item:active { transform: translate(2px, 2px); box-shadow: var(--shadow-active); }
-  .chat-user-item .uavatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--primary);
-    color: var(--white);
-    border: 2px solid var(--black);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .chat-user-item .uinfo { flex: 1; min-width: 0; }
-  .chat-user-item .uname { font-size: 15px; margin-bottom: 2px; }
-  .chat-user-item .ulast { font-size: 12px; color: #475569; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .unread-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--danger); border: 2px solid var(--black); flex-shrink: 0; }
-
-  /* ===== TOAST ===== */
   .toast {
     position: fixed;
-    bottom: 100px;
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background: var(--secondary);
+    top: 20px; left: 50%;
+    transform: translateX(-50%) translateY(-100px);
+    background: var(--success);
     color: var(--black);
-    border: var(--border);
-    box-shadow: var(--shadow);
-    padding: 14px 24px;
+    padding: 12px 24px;
+    border: 3px solid var(--black);
+    border-radius: 8px;
     font-size: 14px;
-    opacity: 0;
-    transition: .3s;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+    box-shadow: 4px 4px 0px 0px var(--black);
     pointer-events: none;
-    z-index: 999;
+    text-align: center;
     white-space: nowrap;
   }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast.show { transform: translateX(-50%) translateY(0); }
   .toast.error { background: var(--danger); color: var(--white); text-shadow: 1px 1px 0px var(--black); }
-
-  .loading { text-align: center; padding: 40px 0; font-size: 16px; text-transform: uppercase; }
-  .spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid var(--white);
-    border-top-color: var(--primary);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 0 auto 16px;
-    box-shadow: var(--shadow-sm);
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .empty-state { text-align: center; padding: 40px 0; font-size: 14px; text-transform: uppercase; color: #64748b; }
   
-  /* Custom Scrollbar */
-  ::-webkit-scrollbar { width: 8px; }
-  ::-webkit-scrollbar-track { background: var(--white); border-left: 2px solid var(--black); }
-  ::-webkit-scrollbar-thumb { background: var(--primary); border: 2px solid var(--black); }
+  /* === PERBAIKAN CHAT === */
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 120px);
+    background: var(--white);
+    border: 3px solid var(--black);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 4px 4px 0px 0px var(--black);
+    margin: 0 auto;
+    width: 100%;
+  }
+  .chat-header {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 3px solid var(--black);
+    background: var(--primary-light);
+    flex-shrink: 0;
+  }
+  .chat-header .back-btn {
+    background: none; border: none; font-size: 24px; cursor: pointer; padding: 0 10px; font-weight: bold;
+  }
+  .chat-header .info { flex: 1; }
+  .chat-header .name { font-size: 16px; font-weight: bold; }
+  .chat-header .status { font-size: 12px; color: #333; }
+  .chat-messages {
+    flex: 1; padding: 12px; overflow-y: auto;
+    display: flex; flex-direction: column; gap: 8px;
+    background: #f8fafc;
+  }
+  .chat-empty { text-align: center; color: #666; font-size: 13px; margin-top: 20px; }
+  .msg {
+    max-width: 80%; padding: 8px 12px; border-radius: 8px;
+    font-size: 13px; border: 2px solid var(--black);
+    position: relative;
+    word-wrap: break-word;
+  }
+  .msg.me { align-self: flex-end; background: var(--primary); color: var(--white); text-shadow: 1px 1px 0px var(--black); }
+  .msg.them { align-self: flex-start; background: var(--white); }
+  .msg .time { display: block; font-size: 10px; margin-top: 4px; opacity: 0.7; text-align: right; }
+  .chat-input-row { display: flex; border-top: 3px solid var(--black); flex-shrink: 0; }
+  .chat-input-row input {
+    flex: 1; padding: 12px; border: none; outline: none; font-size: 14px;
+  }
+  .chat-input-row button {
+    padding: 0 16px; background: var(--primary); color: var(--white);
+    border: none; border-left: 3px solid var(--black); font-size: 18px; cursor: pointer;
+  }
+
+  /* === FIX CHAT LIST ADMIN === */
+  .chat-user-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background: var(--white);
+    border: 3px solid var(--black);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 4px 4px 0px 0px var(--black);
+    cursor: pointer;
+    gap: 12px;
+  }
+  .chat-user-item:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px 0px var(--black); }
+  .uavatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--secondary); border: 2px solid var(--black);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .uinfo { flex: 1; overflow: hidden; }
+  .uinfo .uname { font-size: 14px; font-weight: bold; }
+  .uinfo .ulast { font-size: 12px; color: #555; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .unread-dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--danger); border: 2px solid var(--black);
+    flex-shrink: 0;
+  }
+
+  /* === FIX GENERATE GMAIL (LIHAT SEMUA) & TOMBOL COPY PASSWORD === */
+  .pass-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .pass-option {
+    border: 3px solid var(--black); padding: 8px; text-align: center;
+    background: var(--white); cursor: pointer; box-shadow: 2px 2px 0px 0px var(--black);
+    display: flex; flex-direction: column; gap: 6px;
+    position: relative;
+  }
+  .pass-option.selected { background: var(--primary); color: var(--white); text-shadow: 1px 1px 0px var(--black); }
+  .pass-option .title { font-size: 10px; text-transform: uppercase; opacity: 0.8; }
+  .pass-option .val { font-size: 14px; font-weight: bold; word-break: break-all; }
+  .pass-option .btn-copy-pass {
+    width: 100%;
+    background: var(--secondary);
+    color: var(--black);
+    border: 2px solid var(--black);
+    padding: 6px;
+    font-size: 11px;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 2px 2px 0px 0px var(--black);
+    text-transform: uppercase;
+  }
+  .pass-option .btn-copy-pass:active { 
+    transform: translate(1px, 1px); 
+    box-shadow: 0px 0px 0px 0px var(--black); 
+  }
+
+  /* === TOMBOL TELEGRAM MELAYANG === */
+  .telegram-float {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    background: #229ED9;
+    border: 3px solid var(--black);
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 4px 4px 0px 0px var(--black);
+    z-index: 50;
+    cursor: pointer;
+    transition: 0.1s;
+  }
+  .telegram-float:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px 0px var(--black); }
+  .telegram-float svg { width: 30px; height: 30px; fill: var(--white); stroke: var(--white); }
+  .telegram-float.show { display: flex; }
+
+  /* === FIX TEKS PERINGATAN SETOR === */
+  #screen-setor {
+    padding-bottom: 120px; /* Menambah ruang kosong di bawah agar teks tidak tertutup nav/telegram */
+  }
+  .warning-text {
+    text-align: center; 
+    font-size: 13px; 
+    margin-top: 15px; 
+    margin-bottom: 10px; 
+    color: var(--black); 
+    font-weight: 900; 
+    background: var(--white); 
+    padding: 10px; 
+    border: 3px solid var(--black); 
+    border-radius: 8px; 
+    box-shadow: 2px 2px 0px 0px var(--black);
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--white); }
+  ::-webkit-scrollbar-thumb { background: var(--primary); }
 </style>
 </head>
 <body>
 
 <div class="app">
 
-  <!-- ===== LOADING ===== -->
-  <div id="screen-loading" class="screen active">
-    <div class="loading">
-      <div class="spinner"></div>
-      Memuat IzzGmail...
-    </div>
-  </div>
-
   <!-- ===== LOGIN ===== -->
-  <div id="screen-login" class="screen">
-    <div class="logo">IzzGmail</div>
-    <div class="sub-logo">Setor Gmail Fresh, Dapat Cuan!</div>
+  <div id="screen-login" class="screen active">
+    <div class="login-box">
+      <div class="logo">IzzGmail</div>
+      <div class="sub-logo">Setor Gmail Fresh, Dapat Cuan!</div>
 
-    <div class="auth-tabs">
-      <button id="tab-login" class="active" onclick="switchAuth('login')">Login</button>
-      <button id="tab-daftar" onclick="switchAuth('daftar')">Daftar</button>
-    </div>
-
-    <div id="form-login">
-      <button class="btn-google" onclick="loginGoogle()">
-        <svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-        Login Google
-      </button>
-      <div class="divider">atau</div>
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="login-email" placeholder="email@contoh.com" autocomplete="email">
+      <div class="auth-tabs">
+        <button id="tab-login" class="active" onclick="switchAuth('login')">Login</button>
+        <button id="tab-daftar" onclick="switchAuth('daftar')">Daftar</button>
       </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" id="login-pass" placeholder="Password" autocomplete="current-password">
-      </div>
-      <button class="btn btn-primary" id="btn-login" onclick="doLogin()">Login</button>
-    </div>
 
-    <div id="form-daftar" style="display:none;">
-      <button class="btn-google" onclick="loginGoogle()">
-        <svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-        Daftar Google
-      </button>
-      <div class="divider">atau</div>
-      <div class="form-group"><label>Email</label><input type="email" id="daftar-email" placeholder="email@contoh.com"></div>
-      <div class="form-group"><label>Nama</label><input type="text" id="daftar-nama" placeholder="Nama Lengkap"></div>
-      <div class="form-group"><label>Password</label><input type="password" id="daftar-pass" placeholder="Minimal 6 karakter"></div>
-      <div class="form-group"><label>Konfirmasi Password</label><input type="password" id="daftar-pass2" placeholder="Ulangi password"></div>
-      <button class="btn btn-primary" id="btn-daftar" onclick="doDaftar()">Daftar</button>
+      <div id="form-login">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="login-email" placeholder="contoh@gmail.com" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="login-pass" placeholder="Password" autocomplete="current-password">
+        </div>
+        <button class="btn btn-primary" id="btn-login" onclick="doLogin()">Login</button>
+      </div>
+
+      <div id="form-daftar" style="display:none;">
+        <div class="form-group"><label>Email</label><input type="email" id="daftar-email" placeholder="contoh@gmail.com"></div>
+        <div class="form-group"><label>Nama</label><input type="text" id="daftar-nama" placeholder="Nama Lengkap (Opsional)"></div>
+        <div class="form-group"><label>Password</label><input type="password" id="daftar-pass" placeholder="Minimal 6 karakter"></div>
+        <div class="form-group"><label>Konfirmasi Password</label><input type="password" id="daftar-pass2" placeholder="Ulangi password"></div>
+        <div class="form-group">
+          <label>Kode Referral (Opsional)</label>
+          <input type="text" id="daftar-ref" placeholder="Masukkan kode referral jika ada">
+        </div>
+        <button class="btn btn-primary" id="btn-daftar" onclick="doDaftar()">Daftar</button>
+      </div>
     </div>
   </div>
 
-  <!-- ===== UTAMA ===== -->
+  <!-- ===== USER: UTAMA ===== -->
   <div id="screen-utama" class="screen">
-    <div class="neo-card neo-card-primary balance-card">
-      <div class="label">Saldo Anda</div>
+    <div class="page-title">IZZGMAIL PEDIA</div>
+    
+    <!-- JAM DIGITAL -->
+    <div class="digital-clock-container">
+      <div class="digital-clock">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        <span class="clock-time" id="clock-user">--:--:--</span>
+      </div>
+    </div>
+
+    <div class="balance-card">
+      <div class="label">SALDO ANDA</div>
       <div class="amount" id="saldo-display">Rp 0</div>
     </div>
     
-    <div class="greeting">Hai, <span id="nama-user">User</span> 👋</div>
-    <div class="desc">Selamat datang di <b>IzzGmail</b>, setorkan gmail fresh kamu untuk mendapatkan uang. Rate / harga per gmail <b>Rp 2.800</b></div>
-    
-    <div class="action-grid">
-      <button class="btn btn-secondary" onclick="showScreen('setor')">📤 SETOR</button>
-      <button class="btn btn-outline" onclick="showScreen('riwayat')">📜 Riwayat</button>
-      <button class="btn btn-outline" onclick="showScreen('ewallet')">💳 E-WALLET</button>
-      <button class="btn btn-outline" onclick="showScreen('setor')">📖 RULES</button>
+    <div class="greeting-container">
+      <span class="greeting-text">Hai,</span>
+      <span class="greeting-name" id="nama-user">User</span>
     </div>
     
-    <div class="action-grid">
-      <button class="btn btn-outline" onclick="openChat()">💬 Izz Support</button>
-      <button class="btn btn-outline" onclick="showScreen('leaderboard')">🏆 Leaderboard</button>
+    <div class="site-status status-open" id="user-site-status">WEBSITE: OPEN</div>
+    
+    <div class="desc" id="user-desc-text">Selamat datang di <b>IzzGmail Pedia</b>, setorkan gmail fresh kamu untuk mendapatkan uang. Rate / harga per gmail <b>Rp 2.800</b></div>
+    
+    <!-- TATA LETAK TOMBOL BARU -->
+    <div class="home-grid">
+      <button class="btn btn-outline" onclick="showScreen('setor')" id="home-btn-setor">SETOR</button>
+      <button class="btn btn-outline" onclick="showScreen('riwayat')">RIWAYAT</button>
+      <button class="btn btn-outline" onclick="showRulesModal()">RULES</button>
+      
+      <button class="btn btn-outline" onclick="showScreen('ewallet')">E-WALLET</button>
+      <button class="btn btn-outline" onclick="openChat()" id="btn-home-chat">
+        IZZ SUPPORT
+        <div class="notif-dot" id="user-chat-notif"></div>
+      </button>
+      <button class="btn btn-outline" onclick="showScreen('leaderboard')">LEADERBOARD</button>
+      
+      <button class="btn btn-outline btn-full" onclick="showScreen('profil')">REFFERAL</button>
     </div>
     
     <div class="stats-row">
-      <div class="stat-box stat-green"><div class="num" id="stat-diterima">0</div><div class="lbl">Diterima</div></div>
-      <div class="stat-box stat-yellow"><div class="num" id="stat-pending">0</div><div class="lbl">Pending</div></div>
-      <div class="stat-box stat-red"><div class="num" id="stat-ditolak">0</div><div class="lbl">Ditolak</div></div>
+      <div class="stat-box stat-green"><div class="num" id="stat-diterima">0</div><div class="lbl">DITERIMA</div></div>
+      <div class="stat-box stat-red"><div class="num" id="stat-ditolak">0</div><div class="lbl">DI TOLAK</div></div>
+      <div class="stat-box stat-yellow"><div class="num" id="stat-pending">0</div><div class="lbl">PENDING</div></div>
+      <div class="stat-box stat-purple"><div class="num" id="stat-captcha">0</div><div class="lbl">CAPTCHA</div></div>
     </div>
   </div>
 
-  <!-- ===== SETOR ===== -->
+  <!-- ===== USER: SETOR ===== -->
   <div id="screen-setor" class="screen">
-    <div class="logo" style="font-size:24px;margin-bottom:16px;">IzzGmail</div>
-    
+    <div class="section-title">RULES</div>
     <div class="rules-box">
-      <h4>📋 Rules</h4>
-      <ol>
+      <ol id="user-rules-list">
         <li>Gmail wajib fresh/baru dibuat, bukan akun lama.</li>
-        <li>Nama Gmail wajib sesuai hasil generate di website, harus sama persis dan tidak boleh berbeda satu huruf pun.</li>
-        <li>Password wajib: <b>goldacok</b> (kecil semua / no kapital)</li>
-        <li>Setting umur Gmail minimal 18 tahun. Dilarang menyetorkan akun anak atau akun yang masih terhubung dengan Family Link.</li>
-        <li>Dilarang menambahkan nomor telepon atau email pemulihan.</li>
       </ol>
-      <div class="note">⚠️ Wajib mematuhi semua rules yang berlaku. Pelanggaran aturan dapat menyebabkan akun diblokir.</div>
+      <div class="note">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--white)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+        Wajib mematuhi semua rules yang berlaku. Pelanggaran aturan dapat menyebabkan akun diblokir.
+      </div>
     </div>
 
-    <button class="btn btn-primary" onclick="generateGmail()" style="margin-bottom:16px;">🔄 GENERATE GMAIL</button>
-
-    <div class="generate-box">
-      <div class="email" id="generated-email">-</div>
-      <button class="btn btn-outline" onclick="copyEmail()">📋 COPY EMAIL</button>
+    <div class="form-group">
+      <label>Pilih Jumlah Generate</label>
+      <select id="generate-count" style="width:100%; padding:14px; border:3px solid var(--black); border-radius:8px; font-size:16px; outline:none; margin-bottom:12px;">
+        <option value="1">1 Gmail</option>
+        <option value="5">5 Gmail</option>
+        <option value="10">10 Gmail</option>
+        <option value="20">20 Gmail</option>
+        <option value="30">30 Gmail</option>
+        <option value="40">40 Gmail</option>
+        <option value="50">50 Gmail</option>
+        <option value="60">60 Gmail</option>
+        <option value="70">70 Gmail</option>
+        <option value="80">80 Gmail</option>
+        <option value="90">90 Gmail</option>
+        <option value="100">100 Gmail</option>
+      </select>
     </div>
 
-    <div class="price-tag">Password : goldacok<br>Rp 2.800 / gmail</div>
+    <button class="btn btn-primary" onclick="generateGmail()" style="margin-bottom:12px;" id="btn-generate">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+      GENERATE GMAIL
+    </button>
+
+    <!-- TAMPILAN GENERATE -->
+    <div class="generate-box" id="generate-container">
+      <div id="generated-list" style="margin-bottom: 12px;"></div>
+      <button id="btn-toggle-view" class="btn btn-outline" onclick="toggleViewAllGenerate()" style="display:none; margin-bottom: 8px; font-size: 14px; padding: 10px;">LIHAT SEMUA GMAIL</button>
+      <button id="btn-copy-all-generate" class="btn btn-secondary" onclick="copyAllGenerated()" style="display:none; margin-bottom: 8px;">SALIN SEMUA EMAIL</button>
+    </div>
+    
+    <div class="price-tag">
+      <div style="margin-bottom:8px; font-size:12px; color:#555;">PILIH SALAH SATU PASSWORD:</div>
+      <div class="pass-grid" id="user-pass-grid"></div>
+    </div>
 
     <div class="form-group">
       <label>Masukkan Gmail yang disetorkan (satu per baris)</label>
-      <textarea class="setor-input" id="input-setor" placeholder="izzgmail1@gmail.com&#10;izzgmail2@gmail.com" style="min-height:120px; resize:vertical;"></textarea>
+      <textarea class="setor-input" id="input-setor" placeholder="izzgmail1@gmail.com&#10;izzgmail2@gmail.com" style="min-height:100px; resize:vertical; border: 3px solid var(--black);"></textarea>
     </div>
 
     <button class="btn btn-primary" id="btn-setor" onclick="doSetor()">SETOR SEKARANG</button>
+    
+    <!-- TEKS TAMBAHAN -->
+    <div class="warning-text">
+      PENGECEKAN GMAIL 1 - 24 JAM<br>TERGANTUNG ANTRIAN
+    </div>
   </div>
 
-  <!-- ===== RIWAYAT ===== -->
+  <!-- ===== USER: RIWAYAT (2 TAB) ===== -->
   <div id="screen-riwayat" class="screen">
-    <div class="section-title">📜 Riwayat Penarikan</div>
-    <div id="riwayat-list"><div class="loading"><div class="spinner"></div>Memuat...</div></div>
+    <div class="riwayat-tabs">
+      <button id="tab-riwayat-penarikan" class="active" onclick="switchRiwayatTab('penarikan')">Penarikan</button>
+      <button id="tab-riwayat-gmail" onclick="switchRiwayatTab('gmail')">Gmail</button>
+    </div>
+    
+    <div id="riwayat-penarikan-content">
+      <div class="section-title">Riwayat Penarikan</div>
+      <div id="riwayat-list"><div class="loading">MEMUAT...</div></div>
+    </div>
+    
+    <div id="riwayat-gmail-content" style="display: none;">
+      <div class="section-title">Riwayat Gmail</div>
+      <div id="riwayat-gmail-list"><div class="loading">MEMUAT...</div></div>
+    </div>
   </div>
 
-  <!-- ===== E-WALLET ===== -->
+  <!-- ===== USER: E-WALLET ===== -->
   <div id="screen-ewallet" class="screen">
-    <div class="neo-card neo-card-primary balance-card">
-      <div class="label">Saldo Anda</div>
+    <div class="balance-card">
+      <div class="label">SALDO ANDA</div>
       <div class="amount" id="saldo-ewallet">Rp 0</div>
     </div>
     
@@ -818,15 +918,24 @@
     
     <div class="form-group"><label>Nama Penerima</label><input type="text" id="wd-nama" placeholder="Nama sesuai e-wallet"></div>
     <div class="form-group"><label>Nomor E-Wallet</label><input type="tel" id="wd-nomor" placeholder="08xxxxxxxxxx"></div>
-    <div class="form-group"><label>Jumlah Penarikan (Rp)</label><input type="number" id="wd-jumlah" placeholder="Minimal 10000"></div>
+    <div class="form-group">
+      <label>Jumlah Penarikan (Rp)</label>
+      <input type="number" id="wd-jumlah" placeholder="Pilih metode dulu..." disabled>
+      <div id="wd-info-biaya" style="font-size: 12px; margin-top: 6px; color: #d97706; display: none;"></div>
+    </div>
     
     <button class="btn btn-primary" id="btn-withdraw" onclick="doWithdraw()">Konfirmasi Penarikan</button>
   </div>
 
-  <!-- ===== PROFIL ===== -->
+  <!-- ===== USER: PROFIL ===== -->
   <div id="screen-profil" class="screen">
     <div class="profile-header">
-      <div class="avatar" id="avatar-user">U</div>
+      <div class="avatar" id="avatar-user" onclick="document.getElementById('input-photo').click()">
+        <span id="avatar-initial">U</span>
+        <img id="avatar-img" src="" alt="Profile">
+      </div>
+      <button class="btn-upload" onclick="document.getElementById('input-photo').click()">UBAH FOTO</button>
+      <input type="file" id="input-photo" accept="image/*" style="display: none;" onchange="handlePhotoUpload(event)">
     </div>
     
     <div class="profile-info">
@@ -834,23 +943,40 @@
       <div class="row"><span>Email</span><span id="profil-email">-</span></div>
       <div class="row"><span>Saldo</span><span id="profil-saldo">Rp 0</span></div>
     </div>
+
+    <!-- KOTAK REFERRAL -->
+    <div class="referral-box">
+      <div style="font-size: 14px; text-transform: uppercase;">Kode Referral Kamu</div>
+      <div class="ref-code" id="profil-ref-code">-</div>
+      <div class="ref-desc">Bagikan kode/link ini ke temanmu.<br>Dapatkan <b>Rp 150</b> setiap temanmu menyetorkan Gmail yang diterima.</div>
+      <button class="btn btn-secondary" onclick="salinKodeReferral()">SALIN KODE</button>
+      <button class="btn btn-primary" style="margin-top: 8px;" onclick="bagikanLinkReferral()">BAGIKAN LINK</button>
+    </div>
+
+    <!-- RIWAYAT PENDAPATAN REFERRAL -->
+    <div class="section-title" style="margin-top: 20px;">Riwayat Pendapatan Referral</div>
+    <div id="riwayat-referral-list"><div class="loading">MEMUAT...</div></div>
     
-    <button class="btn btn-outline" onclick="gantiPassword()" style="margin-bottom:16px;">🔐 GANTI PASSWORD</button>
-    <button class="btn btn-danger" onclick="logout()">🚪 LOGOUT</button>
+    <button class="btn btn-secondary" onclick="bukaEditProfil()" style="margin-bottom:12px; margin-top: 20px;">EDIT PROFIL</button>
+    <button class="btn btn-outline" id="btn-ganti-pass" onclick="gantiPassword()" style="margin-bottom:12px;">GANTI PASSWORD</button>
+    <button class="btn btn-danger" onclick="logout()">LOGOUT</button>
   </div>
 
-  <!-- ===== LEADERBOARD ===== -->
+  <!-- ===== USER: LEADERBOARD ===== -->
   <div id="screen-leaderboard" class="screen">
-    <div class="section-title" style="text-align:center; display:block;">🏆 TOP PENYETOR</div>
-    <div id="leaderboard-list"><div class="loading"><div class="spinner"></div>Memuat...</div></div>
+    <div class="lb-tabs">
+      <button id="tab-lb-gmail" class="active" onclick="switchLeaderboardTab('gmail')">Top Setor Gmail</button>
+      <button id="tab-lb-ref" onclick="switchLeaderboardTab('refferal')">Top Pengundang</button>
+    </div>
+    <div class="section-title" id="lb-title">Top Penyetor Gmail</div>
+    <div id="leaderboard-list"><div class="loading">MEMUAT...</div></div>
   </div>
 
-  <!-- ===== CHAT (USER) ===== -->
+  <!-- ===== USER: CHAT ===== -->
   <div id="screen-chat" class="screen">
     <div class="chat-container">
       <div class="chat-header">
-        <button class="back-btn" onclick="showScreen('utama')">←</button>
-        <div class="avatar-admin">👑</div>
+        <button class="back-btn" onclick="showScreen('utama')">&lt;</button>
         <div class="info">
           <div class="name">Izz Support</div>
           <div class="status">Admin Online</div>
@@ -859,39 +985,109 @@
       <div class="chat-messages" id="chat-messages"></div>
       <div class="chat-input-row">
         <input type="text" id="chat-input" placeholder="Tulis pesan..." onkeypress="if(event.key==='Enter')sendMessage()">
-        <button onclick="sendMessage()" id="chat-send-btn">➤</button>
+        <button onclick="sendMessage()" id="chat-send-btn">&gt;</button>
       </div>
     </div>
   </div>
 
-  <!-- ===== ADMIN DASHBOARD ===== -->
-  <div id="screen-admin" class="screen">
-    <div class="logo" style="font-size:20px;margin-bottom:16px;">👑 Admin Panel</div>
+  <!-- ========================================================= -->
+  <!-- ===== ADMIN SECTION ===== -->
+  <!-- ========================================================= -->
+
+  <!-- ADMIN: BERANDA -->
+  <div id="screen-admin-beranda" class="screen">
+    <div class="page-title" style="font-size: 24px;">ADMIN PANEL</div>
     
+    <!-- JAM DIGITAL ADMIN -->
+    <div class="digital-clock-container">
+      <div class="digital-clock">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        <span class="clock-time" id="clock-admin">--:--:--</span>
+      </div>
+    </div>
+
     <div class="admin-stat">
-      <div class="num" id="admin-total">0</div>
+      <div class="num" id="admin-total-gmail">0</div>
       <div class="lbl">Total Gmail Disetorkan</div>
     </div>
 
-    <div class="section-title">💬 Chat Masuk</div>
-    <div id="admin-chat-list"><div class="loading"><div class="spinner"></div>Memuat...</div></div>
+    <button class="btn btn-secondary" onclick="bukaPengaturan()" style="margin-bottom:16px;">PENGATURAN WEBSITE</button>
 
-    <div class="section-title" style="margin-top:20px;">📥 Setoran Pending</div>
-    <div id="admin-setoran-list"><div class="loading"><div class="spinner"></div>Memuat...</div></div>
-    
-    <div class="section-title" style="margin-top:20px;">💸 Penarikan Pending</div>
-    <div id="admin-withdraw-list"><div class="loading"><div class="spinner"></div>Memuat...</div></div>
-    
-    <button class="btn btn-danger" style="margin-top:20px;" onclick="logout()">🚪 Logout Admin</button>
-    <button class="btn btn-outline" style="margin-top:12px;" onclick="showScreen('utama')">← Ke Beranda</button>
+    <!-- FITUR GENERATE TOGGLE -->
+    <div class="section-title">Pengaturan Generate Gmail</div>
+    <div class="admin-user" style="display: flex; justify-content: space-between; align-items: center; padding: 16px;">
+      <div>
+        <div style="font-size: 14px;">Status Generate:</div>
+        <div id="admin-generate-status" style="font-size: 16px; color: var(--danger);">NONAKTIF</div>
+      </div>
+      <button class="btn btn-primary" id="btn-toggle-generate" onclick="toggleGenerateStatus()" style="width: auto; padding: 10px 20px; font-size: 12px;">AKTIFKAN</button>
+    </div>
+
+    <!-- LOG SALDO MASUK (HANYA 1 TERBARU + TOMBOL LIHAT SEMUA) -->
+    <div class="section-title" style="margin-top: 20px;">Log Saldo Terbaru</div>
+    <div id="admin-log-saldo"><div class="loading">MEMUAT LOG...</div></div>
+    <button class="btn btn-outline" id="btn-lihat-semua-log" onclick="bukaModalLog()" style="display:none; margin-bottom:16px;">LIHAT SEMUA LOG</button>
+
+    <div class="section-title">Daftar Akun User</div>
+    <div id="admin-user-list"><div class="loading">MEMUAT...</div></div>
   </div>
 
-  <!-- ===== ADMIN CHAT ===== -->
+  <!-- ADMIN: SETOR USER -->
+  <div id="screen-admin-setor" class="screen">
+    <div class="admin-tabs">
+      <button id="tab-setor-pending" class="active" onclick="switchAdminSetorTab('pending')">Pending</button>
+      <button id="tab-setor-diterima" onclick="switchAdminSetorTab('diterima')">Diterima</button>
+      <button id="tab-setor-ditolak" onclick="switchAdminSetorTab('ditolak')">Ditolak</button>
+      <button id="tab-setor-captcha" onclick="switchAdminSetorTab('captcha')">Captcha</button>
+    </div>
+    <div id="admin-setoran-list"><div class="loading">MEMUAT...</div></div>
+  </div>
+
+  <!-- ADMIN: PENARIKAN USER -->
+  <div id="screen-admin-penarikan" class="screen">
+    <div class="admin-tabs">
+      <button id="tab-tarik-pending" class="active" onclick="switchAdminTarikTab('pending')">Pending</button>
+      <button id="tab-tarik-sukses" class="active" onclick="switchAdminTarikTab('sukses')">Sukses</button>
+    </div>
+    <div id="admin-withdraw-list"><div class="loading">MEMUAT...</div></div>
+  </div>
+
+  <!-- ADMIN: SUPPORT USER -->
+  <div id="screen-admin-support" class="screen">
+    <div class="section-title">Chat Masuk</div>
+    <div id="admin-chat-list"><div class="loading">MEMUAT...</div></div>
+  </div>
+
+  <!-- ADMIN: LEADERBOARD -->
+  <div id="screen-admin-leaderboard" class="screen">
+    <div class="lb-tabs">
+      <button id="tab-admin-lb-gmail" class="active" onclick="switchAdminLeaderboardTab('gmail')">Top Setor Gmail</button>
+      <button id="tab-admin-lb-ref" onclick="switchAdminLeaderboardTab('refferal')">Top Pengundang</button>
+    </div>
+    <div class="section-title" id="admin-lb-title">Top Penyetor Gmail</div>
+    <div id="admin-leaderboard-list"><div class="loading">MEMUAT...</div></div>
+  </div>
+
+  <!-- ADMIN: PROFIL -->
+  <div id="screen-admin-profil" class="screen">
+    <div class="profile-header">
+      <div class="avatar" style="background: var(--secondary); color: var(--black);">A</div>
+    </div>
+    
+    <div class="profile-info">
+      <div class="row"><span>Nama</span><span>Admin Utama</span></div>
+      <div class="row"><span>Email</span><span id="admin-profil-email">-</span></div>
+      <div class="row"><span>Status</span><span>OWNER</span></div>
+    </div>
+    
+    <button class="btn btn-danger" onclick="logout()">LOGOUT ADMIN</button>
+  </div>
+
+  <!-- ADMIN: CHAT ROOM -->
   <div id="screen-admin-chat" class="screen">
     <div class="chat-container">
       <div class="chat-header">
-        <button class="back-btn" onclick="showScreen('admin')">←</button>
-        <div class="avatar-admin" id="admin-chat-avatar">U</div>
+        <button class="back-btn" onclick="showScreen('admin-support')">&lt;</button>
         <div class="info">
           <div class="name" id="admin-chat-name">User</div>
           <div class="status">User</div>
@@ -900,36 +1096,236 @@
       <div class="chat-messages" id="admin-chat-messages"></div>
       <div class="chat-input-row">
         <input type="text" id="admin-chat-input" placeholder="Balas pesan..." onkeypress="if(event.key==='Enter')adminSendMessage()">
-        <button onclick="adminSendMessage()">➤</button>
+        <button onclick="adminSendMessage()">&gt;</button>
       </div>
     </div>
   </div>
 
-  <!-- ===== BOTTOM NAV ===== -->
-  <div class="bottom-nav" id="bottom-nav">
-    <button data-screen="utama" onclick="showScreen('utama')" class="active"><span class="icon">🏠</span>Beranda</button>
-    <button data-screen="setor" onclick="showScreen('setor')"><span class="icon">📤</span>Setor</button>
-    <button data-screen="ewallet" onclick="showScreen('ewallet')"><span class="icon">💳</span>Wallet</button>
-    <button data-screen="profil" onclick="showScreen('profil')"><span class="icon">👤</span>Profil</button>
+  <!-- ===== BOTTOM NAV USER ===== -->
+  <div class="bottom-nav" id="bottom-nav-user">
+    <button data-screen="utama" onclick="showScreen('utama')" class="active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+      Beranda
+    </button>
+    <button data-screen="setor" onclick="showScreen('setor')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="17 8 12 3 7 8"></polyline>
+        <line x1="12" y1="3" x2="12" y2="15"></line>
+        <line x1="8" y1="12" x2="16" y2="12"></line>
+      </svg>
+      Setor
+    </button>
+    <button data-screen="ewallet" onclick="showScreen('ewallet')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="5" width="20" height="14" rx="2" ry="2"></rect>
+        <line x1="2" y1="10" x2="22" y2="10"></line>
+        <circle cx="12" cy="15" r="1.5"></circle>
+        <circle cx="17" cy="15" r="1.5"></circle>
+        <circle cx="7" cy="15" r="1.5"></circle>
+      </svg>
+      Wallet
+    </button>
+    <button data-screen="profil" onclick="showScreen('profil')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle><circle cx="12" cy="7" r="1.5" fill="currentColor"></circle></svg>
+      Profil
+    </button>
+  </div>
+
+  <!-- ===== BOTTOM NAV ADMIN ===== -->
+  <div class="bottom-nav" id="bottom-nav-admin">
+    <button data-screen="admin-beranda" onclick="showScreen('admin-beranda')" class="active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+      Beranda
+    </button>
+    <button data-screen="admin-setor" onclick="showScreen('admin-setor')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="17 8 12 3 7 8"></polyline>
+        <line x1="12" y1="3" x2="12" y2="15"></line>
+        <line x1="8" y1="12" x2="16" y2="12"></line>
+      </svg>
+      Setor
+    </button>
+    <button data-screen="admin-penarikan" onclick="showScreen('admin-penarikan')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2" ry="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line><path d="M12 15h6"></path></svg>
+      Tarik
+    </button>
+    <button data-screen="admin-support" onclick="showScreen('admin-support')" id="admin-nav-support">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      Support
+      <div class="notif-dot" id="admin-chat-notif" style="top: 2px; right: 10px;"></div>
+    </button>
+    <button data-screen="admin-leaderboard" onclick="showScreen('admin-leaderboard')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+      Leader
+    </button>
+    <button data-screen="admin-profil" onclick="showScreen('admin-profil')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle><circle cx="12" cy="7" r="1.5" fill="currentColor"></circle></svg>
+      Profil
+    </button>
+  </div>
+
+  <!-- ===== MODAL RULES ===== -->
+  <div id="modal-rules" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+      <div class="rules-box" style="margin-bottom:0;">
+        <h4>RULES</h4>
+        <ol id="modal-rules-list">
+          <li>Gmail wajib fresh/baru dibuat, bukan akun lama.</li>
+        </ol>
+        <div class="note">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--white)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+            <line x1="12" y1="9" x2="12" y2="13"></line>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+          Wajib mematuhi semua rules yang berlaku. Pelanggaran aturan dapat menyebabkan akun diblokir.
+        </div>
+      </div>
+      <button class="btn btn-primary" style="margin-top:16px;" onclick="tutupRulesModal()">TUTUP</button>
+    </div>
+  </div>
+
+  <!-- ===== MODAL EDIT PROFIL ===== -->
+  <div id="modal-edit-profil" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+      <h3 style="margin-bottom: 16px; text-align: center; text-transform: uppercase;">Edit Profil</h3>
+      <div class="form-group">
+        <label>Nama Baru</label>
+        <input type="text" id="edit-nama" placeholder="Masukkan nama baru">
+      </div>
+      <div style="display: flex; gap: 10px; margin-top: 16px;">
+        <button class="btn btn-danger" style="flex: 1;" onclick="tutupEditProfil()">BATAL</button>
+        <button class="btn btn-success" style="flex: 1;" id="btn-save-profil" onclick="simpanEditProfil()">SIMPAN</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL BUAT PASSWORD ===== -->
+  <div id="modal-password" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+      <h3 style="margin-bottom: 16px; text-align: center; text-transform: uppercase;">Buat Password Baru</h3>
+      <div class="form-group">
+        <label>Password Baru</label>
+        <input type="password" id="new-pass" placeholder="Minimal 6 karakter">
+      </div>
+      <div class="form-group">
+        <label>Konfirmasi Password</label>
+        <input type="password" id="new-pass-confirm" placeholder="Ulangi password">
+      </div>
+      <div style="display: flex; gap: 10px; margin-top: 16px;">
+        <button class="btn btn-danger" style="flex: 1;" onclick="tutupModalPassword()">BATAL</button>
+        <button class="btn btn-success" style="flex: 1;" id="btn-save-pass" onclick="simpanPasswordGoogle()">SIMPAN</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL PENGATURAN WEBSITE (ADMIN) ===== -->
+  <div id="modal-pengaturan" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+      <h3 style="margin-bottom: 16px; text-align: center; text-transform: uppercase;">Pengaturan Website</h3>
+      
+      <div class="form-group">
+        <label>Status Website</label>
+        <select id="setting-status" style="width:100%; padding:14px; border:3px solid var(--black); border-radius:8px; font-size:14px; outline:none;">
+          <option value="OPEN">OPEN (Buka)</option>
+          <option value="CLOSE">CLOSE (Tutup)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Rate per Gmail (Rp)</label>
+        <input type="number" id="setting-rate" placeholder="Contoh: 2800">
+      </div>
+
+      <div style="background: #e5e7eb; padding: 10px; border: 2px solid var(--black); border-radius: 8px; margin-bottom: 16px;">
+        <h4 style="margin-bottom: 10px; text-align: center;">PENGATURAN E-WALLET</h4>
+        
+        <div class="form-group">
+          <label>Minimal Penarikan DANA (Rp)</label>
+          <input type="number" id="setting-min-dana" placeholder="Contoh: 10000">
+        </div>
+        <div class="form-group">
+          <label>Minimal Penarikan GOPAY (Rp)</label>
+          <input type="number" id="setting-min-gopay" placeholder="Contoh: 5000">
+        </div>
+        <div class="form-group">
+          <label>Minimal Penarikan OVO (Rp)</label>
+          <input type="number" id="setting-min-ovo" placeholder="Contoh: 5000">
+        </div>
+        
+        <div class="form-group" style="margin-top: 10px; border-top: 2px dashed #999; padding-top: 10px;">
+          <label>Biaya Admin (Rp)</label>
+          <input type="number" id="setting-biaya-admin" placeholder="Contoh: 999">
+          
+          <div style="margin-top: 10px;">
+            <label style="font-size: 12px; margin-bottom: 6px; display: block;">BERLAKU UNTUK METODE:</label>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <label style="display: flex; align-items: center; gap: 4px; font-size: 13px; cursor: pointer;">
+                <input type="checkbox" id="adm-dana" style="width: 18px; height: 18px; box-shadow: none;"> DANA
+              </label>
+              <label style="display: flex; align-items: center; gap: 4px; font-size: 13px; cursor: pointer;">
+                <input type="checkbox" id="adm-gopay" style="width: 18px; height: 18px; box-shadow: none;"> GOPAY
+              </label>
+              <label style="display: flex; align-items: center; gap: 4px; font-size: 13px; cursor: pointer;">
+                <input type="checkbox" id="adm-ovo" style="width: 18px; height: 18px; box-shadow: none;"> OVO
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Edit Rules (satu per baris)</label>
+        <textarea id="setting-rules" rows="4" placeholder="Masukkan aturan..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Daftar Password (pisahkan dengan koma)</label>
+        <input type="text" id="setting-passwords" placeholder="Contoh: goldacok, izzgmail123">
+      </div>
+
+      <div style="display: flex; gap: 10px; margin-top: 16px;">
+        <button class="btn btn-danger" style="flex: 1;" onclick="tutupPengaturan()">BATAL</button>
+        <button class="btn btn-success" style="flex: 1;" id="btn-save-setting" onclick="simpanPengaturan()">SIMPAN</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MODAL SEMUA LOG (TOMBOL TUTUP DI ATAS) ===== -->
+  <div id="modal-log" class="modal-overlay" style="display:none;">
+    <div class="modal-content">
+      <div class="modal-sticky-top">
+        <h3 style="margin-bottom: 10px; text-align: center; text-transform: uppercase;">Semua Log Saldo</h3>
+        <button class="btn btn-primary" onclick="tutupModalLog()">TUTUP</button>
+      </div>
+      <div id="modal-log-list"></div>
+    </div>
   </div>
 
 </div>
 
+<!-- TOMBOL TELEGRAM MELAYANG -->
+<div class="telegram-float" id="telegram-float" onclick="window.open('https://t.me/IZZTZYOFFC', '_blank')">
+  <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+</div>
+
 <div id="toast" class="toast"></div>
 
-<!-- Firebase SDK v10 -->
+<!-- Firebase SDK v11 -->
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
 import {
   getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
-  signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged,
-  sendPasswordResetEmail
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  signOut, onAuthStateChanged,
+  sendPasswordResetEmail, updatePassword
+} from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
 import {
   getFirestore, doc, setDoc, getDoc, updateDoc, collection,
   addDoc, query, where, orderBy, limit, getDocs, serverTimestamp,
   increment, onSnapshot
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
 
 /* ============ CONFIG FIREBASE ANDA ============ */
 const firebaseConfig = {
@@ -942,13 +1338,9 @@ const firebaseConfig = {
   measurementId: "G-7M2C2413CF"
 };
 
-/* 🔥 GANTI EMAIL INI DENGAN EMAIL ANDA (Yang akan jadi Admin) */
 const OWNER_EMAILS = [
-  "admin@izzgmail.com" // GANTI DENGAN EMAIL YANG AKAN ANDA PAKAI UNTUK LOGIN ADMIN
+  "admin@izzgmail.com" // GANTI DENGAN EMAIL ADMIN ANDA
 ];
-
-const RATE_PER_GMAIL = 2800;
-/* ============================================================ */
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -957,11 +1349,45 @@ const db = getFirestore(app);
 let currentUser = null;
 let currentProfile = null;
 let method = '';
-let generatedEmail = '';
+let generatedEmails = []; 
+let isViewAllGenerate = false;
 let chatUnsubscribe = null;
 let adminChatUnsub = null;
 let adminChatListUnsub = null;
 let currentAdminChatUid = null;
+let currentLbTab = 'gmail';
+let currentAdminLbTab = 'gmail';
+let userNotifUnsub = null; // Listener real-time notif user
+let adminNotifUnsub = null; // Listener real-time notif admin
+let clockInterval = null; // Interval Jam Digital
+
+// Variabel Pengaturan Website (Default)
+let siteSettings = {
+  rules: [
+    "Gmail wajib fresh/baru dibuat, bukan akun lama.",
+    "Nama Gmail wajib sesuai hasil generate di website, harus sama persis dan tidak boleh berbeda satu huruf pun.",
+    "Password wajib: goldacok (kecil semua / no kapital)",
+    "Setting umur Gmail minimal 18 tahun. Dilarang menyetorkan akun anak atau akun yang masih terhubung dengan Family Link.",
+    "Dilarang menambahkan nomor telepon atau email pemulihan."
+  ],
+  passwords: ["goldacok"],
+  status: "OPEN",
+  generateStatus: "AKTIF", // Status generate default
+  minWithdraw: 10000,
+  minDana: 10000,
+  minGopay: 5000,
+  minOvo: 5000,
+  biayaAdmin: 999,
+  admDana: false,
+  admGopay: true,
+  admOvo: true,
+  ratePerGmail: 2800
+};
+
+let selectedUserPass = ""; 
+let currentRiwayatTab = 'penarikan';
+let currentAdminSetorTab = 'pending';
+let currentAdminTarikTab = 'pending';
 
 /* ===== HELPERS ===== */
 function showToast(msg, isError = false) {
@@ -972,16 +1398,43 @@ function showToast(msg, isError = false) {
   window._toastTimer = setTimeout(() => t.className = 'toast', 3000);
 }
 function rupiah(n) { return 'Rp ' + (Number(n) || 0).toLocaleString('id-ID'); }
-function isAdmin(email) {
-  return OWNER_EMAILS.map(e => e.toLowerCase()).includes((email || '').toLowerCase());
-}
+function isAdmin(email) { return OWNER_EMAILS.map(e => e.toLowerCase()).includes((email || '').toLowerCase()); }
 function formatTime(ts) {
   if (!ts) return '';
   const d = ts.toDate ? ts.toDate() : new Date(ts);
   return d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
 }
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function formatDateTime(ts) {
+  if (!ts) return '';
+  const d = ts.toDate ? ts.toDate() : new Date(ts);
+  return d.toLocaleString('id-ID', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+}
+function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+/* ===== JAM DIGITAL ===== */
+function startDigitalClock() {
+  if (clockInterval) clearInterval(clockInterval);
+  
+  const updateTime = () => {
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString('id-ID', { hour12: false });
+    
+    const clockUser = document.getElementById('clock-user');
+    const clockAdmin = document.getElementById('clock-admin');
+    
+    if (clockUser) clockUser.textContent = timeStr;
+    if (clockAdmin) clockAdmin.textContent = timeStr;
+  };
+  
+  updateTime();
+  clockInterval = setInterval(updateTime, 1000);
+}
+
+/* ===== GENERATE KODE REFERRAL ===== */
+function generateReferralCode(nama) {
+  const cleanName = nama.replace(/[^a-zA-Z0-9]/g, '').toUpperCase().slice(0, 4);
+  const randomStr = Math.random().toString(36).substring(2, 6).toUpperCase();
+  return cleanName + randomStr;
 }
 
 function showScreen(name) {
@@ -989,20 +1442,98 @@ function showScreen(name) {
   const el = document.getElementById('screen-' + name);
   if (el) el.classList.add('active');
 
-  const nav = document.getElementById('bottom-nav');
-  if (currentUser && name !== 'login') {
-    nav.style.display = 'flex';
-    nav.querySelectorAll('button').forEach(b => b.classList.toggle('active', b.dataset.screen === name));
+  const navUser = document.getElementById('bottom-nav-user');
+  const navAdmin = document.getElementById('bottom-nav-admin');
+  const tgFloat = document.getElementById('telegram-float');
+  
+  if (currentUser) {
+    tgFloat.classList.add('show'); 
+    if (isAdmin(currentUser.email)) {
+      navUser.style.display = 'none';
+      navAdmin.style.display = 'flex';
+      navAdmin.querySelectorAll('button').forEach(b => b.classList.toggle('active', b.dataset.screen === name));
+    } else {
+      navAdmin.style.display = 'none';
+      navUser.style.display = 'flex';
+      navUser.querySelectorAll('button').forEach(b => b.classList.toggle('active', b.dataset.screen === name));
+    }
   } else {
-    nav.style.display = 'none';
+    tgFloat.classList.remove('show');
+    navUser.style.display = 'none';
+    navAdmin.style.display = 'none';
   }
 
   if (name === 'utama') loadDashboard();
-  if (name === 'ewallet') updateSaldoUI();
-  if (name === 'profil') loadProfil();
+  if (name === 'setor') updateSetorUI(); // Update UI Setor (disable jika tutup / generate off)
+  if (name === 'ewallet') {
+    updateSaldoUI();
+    method = '';
+    document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('selected'));
+    document.getElementById('wd-jumlah').value = '';
+    document.getElementById('wd-jumlah').disabled = true;
+    document.getElementById('wd-jumlah').placeholder = 'Pilih metode dulu...';
+    document.getElementById('wd-info-biaya').style.display = 'none';
+  }
+  if (name === 'profil') {
+    loadProfil();
+    loadRiwayatReferral();
+  }
   if (name === 'riwayat') loadRiwayat();
-  if (name === 'leaderboard') loadLeaderboard();
-  if (name === 'admin') loadAdmin();
+  if (name === 'leaderboard') loadLeaderboard(currentLbTab);
+  
+  if (name === 'admin-beranda') loadAdminBeranda();
+  if (name === 'admin-setor') loadAdminSetor();
+  if (name === 'admin-penarikan') loadAdminPenarikan();
+  if (name === 'admin-support') loadAdminSupport();
+  if (name === 'admin-leaderboard') loadAdminLeaderboard(currentAdminLbTab);
+  if (name === 'admin-profil') loadAdminProfil();
+}
+
+/* ===== UPDATE UI SETOR (JIKA TUTUP / GENERATE OFF) ===== */
+function updateSetorUI() {
+  const isWebOpen = siteSettings.status === "OPEN";
+  const isGenActive = siteSettings.generateStatus === "AKTIF";
+  
+  const btnGenerate = document.getElementById('btn-generate');
+  const inputSetor = document.getElementById('input-setor');
+  const btnSetor = document.getElementById('btn-setor');
+  const homeBtnSetor = document.getElementById('home-btn-setor');
+
+  // 1. Update Tombol Generate
+  if (!isWebOpen || !isGenActive) {
+    btnGenerate.disabled = true;
+    if (!isWebOpen) {
+      btnGenerate.innerHTML = `SEDANG TUTUP`;
+    } else {
+      btnGenerate.innerHTML = `GENERATE DIMATIKAN`;
+    }
+  } else {
+    btnGenerate.disabled = false;
+    btnGenerate.innerHTML = `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg> GENERATE GMAIL`;
+  }
+
+  // 2. Update Form Setor & Tombol
+  if (!isWebOpen) {
+    inputSetor.disabled = true;
+    btnSetor.disabled = true;
+    btnSetor.textContent = 'SEDANG TUTUP';
+    homeBtnSetor.textContent = 'SEDANG TUTUP';
+    homeBtnSetor.disabled = true;
+  } else {
+    inputSetor.disabled = false;
+    btnSetor.disabled = false;
+    btnSetor.textContent = 'SETOR SEKARANG';
+    homeBtnSetor.textContent = 'SETOR';
+    homeBtnSetor.disabled = false;
+  }
+}
+
+/* ===== MODAL RULES ===== */
+function showRulesModal() {
+  document.getElementById('modal-rules').style.display = 'flex';
+}
+function tutupRulesModal() {
+  document.getElementById('modal-rules').style.display = 'none';
 }
 
 /* ===== AUTH ===== */
@@ -1022,7 +1553,9 @@ async function doLogin() {
   btn.disabled = true; btn.textContent = 'Memproses...';
   try {
     await signInWithEmailAndPassword(auth, email, pass);
-    showToast(isAdmin(email) ? 'Login admin berhasil 👑' : 'Login berhasil!');
+    if (isAdmin(email)) showScreen('admin-beranda');
+    else showScreen('utama');
+    showToast(isAdmin(email) ? 'Login admin berhasil' : 'Login berhasil!');
   } catch (e) {
     showToast(terjemahError(e.code), true);
   } finally {
@@ -1032,44 +1565,86 @@ async function doLogin() {
 
 async function doDaftar() {
   const email = document.getElementById('daftar-email').value.trim().toLowerCase();
-  const nama = document.getElementById('daftar-nama').value.trim();
+  let nama = document.getElementById('daftar-nama').value.trim();
   const pass = document.getElementById('daftar-pass').value;
   const pass2 = document.getElementById('daftar-pass2').value;
-  if (!email || !nama || !pass || !pass2) return showToast('Semua field wajib diisi', true);
+  const refCodeInput = document.getElementById('daftar-ref').value.trim().toUpperCase();
+  
+  if (!email || !pass || !pass2) return showToast('Isi email dan password', true);
   if (pass !== pass2) return showToast('Password tidak sama', true);
   if (pass.length < 6) return showToast('Password minimal 6 karakter', true);
+  
+  if (!nama) nama = email.split('@')[0];
+
   const btn = document.getElementById('btn-daftar');
   btn.disabled = true; btn.textContent = 'Memproses...';
+
   try {
+    let referrerUid = null;
+    let referrerNama = '';
+    let bonusDaftar = 0;
+    
+    // 1. CEK KODE REFERRAL (HANYA DAPAT BONUS JIKA PAKAI)
+    if (refCodeInput) {
+      try {
+        const qRef = query(collection(db, 'users'), where('referralCode', '==', refCodeInput));
+        const sRef = await getDocs(qRef);
+        if (!sRef.empty) {
+          referrerUid = sRef.docs[0].id; 
+          referrerNama = sRef.docs[0].data().nama; 
+          bonusDaftar = 200; // Dapat bonus jika referral valid
+        } else {
+          showToast('Kode referral tidak ditemukan, mendaftar tanpa bonus.', true);
+        }
+      } catch (err) {
+        console.error("Gagal cek referral:", err);
+        showToast('Gagal memvalidasi referral. Mendaftar tanpa bonus.', true);
+      }
+    }
+
+    // 2. BUAT AKUN USER B
     const cred = await createUserWithEmailAndPassword(auth, email, pass);
+    const myReferralCode = generateReferralCode(nama);
+    
     await setDoc(doc(db, 'users', cred.user.uid), {
-      nama, email, saldo: 0, totalSetor: 0, createdAt: serverTimestamp()
+      nama, email, 
+      saldo: bonusDaftar, // 200 jika ada ref, 0 jika tidak
+      totalSetor: 0, 
+      totalReff: 0, 
+      status: 'aktif', 
+      photoURL: '', 
+      referralCode: myReferralCode,
+      referredBy: referrerUid || null, 
+      referredByName: referrerNama || null,
+      createdAt: serverTimestamp()
     });
-    showToast('Daftar berhasil! Silakan login.');
+
+    // 3. LOG BONUS (HANYA JIKA DAPAT BONUS)
+    if (bonusDaftar > 0) {
+      await addDoc(collection(db, 'log_saldo'), {
+        uid: cred.user.uid,
+        nama: nama,
+        tipe: 'Referral (Pendaftar Baru)',
+        jumlah: bonusDaftar,
+        detail: `Mendaftar menggunakan kode referral: ${refCodeInput} (Diundang oleh ${referrerNama})`,
+        createdAt: serverTimestamp()
+      });
+    }
+
+    // Tampilkan pesan sukses
+    if (bonusDaftar > 0) {
+      showToast('Daftar berhasil! Bonus Rp 200 telah ditambahkan.');
+    } else {
+      showToast('Daftar berhasil!');
+    }
+    
     switchAuth('login');
     document.getElementById('login-email').value = email;
   } catch (e) {
-    showToast(terjemahError(e.code), true);
+    console.error("Error Daftar:", e);
+    showToast('Gagal daftar: ' + e.message, true);
   } finally {
     btn.disabled = false; btn.textContent = 'Daftar';
-  }
-}
-
-async function loginGoogle() {
-  try {
-    const provider = new GoogleAuthProvider();
-    provider.setCustomParameters({ prompt: 'select_account' });
-    const cred = await signInWithPopup(auth, provider);
-    const ref = doc(db, 'users', cred.user.uid);
-    const snap = await getDoc(ref);
-    if (!snap.exists()) {
-      await setDoc(ref, {
-        nama: cred.user.displayName || cred.user.email.split('@')[0],
-        email: cred.user.email, saldo: 0, totalSetor: 0, createdAt: serverTimestamp()
-      });
-    }
-  } catch (e) {
-    showToast(terjemahError(e.code), true);
   }
 }
 
@@ -1083,6 +1658,8 @@ function cleanupChatListeners() {
   if (chatUnsubscribe) { chatUnsubscribe(); chatUnsubscribe = null; }
   if (adminChatUnsub) { adminChatUnsub(); adminChatUnsub = null; }
   if (adminChatListUnsub) { adminChatListUnsub(); adminChatListUnsub = null; }
+  if (userNotifUnsub) { userNotifUnsub(); userNotifUnsub = null; }
+  if (adminNotifUnsub) { adminNotifUnsub(); adminNotifUnsub = null; }
   currentAdminChatUid = null;
 }
 
@@ -1095,11 +1672,6 @@ function terjemahError(code) {
     'auth/email-already-in-use': 'Email sudah terdaftar',
     'auth/weak-password': 'Password terlalu lemah',
     'auth/too-many-requests': 'Terlalu banyak percobaan, coba lagi nanti',
-    'auth/popup-closed-by-user': 'Login Google dibatalkan',
-    'auth/operation-not-allowed': 'Login Google belum diaktifkan di Firebase Console',
-    'auth/unauthorized-domain': 'Domain ini belum diizinkan. Tambahkan di Firebase → Authentication → Settings → Authorized domains',
-    'auth/popup-blocked': 'Popup diblokir browser. Izinkan popup untuk situs ini',
-    'auth/cancelled-popup-request': 'Popup sedang dibuka, tunggu sebentar',
     'auth/network-request-failed': 'Koneksi internet bermasalah'
   };
   return map[code] || 'Terjadi kesalahan: ' + code;
@@ -1110,37 +1682,362 @@ onAuthStateChanged(auth, async (user) => {
   currentUser = user;
   if (user) {
     const snap = await getDoc(doc(db, 'users', user.uid));
-    currentProfile = snap.exists()
-      ? snap.data()
-      : { nama: user.email.split('@')[0], email: user.email, saldo: 0, totalSetor: 0 };
-    if (isAdmin(user.email)) showScreen('admin');
-    else showScreen('utama');
+    if (snap.exists()) {
+      currentProfile = snap.data();
+      if (!currentProfile.nama) {
+        currentProfile.nama = user.email.split('@')[0];
+        await updateDoc(doc(db, 'users', user.uid), { nama: currentProfile.nama });
+      }
+      if (!currentProfile.referralCode) {
+        const newCode = generateReferralCode(currentProfile.nama);
+        await updateDoc(doc(db, 'users', user.uid), { referralCode: newCode });
+        currentProfile.referralCode = newCode;
+      }
+      if (!currentProfile.totalReff) {
+        await updateDoc(doc(db, 'users', user.uid), { totalReff: 0 });
+        currentProfile.totalReff = 0;
+      }
+
+      if (currentProfile.status === 'diblokir') {
+        showToast('Akun Anda telah diblokir oleh admin.', true);
+        await signOut(auth);
+        return;
+      }
+    } else {
+      currentProfile = { 
+        nama: user.email.split('@')[0], 
+        email: user.email, 
+        saldo: 0, 
+        totalSetor: 0,
+        totalReff: 0,
+        status: 'aktif',
+        photoURL: '',
+        referralCode: generateReferralCode(user.email.split('@')[0])
+      };
+      await setDoc(doc(db, 'users', user.uid), {
+        ...currentProfile, createdAt: serverTimestamp()
+      });
+    }
+    
+    await loadSiteSettings();
+
+    if (document.getElementById('screen-login').classList.contains('active')) {
+      if (isAdmin(user.email)) showScreen('admin-beranda');
+      else showScreen('utama');
+    }
+    
+    // Cek URL Referral
+    const urlParams = new URLSearchParams(window.location.search);
+    const refUrl = urlParams.get('ref');
+    if (refUrl && document.getElementById('screen-login').classList.contains('active')) {
+      document.getElementById('daftar-ref').value = refUrl;
+      switchAuth('daftar');
+    }
+
+    // JALANKAN LISTENER NOTIFIKASI REAL-TIME
+    if (isAdmin(user.email)) {
+      startAdminNotifListener();
+    } else {
+      startUserNotifListener();
+    }
+
+    // Jalankan Jam Digital
+    startDigitalClock();
+
   } else {
     currentProfile = null;
     cleanupChatListeners();
     showScreen('login');
+    if (clockInterval) clearInterval(clockInterval);
   }
 });
 
-/* ===== DASHBOARD ===== */
+/* ===== PENGATURAN WEBSITE ===== */
+async function loadSiteSettings() {
+  try {
+    const docRef = doc(db, 'settings', 'website');
+    const snap = await getDoc(docRef);
+    if (snap.exists()) {
+      const data = snap.data();
+      if (data.rules) siteSettings.rules = data.rules;
+      if (data.passwords) siteSettings.passwords = data.passwords;
+      if (data.status) siteSettings.status = data.status;
+      if (data.generateStatus) siteSettings.generateStatus = data.generateStatus;
+      if (data.minWithdraw) siteSettings.minWithdraw = data.minWithdraw;
+      if (data.ratePerGmail) siteSettings.ratePerGmail = data.ratePerGmail;
+      
+      // Load settingan e-wallet baru
+      if (data.minDana) siteSettings.minDana = data.minDana;
+      if (data.minGopay) siteSettings.minGopay = data.minGopay;
+      if (data.minOvo) siteSettings.minOvo = data.minOvo;
+      if (data.biayaAdmin) siteSettings.biayaAdmin = data.biayaAdmin;
+      if (data.admDana !== undefined) siteSettings.admDana = data.admDana;
+      if (data.admGopay !== undefined) siteSettings.admGopay = data.admGopay;
+      if (data.admOvo !== undefined) siteSettings.admOvo = data.admOvo;
+    }
+    applySiteSettingsUI();
+    updateSetorUI(); // Panggil update UI Setor
+    updateAdminGenerateUI(); // Panggil update UI Generate Admin
+  } catch (e) {
+    console.error("Gagal memuat pengaturan:", e);
+    applySiteSettingsUI();
+    updateSetorUI();
+    updateAdminGenerateUI();
+  }
+}
+
+function applySiteSettingsUI() {
+  const statusEl = document.getElementById('user-site-status');
+  if (statusEl) {
+    statusEl.textContent = "WEBSITE: " + siteSettings.status;
+    if (siteSettings.status === "OPEN") {
+      statusEl.className = "site-status status-open";
+    } else {
+      statusEl.className = "site-status status-close";
+    }
+  }
+
+  const descEl = document.getElementById('user-desc-text');
+  if (descEl) {
+    descEl.innerHTML = `Selamat datang di <b>IzzGmail Pedia</b>, setorkan gmail fresh kamu untuk mendapatkan uang. Rate / harga per gmail <b>${rupiah(siteSettings.ratePerGmail)}</b>`;
+  }
+
+  const rulesList = document.getElementById('user-rules-list');
+  if (rulesList) {
+    rulesList.innerHTML = siteSettings.rules.map(r => `<li>${escapeHtml(r)}</li>`).join('');
+  }
+  const modalRulesList = document.getElementById('modal-rules-list');
+  if (modalRulesList) {
+    modalRulesList.innerHTML = siteSettings.rules.map(r => `<li>${escapeHtml(r)}</li>`).join('');
+  }
+
+  const passGrid = document.getElementById('user-pass-grid');
+  if (passGrid) {
+    passGrid.innerHTML = '';
+    siteSettings.passwords.forEach((pass, index) => {
+      passGrid.innerHTML += `
+        <label class="pass-option ${selectedUserPass === pass ? 'selected' : ''}" onclick="selectUserPass('${pass}', this)">
+          <div class="title">PASSWORD ${index + 1}</div>
+          <div class="val">${escapeHtml(pass)}</div>
+          <button class="btn-copy-pass" onclick="copyPasswordText(event, '${pass}')">COPY</button>
+        </label>
+      `;
+    });
+    if (selectedUserPass && !siteSettings.passwords.includes(selectedUserPass)) {
+      selectedUserPass = "";
+    }
+  }
+}
+
+function selectUserPass(pass, el) {
+  selectedUserPass = pass;
+  document.querySelectorAll('.pass-option').forEach(opt => opt.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function copyPasswordText(e, pass) {
+  e.stopPropagation(); // Mencegah klik tombol memicu pilihan pass-option
+  navigator.clipboard.writeText(pass)
+    .then(() => showToast('Password dicopy: ' + pass))
+    .catch(() => showToast('Gagal copy password', true));
+}
+
+/* ===== UPDATE INFO PENARIKAN (MINIMAL & BIAYA ADMIN) ===== */
+function updateWithdrawInfo() {
+  const wdJumlah = document.getElementById('wd-jumlah');
+  const infoEl = document.getElementById('wd-info-biaya');
+  if (!wdJumlah || !infoEl) return;
+
+  if (method === 'GOPAY') {
+    wdJumlah.disabled = false;
+    wdJumlah.placeholder = `Minimal penarikan: ${rupiah(siteSettings.minGopay)}`;
+    infoEl.style.display = 'block';
+    if (siteSettings.admGopay) {
+      infoEl.innerHTML = `*Metode <b>GOPAY</b> dikenakan biaya admin <b>${rupiah(siteSettings.biayaAdmin)}</b> per penarikan.`;
+    } else {
+      infoEl.innerHTML = `*Metode <b>GOPAY</b> tidak dikenakan biaya admin.`;
+    }
+  } else if (method === 'OVO') {
+    wdJumlah.disabled = false;
+    wdJumlah.placeholder = `Minimal penarikan: ${rupiah(siteSettings.minOvo)}`;
+    infoEl.style.display = 'block';
+    if (siteSettings.admOvo) {
+      infoEl.innerHTML = `*Metode <b>OVO</b> dikenakan biaya admin <b>${rupiah(siteSettings.biayaAdmin)}</b> per penarikan.`;
+    } else {
+      infoEl.innerHTML = `*Metode <b>OVO</b> tidak dikenakan biaya admin.`;
+    }
+  } else if (method === 'DANA') {
+    wdJumlah.disabled = false;
+    wdJumlah.placeholder = `Minimal penarikan: ${rupiah(siteSettings.minDana)}`;
+    infoEl.style.display = 'block';
+    if (siteSettings.admDana) {
+      infoEl.innerHTML = `*Metode <b>DANA</b> dikenakan biaya admin <b>${rupiah(siteSettings.biayaAdmin)}</b> per penarikan.`;
+    } else {
+      infoEl.innerHTML = `*Metode <b>DANA</b> tidak dikenakan biaya admin.`;
+    }
+  } else {
+    wdJumlah.disabled = true;
+    wdJumlah.placeholder = `Pilih metode dulu...`;
+    infoEl.style.display = 'none';
+  }
+}
+
+/* ===== ADMIN: PENGATURAN ===== */
+function bukaPengaturan() {
+  if (!isAdmin(currentUser.email)) return;
+  
+  document.getElementById('setting-status').value = siteSettings.status;
+  document.getElementById('setting-rate').value = siteSettings.ratePerGmail;
+  document.getElementById('setting-rules').value = siteSettings.rules.join('\n');
+  document.getElementById('setting-passwords').value = siteSettings.passwords.join(', ');
+  
+  // Load settingan e-wallet
+  document.getElementById('setting-min-dana').value = siteSettings.minDana;
+  document.getElementById('setting-min-gopay').value = siteSettings.minGopay;
+  document.getElementById('setting-min-ovo').value = siteSettings.minOvo;
+  document.getElementById('setting-biaya-admin').value = siteSettings.biayaAdmin;
+  
+  // Load centang biaya admin
+  document.getElementById('adm-dana').checked = siteSettings.admDana;
+  document.getElementById('adm-gopay').checked = siteSettings.admGopay;
+  document.getElementById('adm-ovo').checked = siteSettings.admOvo;
+  
+  document.getElementById('modal-pengaturan').style.display = 'flex';
+}
+
+function tutupPengaturan() {
+  document.getElementById('modal-pengaturan').style.display = 'none';
+}
+
+async function simpanPengaturan() {
+  if (!isAdmin(currentUser.email)) return;
+  
+  const status = document.getElementById('setting-status').value;
+  const rate = parseInt(document.getElementById('setting-rate').value) || 2800;
+  const rulesText = document.getElementById('setting-rules').value.trim();
+  const passText = document.getElementById('setting-passwords').value.trim();
+  
+  const minDana = parseInt(document.getElementById('setting-min-dana').value) || 10000;
+  const minGopay = parseInt(document.getElementById('setting-min-gopay').value) || 5000;
+  const minOvo = parseInt(document.getElementById('setting-min-ovo').value) || 5000;
+  const biayaAdmin = parseInt(document.getElementById('setting-biaya-admin').value) || 999;
+  
+  const admDana = document.getElementById('adm-dana').checked;
+  const admGopay = document.getElementById('adm-gopay').checked;
+  const admOvo = document.getElementById('adm-ovo').checked;
+  
+  if (!rulesText) return showToast('Rules tidak boleh kosong', true);
+  if (!passText) return showToast('Minimal harus ada 1 password!', true);
+  
+  const newRules = rulesText.split('\n').map(r => r.trim()).filter(r => r);
+  const newPasswords = passText.split(',').map(p => p.trim()).filter(p => p);
+
+  const btn = document.getElementById('btn-save-setting');
+  btn.disabled = true; btn.textContent = 'MENYIMPAN...';
+
+  try {
+    await setDoc(doc(db, 'settings', 'website'), {
+      rules: newRules,
+      passwords: newPasswords,
+      status: status,
+      ratePerGmail: rate,
+      minDana: minDana,
+      minGopay: minGopay,
+      minOvo: minOvo,
+      biayaAdmin: biayaAdmin,
+      admDana: admDana,
+      admGopay: admGopay,
+      admOvo: admOvo
+    }, { merge: true }); // Merge true agar generateStatus tidak terhapus
+    
+    siteSettings.rules = newRules;
+    siteSettings.passwords = newPasswords;
+    siteSettings.status = status;
+    siteSettings.ratePerGmail = rate;
+    siteSettings.minDana = minDana;
+    siteSettings.minGopay = minGopay;
+    siteSettings.minOvo = minOvo;
+    siteSettings.biayaAdmin = biayaAdmin;
+    siteSettings.admDana = admDana;
+    siteSettings.admGopay = admGopay;
+    siteSettings.admOvo = admOvo;
+    
+    applySiteSettingsUI();
+    updateSetorUI();
+    showToast('Pengaturan berhasil disimpan!');
+    tutupPengaturan();
+  } catch (e) {
+    showToast('Gagal menyimpan: ' + e.message, true);
+  } finally {
+    btn.disabled = false; btn.textContent = 'SIMPAN';
+  }
+}
+
+/* ===== ADMIN: TOGGLE GENERATE ===== */
+function updateAdminGenerateUI() {
+  const statusEl = document.getElementById('admin-generate-status');
+  const btnToggle = document.getElementById('btn-toggle-generate');
+  
+  if (siteSettings.generateStatus === "AKTIF") {
+    statusEl.textContent = "AKTIF";
+    statusEl.style.color = "var(--success)";
+    btnToggle.textContent = "NONAKTIFKAN";
+    btnToggle.className = "btn btn-danger";
+  } else {
+    statusEl.textContent = "NONAKTIF";
+    statusEl.style.color = "var(--danger)";
+    btnToggle.textContent = "AKTIFKAN";
+    btnToggle.className = "btn btn-success";
+  }
+}
+
+async function toggleGenerateStatus() {
+  if (!isAdmin(currentUser.email)) return;
+  
+  const newStatus = siteSettings.generateStatus === "AKTIF" ? "NONAKTIF" : "AKTIF";
+  const confirmMsg = newStatus === "AKTIF" ? "Aktifkan fitur Generate Gmail?" : "Nonaktifkan fitur Generate Gmail?";
+  if (!confirm(confirmMsg)) return;
+
+  const btn = document.getElementById('btn-toggle-generate');
+  btn.disabled = true; btn.textContent = 'Memproses...';
+
+  try {
+    await updateDoc(doc(db, 'settings', 'website'), {
+      generateStatus: newStatus
+    });
+    siteSettings.generateStatus = newStatus;
+    
+    updateAdminGenerateUI();
+    updateSetorUI();
+    showToast('Generate Gmail berhasil di' + (newStatus === "AKTIF" ? 'aktifkan' : 'nonaktifkan') + '!');
+  } catch (e) {
+    showToast('Gagal mengubah status: ' + e.message, true);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+/* ===== DASHBOARD USER ===== */
 async function loadDashboard() {
-  if (!currentUser) return;
+  if (!currentUser || isAdmin(currentUser.email)) return;
   const snap = await getDoc(doc(db, 'users', currentUser.uid));
   currentProfile = snap.data();
   document.getElementById('saldo-display').textContent = rupiah(currentProfile.saldo);
   document.getElementById('nama-user').textContent = currentProfile.nama;
   const q = query(collection(db, 'setoran'), where('uid', '==', currentUser.uid));
   const s = await getDocs(q);
-  let diterima = 0, pending = 0, ditolak = 0;
+  let diterima = 0, pending = 0, ditolak = 0, captcha = 0;
   s.forEach(d => {
     const st = d.data().status;
     if (st === 'diterima') diterima++;
     else if (st === 'pending') pending++;
     else if (st === 'ditolak') ditolak++;
+    else if (st === 'captcha') captcha++;
   });
   document.getElementById('stat-diterima').textContent = diterima;
   document.getElementById('stat-pending').textContent = pending;
   document.getElementById('stat-ditolak').textContent = ditolak;
+  document.getElementById('stat-captcha').textContent = captcha;
 }
 
 function updateSaldoUI() {
@@ -1148,42 +2045,134 @@ function updateSaldoUI() {
   document.getElementById('saldo-ewallet').textContent = rupiah(currentProfile.saldo);
 }
 
-/* ===== SETOR ===== */
+/* ===== SETOR (GENERATE ACak) ===== */
 function generateGmail() {
+  if (siteSettings.status !== "OPEN") return showToast('Website sedang tutup', true);
+  if (siteSettings.generateStatus !== "AKTIF") return showToast('Fitur generate sedang dimatikan admin', true);
+  
+  const count = parseInt(document.getElementById('generate-count').value) || 1;
+  if (count > 100) return showToast('Maksimal 100 email sekali generate', true);
+
+  generatedEmails = [];
+  isViewAllGenerate = false; 
+  
   const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-  let name = 'izz';
-  for (let i = 0; i < 7; i++) name += chars[Math.floor(Math.random() * chars.length)];
-  generatedEmail = name + '@gmail.com';
-  document.getElementById('generated-email').textContent = generatedEmail;
-  showToast('Gmail berhasil digenerate!');
+  for (let i = 0; i < count; i++) {
+    let name = '';
+    for (let j = 0; j < 10; j++) name += chars[Math.floor(Math.random() * chars.length)];
+    let email = name + '@gmail.com';
+    generatedEmails.push(email);
+  }
+  renderGeneratedList();
+  showToast(count + ' Gmail berhasil digenerate secara acak!');
 }
-function copyEmail() {
-  if (!generatedEmail) return showToast('Generate gmail dulu', true);
-  navigator.clipboard.writeText(generatedEmail)
-    .then(() => showToast('Email dicopy: ' + generatedEmail))
-    .catch(() => showToast('Gagal copy, salin manual: ' + generatedEmail, true));
+
+function renderGeneratedList() {
+  const listEl = document.getElementById('generated-list');
+  const btnToggle = document.getElementById('btn-toggle-view');
+  const btnCopyAll = document.getElementById('btn-copy-all-generate');
+  
+  if (generatedEmails.length === 0) {
+    listEl.innerHTML = '<div style="color: #555; font-size: 14px;">Belum ada email digenerate</div>';
+    btnToggle.style.display = 'none';
+    btnCopyAll.style.display = 'none';
+    return;
+  }
+
+  let displayEmails = generatedEmails;
+  if (!isViewAllGenerate && generatedEmails.length > 3) {
+    displayEmails = generatedEmails.slice(0, 3);
+  }
+
+  let html = '';
+  displayEmails.forEach(email => {
+    html += `
+      <div class="email-item">
+        <span>${email}</span>
+        <button onclick="copySingleEmail('${email}')">COPY</button>
+      </div>
+    `;
+  });
+
+  if (!isViewAllGenerate && generatedEmails.length > 3) {
+    html += `<div style="font-size: 12px; color: #555; margin-top: 8px;">Dan ${generatedEmails.length - 3} email lainnya...</div>`;
+    btnToggle.textContent = 'LIHAT SEMUA GMAIL';
+    btnToggle.style.display = 'block';
+  } else if (isViewAllGenerate && generatedEmails.length > 3) {
+    btnToggle.textContent = 'SEMBUNYIKAN GMAIL';
+    btnToggle.style.display = 'block';
+  } else {
+    btnToggle.style.display = 'none';
+  }
+
+  listEl.innerHTML = html;
+  btnCopyAll.style.display = 'block';
 }
+
+function toggleViewAllGenerate() {
+  isViewAllGenerate = !isViewAllGenerate;
+  renderGeneratedList();
+}
+
+function copySingleEmail(email) {
+  navigator.clipboard.writeText(email)
+    .then(() => showToast('Email dicopy: ' + email))
+    .catch(() => showToast('Gagal copy, salin manual: ' + email, true));
+}
+
+function copyAllGenerated() {
+  if (generatedEmails.length === 0) return showToast('Generate gmail dulu', true);
+  const all = generatedEmails.join('\n');
+  navigator.clipboard.writeText(all)
+    .then(() => showToast('Semua email berhasil dicopy!'))
+    .catch(() => showToast('Gagal copy', true));
+}
+
 async function doSetor() {
+  if (siteSettings.status !== "OPEN") return showToast('Website sedang tutup, tidak bisa setor', true);
+
   const raw = document.getElementById('input-setor').value.trim();
   if (!raw) return showToast('Masukkan gmail yang akan disetor', true);
   const gmails = raw.split('\n').map(g => g.trim()).filter(g => /^[^\s@]+@gmail\.com$/i.test(g));
   if (gmails.length === 0) return showToast('Format gmail tidak valid', true);
+  
+  if (siteSettings.passwords.length > 1 && !selectedUserPass) {
+    return showToast('Wajib pilih salah satu password!', true);
+  }
+
+  if (!currentProfile || !currentProfile.nama) {
+    return showToast('Profil tidak terbaca, silakan logout dan login ulang', true);
+  }
+
   const btn = document.getElementById('btn-setor');
   btn.disabled = true; btn.textContent = 'Mengirim...';
   try {
     for (const g of gmails) {
       await addDoc(collection(db, 'setoran'), {
-        uid: currentUser.uid, user: currentProfile.nama, email: currentProfile.email,
-        gmail: g, status: 'pending', createdAt: serverTimestamp()
+        uid: currentUser.uid, 
+        user: currentProfile.nama, 
+        email: currentProfile.email,
+        gmail: g, 
+        status: 'pending', 
+        selectedPassword: selectedUserPass || siteSettings.passwords[0], 
+        createdAt: serverTimestamp()
       });
     }
     document.getElementById('input-setor').value = '';
     showToast(gmails.length + ' gmail berhasil disetor!');
+    
+    generatedEmails = generatedEmails.filter(e => !gmails.includes(e));
+    renderGeneratedList();
     loadDashboard();
   } catch (e) {
     showToast('Gagal setor: ' + e.message, true);
   } finally {
-    btn.disabled = false; btn.textContent = 'SETOR SEKARANG';
+    btn.disabled = false; 
+    if (siteSettings.status === "OPEN") {
+      btn.textContent = 'SETOR SEKARANG';
+    } else {
+      btn.textContent = 'SEDANG TUTUP';
+    }
   }
 }
 
@@ -1192,29 +2181,51 @@ function selectMethod(el, m) {
   document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('selected'));
   el.classList.add('selected');
   method = m;
+  updateWithdrawInfo();
 }
 async function doWithdraw() {
   const nama = document.getElementById('wd-nama').value.trim();
   const nomor = document.getElementById('wd-nomor').value.trim();
   const jumlah = parseInt(document.getElementById('wd-jumlah').value) || 0;
+  
   if (!method) return showToast('Pilih metode penarikan', true);
   if (!nama || !nomor) return showToast('Isi nama dan nomor e-wallet', true);
-  if (jumlah < 10000) return showToast('Minimal penarikan Rp 10.000', true);
-  if (jumlah > currentProfile.saldo) return showToast('Saldo tidak cukup', true);
+
+  let minWd = 0;
+  let biayaAdmin = 0;
+  
+  if (method === 'GOPAY') {
+    minWd = siteSettings.minGopay;
+    if (siteSettings.admGopay) biayaAdmin = siteSettings.biayaAdmin;
+  } else if (method === 'OVO') {
+    minWd = siteSettings.minOvo;
+    if (siteSettings.admOvo) biayaAdmin = siteSettings.biayaAdmin;
+  } else if (method === 'DANA') {
+    minWd = siteSettings.minDana;
+    if (siteSettings.admDana) biayaAdmin = siteSettings.biayaAdmin;
+  }
+
+  if (jumlah < minWd) return showToast('Minimal penarikan ' + rupiah(minWd), true);
+  
+  const totalPotong = jumlah + biayaAdmin;
+  if (totalPotong > currentProfile.saldo) return showToast('Saldo tidak cukup (Total potong: ' + rupiah(totalPotong) + ')', true);
+
   const btn = document.getElementById('btn-withdraw');
   btn.disabled = true; btn.textContent = 'Memproses...';
   try {
-    await updateDoc(doc(db, 'users', currentUser.uid), { saldo: increment(-jumlah) });
+    await updateDoc(doc(db, 'users', currentUser.uid), { saldo: increment(-totalPotong) });
+    
     await addDoc(collection(db, 'penarikan'), {
       uid: currentUser.uid, user: currentProfile.nama,
-      nama, nomor, method, jumlah, status: 'pending', createdAt: serverTimestamp()
+      nama, nomor, method, jumlah, biayaAdmin, status: 'pending', createdAt: serverTimestamp()
     });
+    
     document.getElementById('wd-nama').value = '';
     document.getElementById('wd-nomor').value = '';
     document.getElementById('wd-jumlah').value = '';
-    currentProfile.saldo -= jumlah;
+    currentProfile.saldo -= totalPotong;
     updateSaldoUI();
-    showToast('Penarikan ' + rupiah(jumlah) + ' sedang diproses');
+    showToast('Penarikan ' + rupiah(jumlah) + ' sedang diproses' + (biayaAdmin > 0 ? ' (Biaya admin: ' + rupiah(biayaAdmin) + ')' : ''));
   } catch (e) {
     showToast('Gagal: ' + e.message, true);
   } finally {
@@ -1222,24 +2233,53 @@ async function doWithdraw() {
   }
 }
 
-/* ===== RIWAYAT ===== */
+/* ===== RIWAYAT (2 TAB) ===== */
+function switchRiwayatTab(tab) {
+  currentRiwayatTab = tab;
+  document.getElementById('tab-riwayat-penarikan').classList.toggle('active', tab === 'penarikan');
+  document.getElementById('tab-riwayat-gmail').classList.toggle('active', tab === 'gmail');
+  document.getElementById('riwayat-penarikan-content').style.display = tab === 'penarikan' ? 'block' : 'none';
+  document.getElementById('riwayat-gmail-content').style.display = tab === 'gmail' ? 'block' : 'none';
+  
+  if (tab === 'penarikan') loadRiwayatPenarikan();
+  else loadRiwayatGmail();
+}
+
 async function loadRiwayat() {
+  switchRiwayatTab(currentRiwayatTab);
+}
+
+async function loadRiwayatPenarikan() {
   const el = document.getElementById('riwayat-list');
-  el.innerHTML = '<div class="loading"><div class="spinner"></div>Memuat...</div>';
+  el.innerHTML = '<div class="loading">MEMUAT...</div>';
   try {
-    const q = query(collection(db, 'penarikan'), where('uid', '==', currentUser.uid), orderBy('createdAt', 'desc'));
+    const q = query(collection(db, 'penarikan'), where('uid', '==', currentUser.uid));
     const s = await getDocs(q);
-    if (s.empty) { el.innerHTML = '<div class="empty-state">Belum ada riwayat penarikan</div>'; return; }
+    
+    if (s.empty) { 
+      el.innerHTML = '<div class="empty-state">Belum ada riwayat penarikan</div>'; 
+      return; 
+    }
+
+    const listData = [];
+    s.forEach(d => { listData.push({ id: d.id, ...d.data() }); });
+    listData.sort((a, b) => {
+      const timeA = a.createdAt ? a.createdAt.seconds : 0;
+      const timeB = b.createdAt ? b.createdAt.seconds : 0;
+      return timeB - timeA;
+    });
+
     el.innerHTML = '';
-    s.forEach(d => {
-      const r = d.data();
+    listData.forEach(r => {
       const badge = r.status === 'sukses' ? 'badge-sukses' : r.status === 'ditolak' ? 'badge-ditolak' : 'badge-pending';
+      let biayaHtml = r.biayaAdmin ? `<div class="row"><span>Biaya Admin</span><span>${rupiah(r.biayaAdmin)}</span></div>` : '';
       el.innerHTML += `
         <div class="history-card">
           <div class="row"><span>A/N</span><span>${escapeHtml(r.nama)}</span></div>
           <div class="row"><span>Nomor</span><span>${escapeHtml(r.nomor)}</span></div>
           <div class="row"><span>Metode</span><span>${r.method}</span></div>
           <div class="row"><span>Jumlah Penarikan</span><span>${rupiah(r.jumlah)}</span></div>
+          ${biayaHtml}
           <div class="row"><span>Status</span><span class="badge ${badge}">${r.status.toUpperCase()}</span></div>
         </div>`;
     });
@@ -1248,14 +2288,191 @@ async function loadRiwayat() {
   }
 }
 
-/* ===== PROFIL ===== */
+async function loadRiwayatGmail() {
+  const el = document.getElementById('riwayat-gmail-list');
+  el.innerHTML = '<div class="loading">MEMUAT...</div>';
+  try {
+    const q = query(collection(db, 'setoran'), where('uid', '==', currentUser.uid));
+    const s = await getDocs(q);
+    
+    if (s.empty) { 
+      el.innerHTML = '<div class="empty-state">Belum ada riwayat gmail</div>'; 
+      return; 
+    }
+
+    const listData = [];
+    s.forEach(d => { listData.push({ id: d.id, ...d.data() }); });
+    listData.sort((a, b) => {
+      const timeA = a.createdAt ? a.createdAt.seconds : 0;
+      const timeB = b.createdAt ? b.createdAt.seconds : 0;
+      return timeB - timeA;
+    });
+
+    el.innerHTML = '';
+    listData.forEach(r => {
+      const badge = r.status === 'diterima' ? 'badge-sukses' : r.status === 'captcha' ? 'badge-captcha' : r.status === 'ditolak' ? 'badge-ditolak' : 'badge-pending';
+      el.innerHTML += `
+        <div class="history-card">
+          <div class="row"><span>Gmail</span><span>${escapeHtml(r.gmail)}</span></div>
+          <div class="row"><span>Password</span><span>${escapeHtml(r.selectedPassword || '-')}</span></div>
+          <div class="row"><span>Status</span><span class="badge ${badge}">${r.status.toUpperCase()}</span></div>
+          <div class="row"><span>Waktu</span><span>${r.createdAt ? new Date(r.createdAt.seconds * 1000).toLocaleString('id-ID') : '-'}</span></div>
+        </div>`;
+    });
+  } catch (e) {
+    el.innerHTML = '<div class="empty-state">Gagal memuat: ' + e.message + '</div>';
+  }
+}
+
+/* ===== PROFIL & REFERRAL ===== */
 function loadProfil() {
   if (!currentProfile) return;
   document.getElementById('profil-nama').textContent = currentProfile.nama;
   document.getElementById('profil-email').textContent = currentProfile.email;
   document.getElementById('profil-saldo').textContent = rupiah(currentProfile.saldo);
-  document.getElementById('avatar-user').textContent = (currentProfile.nama || 'U').charAt(0).toUpperCase();
+  document.getElementById('profil-ref-code').textContent = currentProfile.referralCode || '-';
+  
+  const avatarContainer = document.getElementById('avatar-user');
+  const avatarImg = document.getElementById('avatar-img');
+  const avatarInitial = document.getElementById('avatar-initial');
+
+  if (currentProfile.photoURL) {
+    avatarImg.src = currentProfile.photoURL;
+    avatarContainer.classList.add('has-photo');
+  } else {
+    avatarImg.src = '';
+    avatarContainer.classList.remove('has-photo');
+    avatarInitial.textContent = (currentProfile.nama || 'U').charAt(0).toUpperCase();
+  }
+
+  const providers = currentUser.providerData.map(p => p.providerId);
+  const isGoogleOnly = providers.includes('google.com') && !providers.includes('password');
+  const btnPass = document.getElementById('btn-ganti-pass');
+
+  if (isGoogleOnly) {
+    btnPass.textContent = 'BUAT PASSWORD BARU';
+    btnPass.setAttribute('onclick', 'bukaModalPassword()');
+  } else {
+    btnPass.textContent = 'GANTI PASSWORD';
+    btnPass.setAttribute('onclick', 'gantiPassword()');
+  }
 }
+
+/* ===== RIWAYAT PENDAPATAN REFERRAL USER ===== */
+async function loadRiwayatReferral() {
+  const el = document.getElementById('riwayat-referral-list');
+  el.innerHTML = '<div class="loading">MEMUAT...</div>';
+  
+  try {
+    // Query log saldo milik user ini dengan tipe 'Bonus Referral'
+    const q = query(
+      collection(db, 'log_saldo'), 
+      where('uid', '==', currentUser.uid),
+      where('tipe', '==', 'Bonus Referral')
+    );
+    const s = await getDocs(q);
+    
+    if (s.empty) { 
+      el.innerHTML = '<div class="empty-state">Belum ada pendapatan referral</div>'; 
+      return; 
+    }
+
+    const listData = [];
+    s.forEach(d => { listData.push({ id: d.id, ...d.data() }); });
+    listData.sort((a, b) => {
+      const timeA = a.createdAt ? a.createdAt.seconds : 0;
+      const timeB = b.createdAt ? b.createdAt.seconds : 0;
+      return timeB - timeA;
+    });
+
+    el.innerHTML = '';
+    listData.forEach(r => {
+      // Ambil nama dari detail (contoh: "Bonus mengundang Budi yang baru mendaftar")
+      // Kita simpan referrer name di detail, atau kita parsing saja.
+      // Karena di doDaftar kita simpan detail: `Bonus mengundang ${nama} yang baru mendaftar`
+      
+      el.innerHTML += `
+        <div class="history-card">
+          <div class="row"><span>Keterangan</span><span>${escapeHtml(r.detail)}</span></div>
+          <div class="row"><span>Pendapatan</span><span style="color: var(--success);">+ ${rupiah(r.jumlah)}</span></div>
+          <div class="row"><span>Waktu</span><span>${formatDateTime(r.createdAt)}</span></div>
+        </div>`;
+    });
+  } catch (e) {
+    el.innerHTML = '<div class="empty-state">Gagal memuat: ' + e.message + '</div>';
+  }
+}
+
+function salinKodeReferral() {
+  if (!currentProfile.referralCode) return;
+  navigator.clipboard.writeText(currentProfile.referralCode)
+    .then(() => showToast('Kode Referral berhasil dicopy!'))
+    .catch(() => showToast('Gagal copy', true));
+}
+
+function bagikanLinkReferral() {
+  if (!currentProfile.referralCode) return;
+  const link = `${window.location.origin}${window.location.pathname}?ref=${currentProfile.referralCode}`;
+  if (navigator.share) {
+    navigator.share({
+      title: 'Ayo Gabung IzzGmail!',
+      text: 'Gunakan kode referral saya untuk mendapatkan bonus Rp 200!',
+      url: link,
+    }).catch(() => {});
+  } else {
+    navigator.clipboard.writeText(link)
+      .then(() => showToast('Link Referral berhasil dicopy!'))
+      .catch(() => showToast('Gagal copy link', true));
+  }
+}
+
+function handlePhotoUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  if (file.size > 1024 * 1024) return showToast('Ukuran foto maksimal 1MB', true);
+
+  const reader = new FileReader();
+  reader.onload = async function(e) {
+    const base64Image = e.target.result;
+    try {
+      await updateDoc(doc(db, 'users', currentUser.uid), { photoURL: base64Image });
+      currentProfile.photoURL = base64Image;
+      loadProfil();
+      showToast('Foto profil berhasil diubah!');
+    } catch (err) {
+      showToast('Gagal upload foto: ' + err.message, true);
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function bukaEditProfil() {
+  document.getElementById('edit-nama').value = currentProfile.nama;
+  document.getElementById('modal-edit-profil').style.display = 'flex';
+}
+function tutupEditProfil() {
+  document.getElementById('modal-edit-profil').style.display = 'none';
+}
+async function simpanEditProfil() {
+  const newName = document.getElementById('edit-nama').value.trim();
+  if (!newName) return showToast('Nama tidak boleh kosong', true);
+  
+  const btn = document.getElementById('btn-save-profil');
+  btn.disabled = true; btn.textContent = 'MENYIMPAN...';
+  
+  try {
+    await updateDoc(doc(db, 'users', currentUser.uid), { nama: newName });
+    currentProfile.nama = newName;
+    showToast('Nama berhasil diperbarui!');
+    tutupEditProfil();
+    loadProfil();
+  } catch (e) {
+    showToast('Gagal update nama: ' + e.message, true);
+  } finally {
+    btn.disabled = false; btn.textContent = 'SIMPAN';
+  }
+}
+
 async function gantiPassword() {
   if (!confirm('Kirim link reset password ke ' + currentUser.email + '?')) return;
   try {
@@ -1266,25 +2483,136 @@ async function gantiPassword() {
   }
 }
 
-/* ===== LEADERBOARD ===== */
-async function loadLeaderboard() {
-  const el = document.getElementById('leaderboard-list');
-  el.innerHTML = '<div class="loading"><div class="spinner"></div>Memuat...</div>';
+function bukaModalPassword() {
+  document.getElementById('modal-password').style.display = 'flex';
+  document.getElementById('new-pass').value = '';
+  document.getElementById('new-pass-confirm').value = '';
+}
+function tutupModalPassword() {
+  document.getElementById('modal-password').style.display = 'none';
+}
+async function simpanPasswordGoogle() {
+  const pass1 = document.getElementById('new-pass').value;
+  const pass2 = document.getElementById('new-pass-confirm').value;
+  const btn = document.getElementById('btn-save-pass');
+
+  if (pass1.length < 6) return showToast('Password minimal 6 karakter', true);
+  if (pass1 !== pass2) return showToast('Konfirmasi password tidak sama!', true);
+
+  btn.disabled = true;
+  btn.textContent = 'MENYIMPAN...';
+
   try {
-    const q = query(collection(db, 'users'), orderBy('totalSetor', 'desc'), limit(10));
+    await updatePassword(currentUser, pass1);
+    showToast('Password berhasil dibuat!');
+    tutupModalPassword();
+    loadProfil();
+  } catch (e) {
+    if (e.code === 'auth/requires-recent-login') {
+      showToast('Sesi habis, silakan logout lalu login ulang.', true);
+      tutupModalPassword();
+    } else {
+      showToast('Gagal membuat password: ' + e.message, true);
+    }
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'SIMPAN';
+  }
+}
+
+/* ===== LEADERBOARD ===== */
+function switchLeaderboardTab(tab) {
+  currentLbTab = tab;
+  document.getElementById('tab-lb-gmail').classList.toggle('active', tab === 'gmail');
+  document.getElementById('tab-lb-ref').classList.toggle('active', tab === 'refferal');
+  document.getElementById('lb-title').textContent = tab === 'gmail' ? 'Top Penyetor Gmail' : 'Top Pengundang';
+  loadLeaderboard(tab);
+}
+
+async function loadLeaderboard(tab) {
+  const el = document.getElementById('leaderboard-list');
+  el.innerHTML = '<div class="loading">MEMUAT...</div>';
+  
+  try {
+    let q;
+    if (tab === 'gmail') {
+      q = query(collection(db, 'users'), orderBy('totalSetor', 'desc'), limit(15)); // Ambil lebih banyak untuk filter admin
+    } else {
+      q = query(collection(db, 'users'), orderBy('totalReff', 'desc'), limit(15));
+    }
+    
     const s = await getDocs(q);
     if (s.empty) { el.innerHTML = '<div class="empty-state">Belum ada data</div>'; return; }
+    
     el.innerHTML = '';
     let rank = 1;
     s.forEach(d => {
       const u = d.data();
+      // SKIP ADMIN DARI LEADERBOARD
+      if (OWNER_EMAILS.map(e => e.toLowerCase()).includes(u.email.toLowerCase())) return;
+
+      if (rank > 10) return; // Batasi 10 teratas setelah filter
+
       const cls = rank === 1 ? 'gold' : rank === 2 ? 'silver' : rank === 3 ? 'bronze' : '';
+      const countText = tab === 'gmail' ? `${u.totalSetor || 0} Gmail` : `${u.totalReff || 0} Teman`;
+      
       el.innerHTML += `
         <div class="leader-item">
           <div class="leader-rank ${cls}">${rank}</div>
           <div class="leader-info">
             <div class="name">${escapeHtml(u.nama)}</div>
-            <div class="count">${u.totalSetor || 0} Gmail</div>
+            <div class="count">${countText}</div>
+          </div>
+        </div>`;
+      rank++;
+    });
+  } catch (e) {
+    el.innerHTML = '<div class="empty-state">Gagal: ' + e.message + '</div>';
+  }
+}
+
+/* ===== ADMIN LEADERBOARD ===== */
+function switchAdminLeaderboardTab(tab) {
+  currentAdminLbTab = tab;
+  document.getElementById('tab-admin-lb-gmail').classList.toggle('active', tab === 'gmail');
+  document.getElementById('tab-admin-lb-ref').classList.toggle('active', tab === 'refferal');
+  document.getElementById('admin-lb-title').textContent = tab === 'gmail' ? 'Top Penyetor Gmail' : 'Top Pengundang';
+  loadAdminLeaderboard(tab);
+}
+
+async function loadAdminLeaderboard(tab) {
+  const el = document.getElementById('admin-leaderboard-list');
+  el.innerHTML = '<div class="loading">MEMUAT...</div>';
+  
+  try {
+    let q;
+    if (tab === 'gmail') {
+      q = query(collection(db, 'users'), orderBy('totalSetor', 'desc'), limit(15));
+    } else {
+      q = query(collection(db, 'users'), orderBy('totalReff', 'desc'), limit(15));
+    }
+    
+    const s = await getDocs(q);
+    if (s.empty) { el.innerHTML = '<div class="empty-state">Belum ada data</div>'; return; }
+    
+    el.innerHTML = '';
+    let rank = 1;
+    s.forEach(d => {
+      const u = d.data();
+      // SKIP ADMIN DARI LEADERBOARD
+      if (OWNER_EMAILS.map(e => e.toLowerCase()).includes(u.email.toLowerCase())) return;
+
+      if (rank > 10) return;
+
+      const cls = rank === 1 ? 'gold' : rank === 2 ? 'silver' : rank === 3 ? 'bronze' : '';
+      const countText = tab === 'gmail' ? `${u.totalSetor || 0} Gmail` : `${u.totalReff || 0} Teman`;
+      
+      el.innerHTML += `
+        <div class="leader-item">
+          <div class="leader-rank ${cls}">${rank}</div>
+          <div class="leader-info">
+            <div class="name">${escapeHtml(u.nama)}</div>
+            <div class="count">${countText}</div>
           </div>
         </div>`;
       rank++;
@@ -1299,7 +2627,7 @@ function openChat() {
   if (!currentUser) return;
   showScreen('chat');
   const msgsEl = document.getElementById('chat-messages');
-  msgsEl.innerHTML = '<div class="chat-empty">👋 Halo! Selamat datang di Izz Support.<br>Ada yang bisa kami bantu?</div>';
+  msgsEl.innerHTML = '<div class="chat-empty">Halo! Selamat datang di Izz Support.<br>Ada yang bisa kami bantu?</div>';
   ensureChatDoc();
   if (chatUnsubscribe) { chatUnsubscribe(); chatUnsubscribe = null; }
   const q = query(
@@ -1309,7 +2637,7 @@ function openChat() {
   );
   chatUnsubscribe = onSnapshot(q, (snap) => {
     if (snap.empty) {
-      msgsEl.innerHTML = '<div class="chat-empty">👋 Halo! Selamat datang di Izz Support.<br>Ada yang bisa kami bantu?</div>';
+      msgsEl.innerHTML = '<div class="chat-empty">Halo! Selamat datang di Izz Support.<br>Ada yang bisa kami bantu?</div>';
       return;
     }
     msgsEl.innerHTML = '';
@@ -1338,7 +2666,10 @@ async function ensureChatDoc() {
   }
 }
 async function markUserRead() {
-  try { await updateDoc(doc(db, 'chats', currentUser.uid), { unreadUser: 0 }); } catch (e) {}
+  try { 
+    await updateDoc(doc(db, 'chats', currentUser.uid), { unreadUser: 0 }); 
+    document.getElementById('user-chat-notif').style.display = 'none'; // Sembunyikan titik merah
+  } catch (e) {}
 }
 async function sendMessage() {
   const input = document.getElementById('chat-input');
@@ -1363,20 +2694,292 @@ async function sendMessage() {
   }
 }
 
-/* ===== ADMIN ===== */
-async function loadAdmin() {
-  if (!isAdmin(currentUser.email)) {
-    showToast('Akses ditolak. Anda bukan admin.', true);
-    showScreen('utama');
-    return;
-  }
+/* ===== LISTENER NOTIFIKASI REAL-TIME USER ===== */
+function startUserNotifListener() {
+  if (!currentUser) return;
+  if (userNotifUnsub) { userNotifUnsub(); userNotifUnsub = null; }
+  
+  userNotifUnsub = onSnapshot(doc(db, 'chats', currentUser.uid), (snap) => {
+    const notifEl = document.getElementById('user-chat-notif');
+    if (snap.exists()) {
+      const data = snap.data();
+      if (data.unreadUser > 0) {
+        notifEl.style.display = 'block';
+      } else {
+        notifEl.style.display = 'none';
+      }
+    }
+  });
+}
+
+/* =========================================================
+   ===== ADMIN SECTION =====
+   ========================================================= */
+
+async function loadAdminBeranda() {
+  if (!isAdmin(currentUser.email)) return;
   
   const allSetoran = await getDocs(collection(db, 'setoran'));
-  document.getElementById('admin-total').textContent = allSetoran.size.toLocaleString('id-ID');
+  document.getElementById('admin-total-gmail').textContent = allSetoran.size.toLocaleString('id-ID');
 
-  // CHAT LIST
+  // LOAD LOG SALDO (1 TERBARU)
+  const logEl = document.getElementById('admin-log-saldo');
+  const btnLihatSemua = document.getElementById('btn-lihat-semua-log');
+  logEl.innerHTML = '<div class="loading">MEMUAT LOG...</div>';
+  btnLihatSemua.style.display = 'none';
+
+  try {
+    const qLog = query(collection(db, 'log_saldo'), orderBy('createdAt', 'desc'), limit(1));
+    const sLog = await getDocs(qLog);
+    if (sLog.empty) {
+      logEl.innerHTML = '<div class="empty-state">Belum ada log saldo</div>';
+    } else {
+      const log = sLog.docs[0].data();
+      const typeClass = log.tipe.includes('Referral') ? 'ref' : 'gmail';
+      logEl.innerHTML = `
+        <div class="log-card">
+          <div class="log-head">
+            <span>${escapeHtml(log.nama)}</span>
+            <span class="log-type ${typeClass}">${escapeHtml(log.tipe)}</span>
+          </div>
+          <div class="log-detail">${escapeHtml(log.detail)}</div>
+          <div style="font-weight: bold; color: var(--primary); margin-top: 4px;">+ ${rupiah(log.jumlah)}</div>
+          <div style="font-size: 10px; color: #888; text-align: right;">${formatDateTime(log.createdAt)}</div>
+        </div>
+      `;
+      
+      // Cek apakah ada lebih dari 1 log
+      const allLogSnap = await getDocs(collection(db, 'log_saldo'));
+      if (allLogSnap.size > 1) {
+        btnLihatSemua.style.display = 'block';
+      }
+    }
+  } catch (e) {
+    logEl.innerHTML = '<div class="empty-state">Gagal memuat log: ' + e.message + '</div>';
+  }
+
+  // LOAD USER LIST
+  const userEl = document.getElementById('admin-user-list');
+  userEl.innerHTML = '<div class="loading">MEMUAT USER...</div>';
+  try {
+    const q = query(collection(db, 'users'), orderBy('createdAt', 'desc'), limit(50));
+    const s = await getDocs(q);
+    if (s.empty) {
+      userEl.innerHTML = '<div class="empty-state">Belum ada user terdaftar</div>';
+      return;
+    }
+    userEl.innerHTML = '';
+    s.forEach(d => {
+      const u = d.data();
+      const isBlocked = u.status === 'diblokir';
+      const btnText = isBlocked ? 'BUKA BLOKIR' : 'BLOKIR';
+      const btnClass = isBlocked ? 'btn-success' : 'btn-danger';
+      
+      userEl.innerHTML += `
+        <div class="admin-user" style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div style="font-size:14px; font-weight:bold;">${escapeHtml(u.nama || 'User')}</div>
+            <div style="font-size:12px; color:#555;">${escapeHtml(u.email)}</div>
+            <div style="font-size:11px; color:${isBlocked ? 'var(--danger)' : 'var(--success)'};">
+              Status: ${isBlocked ? 'DIBLOKIR' : 'AKTIF'}
+            </div>
+          </div>
+          <button class="btn ${btnClass}" style="width:auto; padding:8px 12px; font-size:12px;" onclick="toggleBlockUser('${d.id}', '${u.status || 'aktif'}')">${btnText}</button>
+        </div>
+      `;
+    });
+  } catch (e) {
+    userEl.innerHTML = '<div class="empty-state">Gagal memuat user: ' + e.message + '</div>';
+  }
+}
+
+/* ===== MODAL SEMUA LOG ===== */
+async function bukaModalLog() {
+  const el = document.getElementById('modal-log-list');
+  el.innerHTML = '<div class="loading">MEMUAT SEMUA LOG...</div>';
+  document.getElementById('modal-log').style.display = 'flex';
+
+  try {
+    const qLog = query(collection(db, 'log_saldo'), orderBy('createdAt', 'desc'), limit(100));
+    const sLog = await getDocs(qLog);
+    
+    if (sLog.empty) {
+      el.innerHTML = '<div class="empty-state">Belum ada log</div>';
+      return;
+    }
+
+    el.innerHTML = '';
+    sLog.forEach(d => {
+      const log = d.data();
+      const typeClass = log.tipe.includes('Referral') ? 'ref' : 'gmail';
+      el.innerHTML += `
+        <div class="log-card">
+          <div class="log-head">
+            <span>${escapeHtml(log.nama)}</span>
+            <span class="log-type ${typeClass}">${escapeHtml(log.tipe)}</span>
+          </div>
+          <div class="log-detail">${escapeHtml(log.detail)}</div>
+          <div style="font-weight: bold; color: var(--primary); margin-top: 4px;">+ ${rupiah(log.jumlah)}</div>
+          <div style="font-size: 10px; color: #888; text-align: right;">${formatDateTime(log.createdAt)}</div>
+        </div>
+      `;
+    });
+  } catch (e) {
+    el.innerHTML = '<div class="empty-state">Gagal memuat log: ' + e.message + '</div>';
+  }
+}
+
+function tutupModalLog() {
+  document.getElementById('modal-log').style.display = 'none';
+}
+
+async function toggleBlockUser(uid, currentStatus) {
+  if (!isAdmin(currentUser.email)) return;
+  const newStatus = currentStatus === 'diblokir' ? 'aktif' : 'diblokir';
+  const confirmMsg = newStatus === 'diblokir' ? 'Blokir user ini?' : 'Buka blokir user ini?';
+  if (!confirm(confirmMsg)) return;
+
+  try {
+    await updateDoc(doc(db, 'users', uid), { status: newStatus });
+    showToast(`User berhasil di${newStatus === 'diblokir' ? 'blokir' : 'buka blokir'}`);
+    loadAdminBeranda();
+  } catch (e) {
+    showToast('Gagal: ' + e.message, true);
+  }
+}
+
+function switchAdminSetorTab(tab) {
+  currentAdminSetorTab = tab;
+  document.getElementById('tab-setor-pending').classList.toggle('active', tab === 'pending');
+  document.getElementById('tab-setor-diterima').classList.toggle('active', tab === 'diterima');
+  document.getElementById('tab-setor-ditolak').classList.toggle('active', tab === 'ditolak');
+  document.getElementById('tab-setor-captcha').classList.toggle('active', tab === 'captcha');
+  loadAdminSetor();
+}
+
+async function loadAdminSetor() {
+  if (!isAdmin(currentUser.email)) return;
+  
+  const setoranEl = document.getElementById('admin-setoran-list');
+  setoranEl.innerHTML = '<div class="loading">MEMUAT SETORAN...</div>';
+  
+  try {
+    const qSetor = query(collection(db, 'setoran'), where('status', '==', currentAdminSetorTab));
+    const sSetor = await getDocs(qSetor);
+    
+    if (sSetor.empty) {
+      setoranEl.innerHTML = '<div class="empty-state">Tidak ada data ' + currentAdminSetorTab + '</div>';
+      return;
+    }
+
+    const listData = [];
+    sSetor.forEach(doc => { listData.push({ id: doc.id, ...doc.data() }); });
+    listData.sort((a, b) => {
+      const timeA = a.createdAt ? a.createdAt.seconds : 0;
+      const timeB = b.createdAt ? b.createdAt.seconds : 0;
+      return timeB - timeA;
+    });
+
+    const grouped = {};
+    listData.forEach(r => {
+      if (!grouped[r.uid]) {
+        grouped[r.uid] = { user: r.user, email: r.email, uid: r.uid, items: [] };
+      }
+      grouped[r.uid].items.push({ id: r.id, gmail: r.gmail, selectedPassword: r.selectedPassword });
+    });
+
+    setoranEl.innerHTML = '';
+    Object.values(grouped).forEach(g => {
+      let gmailRows = '';
+      g.items.forEach(item => {
+        let passInfo = item.selectedPassword ? `<br><small style="color:#2563eb;">Pass: ${escapeHtml(item.selectedPassword)}</small>` : '';
+        gmailRows += `
+          <div class="admin-gmail-row">
+            <div class="email">${escapeHtml(item.gmail)} ${passInfo}</div>
+            <div class="actions">
+              ${currentAdminSetorTab === 'pending' ? `
+                <button class="btn btn-success" title="Terima" onclick="approveSetoran('${item.id}','${g.uid}',1)">✅</button>
+                <button class="btn btn-danger" title="Tolak" onclick="rejectSetoran('${item.id}')">❌</button>
+                <button class="btn btn-captcha" title="Captcha" onclick="captchaSetoran('${item.id}')">🤖</button>
+              ` : ''}
+              <button class="btn btn-outline" title="Copy Gmail" onclick="copyAdminGmail('${item.gmail}')">📋</button>
+            </div>
+          </div>
+        `;
+      });
+
+      setoranEl.innerHTML += `
+        <div class="admin-user">
+          <div class="uname">NAMA : ${escapeHtml(g.user)} (${escapeHtml(g.email)})</div>
+          <div class="gmail-list">${gmailRows}</div>
+        </div>
+      `;
+    });
+
+  } catch (e) {
+    setoranEl.innerHTML = '<div class="empty-state">Gagal memuat: ' + e.message + '</div>';
+  }
+}
+
+function copyAdminGmail(email) {
+  navigator.clipboard.writeText(email)
+    .then(() => showToast('Gmail dicopy: ' + email))
+    .catch(() => showToast('Gagal copy', true));
+}
+
+function switchAdminTarikTab(tab) {
+  currentAdminTarikTab = tab;
+  document.getElementById('tab-tarik-pending').classList.toggle('active', tab === 'pending');
+  document.getElementById('tab-tarik-sukses').classList.toggle('active', tab === 'sukses');
+  loadAdminPenarikan();
+}
+
+async function loadAdminPenarikan() {
+  if (!isAdmin(currentUser.email)) return;
+  
+  const wEl = document.getElementById('admin-withdraw-list');
+  wEl.innerHTML = '<div class="loading">MEMUAT PENARIKAN...</div>';
+  
+  try {
+    const qW = query(collection(db, 'penarikan'), where('status', '==', currentAdminTarikTab));
+    const sW = await getDocs(qW);
+    
+    if (sW.empty) {
+      wEl.innerHTML = '<div class="empty-state">Tidak ada data ' + currentAdminTarikTab + '</div>';
+      return;
+    }
+
+    const listData = [];
+    sW.forEach(doc => { listData.push({ id: doc.id, ...doc.data() }); });
+    listData.sort((a, b) => {
+      const timeA = a.createdAt ? a.createdAt.seconds : 0;
+      const timeB = b.createdAt ? b.createdAt.seconds : 0;
+      return timeB - timeA;
+    });
+
+    wEl.innerHTML = '';
+    listData.forEach(r => {
+      wEl.innerHTML += `
+        <div class="withdraw-card">
+          <div class="row"><span>Nama</span><span>${escapeHtml(r.user)}</span></div>
+          <div class="row"><span>A/N</span><span>${escapeHtml(r.nama)}</span></div>
+          <div class="row"><span>Nomor</span><span>${escapeHtml(r.nomor)}</span></div>
+          <div class="row"><span>Metode</span><span>${r.method}</span></div>
+          <div class="row"><span>Jumlah</span><span>${rupiah(r.jumlah)}</span></div>
+          ${r.biayaAdmin ? `<div class="row"><span>Biaya Admin</span><span>${rupiah(r.biayaAdmin)}</span></div>` : ''}
+          ${currentAdminTarikTab === 'pending' ? `<button class="btn btn-success" style="margin-top:10px;" onclick="approveWithdraw('${r.id}')">SUKSES</button>` : ''}
+        </div>`;
+    });
+
+  } catch (e) {
+    wEl.innerHTML = '<div class="empty-state">Gagal memuat: ' + e.message + '</div>';
+  }
+}
+
+async function loadAdminSupport() {
+  if (!isAdmin(currentUser.email)) return;
   const chatEl = document.getElementById('admin-chat-list');
-  chatEl.innerHTML = '<div class="loading"><div class="spinner"></div>Memuat...</div>';
+  chatEl.innerHTML = '<div class="loading">MEMUAT CHAT...</div>';
   if (adminChatListUnsub) { adminChatListUnsub(); adminChatListUnsub = null; }
   const qChat = query(collection(db, 'chats'), orderBy('lastAt', 'desc'), limit(50));
   adminChatListUnsub = onSnapshot(qChat, (snap) => {
@@ -1400,72 +3003,11 @@ async function loadAdmin() {
         </div>`;
     });
   });
+}
 
-  // SETORAN PENDING (PER BARIS GMAIL)
-  const setoranEl = document.getElementById('admin-setoran-list');
-  setoranEl.innerHTML = '<div class="loading"><div class="spinner"></div>Memuat...</div>';
-  const qSetor = query(collection(db, 'setoran'), where('status', '==', 'pending'), orderBy('createdAt', 'desc'), limit(50));
-  const sSetor = await getDocs(qSetor);
-  
-  if (sSetor.empty) {
-    setoranEl.innerHTML = '<div class="empty-state">Tidak ada setoran pending</div>';
-  } else {
-    const grouped = {};
-    sSetor.forEach(d => {
-      const r = d.data();
-      const key = r.uid;
-      if (!grouped[key]) {
-        grouped[key] = { user: r.user, email: r.email, uid: r.uid, items: [] };
-      }
-      grouped[key].items.push({ id: d.id, gmail: r.gmail });
-    });
-
-    setoranEl.innerHTML = '';
-    Object.values(grouped).forEach(g => {
-      let gmailRows = '';
-      g.items.forEach(item => {
-        gmailRows += `
-          <div class="admin-gmail-row">
-            <div class="email">${escapeHtml(item.gmail)}</div>
-            <div class="actions">
-              <button class="btn btn-success" onclick="approveSetoran('${item.id}','${g.uid}',1)">✅</button>
-              <button class="btn btn-danger" onclick="rejectSetoran('${item.id}')">❌</button>
-            </div>
-          </div>
-        `;
-      });
-
-      setoranEl.innerHTML += `
-        <div class="admin-user">
-          <div class="uname">NAMA : ${escapeHtml(g.user)}</div>
-          <div class="gmail-list">${gmailRows}</div>
-        </div>
-      `;
-    });
-  }
-
-  // PENARIKAN PENDING
-  const wEl = document.getElementById('admin-withdraw-list');
-  wEl.innerHTML = '<div class="loading"><div class="spinner"></div>Memuat...</div>';
-  const qW = query(collection(db, 'penarikan'), where('status', '==', 'pending'), orderBy('createdAt', 'desc'), limit(50));
-  const sW = await getDocs(qW);
-  if (sW.empty) {
-    wEl.innerHTML = '<div class="empty-state">Tidak ada penarikan pending</div>';
-  } else {
-    wEl.innerHTML = '';
-    sW.forEach(d => {
-      const r = d.data();
-      wEl.innerHTML += `
-        <div class="withdraw-card">
-          <div class="row"><span>Nama</span><span>${escapeHtml(r.user)}</span></div>
-          <div class="row"><span>A/N</span><span>${escapeHtml(r.nama)}</span></div>
-          <div class="row"><span>Nomor</span><span>${escapeHtml(r.nomor)}</span></div>
-          <div class="row"><span>Metode</span><span>${r.method}</span></div>
-          <div class="row"><span>Jumlah</span><span>${rupiah(r.jumlah)}</span></div>
-          <button class="btn btn-success" style="margin-top:10px;" onclick="approveWithdraw('${d.id}')">✅ SUKSES</button>
-        </div>`;
-    });
-  }
+function loadAdminProfil() {
+  if (!isAdmin(currentUser.email)) return;
+  document.getElementById('admin-profil-email').textContent = currentUser.email;
 }
 
 function openAdminChat(uid, nama) {
@@ -1473,9 +3015,8 @@ function openAdminChat(uid, nama) {
   currentAdminChatUid = uid;
   showScreen('admin-chat');
   document.getElementById('admin-chat-name').textContent = nama;
-  document.getElementById('admin-chat-avatar').textContent = (nama || 'U').charAt(0).toUpperCase();
   const msgsEl = document.getElementById('admin-chat-messages');
-  msgsEl.innerHTML = '<div class="loading"><div class="spinner"></div>Memuat...</div>';
+  msgsEl.innerHTML = '<div class="loading">MEMUAT CHAT...</div>';
   updateDoc(doc(db, 'chats', uid), { unreadAdmin: 0 }).catch(() => {});
   if (adminChatUnsub) { adminChatUnsub(); adminChatUnsub = null; }
   const q = query(
@@ -1514,25 +3055,89 @@ async function adminSendMessage() {
     });
     await updateDoc(doc(db, 'chats', currentAdminChatUid), {
       lastMessage: text, lastAt: serverTimestamp(),
-      unreadUser: increment(1)
+      unreadUser: increment(1) // Tambah unread user agar muncul titik merah di user
     });
   } catch (e) {
     showToast('Gagal kirim: ' + e.message, true);
   }
 }
 
+/* ===== LISTENER NOTIFIKASI REAL-TIME ADMIN ===== */
+function startAdminNotifListener() {
+  if (!currentUser || !isAdmin(currentUser.email)) return;
+  if (adminNotifUnsub) { adminNotifUnsub(); adminNotifUnsub = null; }
+  
+  // Pantau semua chat yang unreadAdmin > 0
+  const qChat = query(collection(db, 'chats'), where('unreadAdmin', '>', 0));
+  
+  adminNotifUnsub = onSnapshot(qChat, (snap) => {
+    const notifEl = document.getElementById('admin-chat-notif');
+    if (!snap.empty) {
+      notifEl.style.display = 'block';
+    } else {
+      notifEl.style.display = 'none';
+    }
+  });
+}
+
 async function approveSetoran(setoranId, uid, count) {
   if (!isAdmin(currentUser.email)) return;
-  if (!confirm('Terima gmail ini? Saldo user +' + rupiah(RATE_PER_GMAIL * count))) return;
+  if (!confirm('Terima gmail ini? Saldo user +' + rupiah(siteSettings.ratePerGmail * count))) return;
+  
   try {
     await updateDoc(doc(db, 'setoran', setoranId), { status: 'diterima' });
+    
+    // 2. Ambil data User B (yang setor)
+    const userSnap = await getDoc(doc(db, 'users', uid));
+    const userData = userSnap.data();
+
+    // 3. Beri saldo utama ke User B
     await updateDoc(doc(db, 'users', uid), {
-      saldo: increment(RATE_PER_GMAIL * count),
+      saldo: increment(siteSettings.ratePerGmail * count),
       totalSetor: increment(count)
     });
-    showToast('Gmail diterima, saldo user ditambah ' + rupiah(RATE_PER_GMAIL * count));
-    loadAdmin();
-  } catch (e) { showToast('Gagal: ' + e.message, true); }
+
+    // 4. Log Saldo untuk User B (Dapat uang dari Gmail)
+    await addDoc(collection(db, 'log_saldo'), {
+      uid: uid,
+      nama: userData.nama,
+      tipe: 'Gmail Diterima',
+      jumlah: siteSettings.ratePerGmail * count,
+      detail: `Menyetorkan ${count} Gmail yang diterima`,
+      createdAt: serverTimestamp()
+    });
+
+    // 5. LOGIKA BONUS REFERRAL UNTUK USER A (HANYA SAAT APPROVE)
+    if (userData && userData.referredBy) {
+      const bonusA = 150 * count;
+      
+      // Update totalReff dan saldo User A
+      await updateDoc(doc(db, 'users', userData.referredBy), {
+        saldo: increment(bonusA),
+        totalReff: increment(count) 
+      });
+
+      // Ambil data User A untuk log
+      const referrerSnap = await getDoc(doc(db, 'users', userData.referredBy));
+      const referrerData = referrerSnap.data();
+      
+      // Simpan Log Saldo untuk User A
+      await addDoc(collection(db, 'log_saldo'), {
+        uid: userData.referredBy,
+        nama: referrerData.nama || 'User A',
+        tipe: 'Bonus Referral',
+        jumlah: bonusA,
+        detail: `Bonus dari ${userData.nama} yang menyetorkan ${count} Gmail`,
+        createdAt: serverTimestamp()
+      });
+    }
+
+    showToast('Gmail diterima, saldo user ditambah ' + rupiah(siteSettings.ratePerGmail * count));
+    loadAdminSetor();
+    loadAdminBeranda();
+  } catch (e) { 
+    showToast('Gagal: ' + e.message, true); 
+  }
 }
 
 async function rejectSetoran(id) {
@@ -1540,7 +3145,15 @@ async function rejectSetoran(id) {
   if (!confirm('Tolak gmail ini?')) return;
   await updateDoc(doc(db, 'setoran', id), { status: 'ditolak' });
   showToast('Gmail ditolak');
-  loadAdmin();
+  loadAdminSetor();
+}
+
+async function captchaSetoran(id) {
+  if (!isAdmin(currentUser.email)) return;
+  if (!confirm('Tandai gmail ini sebagai CAPTCHA?')) return;
+  await updateDoc(doc(db, 'setoran', id), { status: 'captcha' });
+  showToast('Gmail ditandai CAPTCHA');
+  loadAdminSetor();
 }
 
 async function approveWithdraw(id) {
@@ -1548,33 +3161,66 @@ async function approveWithdraw(id) {
   if (!confirm('Tandai penarikan ini SUKSES?')) return;
   await updateDoc(doc(db, 'penarikan', id), { status: 'sukses' });
   showToast('Penarikan ditandai sukses');
-  loadAdmin();
+  loadAdminPenarikan();
 }
 
-/* =========================================================
-   🔧 EXPOSE KE GLOBAL — WAJIB AGAR onclick DI HTML BERFUNGSI
-   ========================================================= */
+/* ===== EXPOSE KE GLOBAL ===== */
 window.switchAuth = switchAuth;
 window.doLogin = doLogin;
 window.doDaftar = doDaftar;
-window.loginGoogle = loginGoogle;
 window.logout = logout;
 window.showScreen = showScreen;
 window.generateGmail = generateGmail;
-window.copyEmail = copyEmail;
+window.copySingleEmail = copySingleEmail;
+window.copyAllGenerated = copyAllGenerated;
 window.doSetor = doSetor;
 window.selectMethod = selectMethod;
 window.doWithdraw = doWithdraw;
 window.gantiPassword = gantiPassword;
+window.bukaModalPassword = bukaModalPassword;
+window.tutupModalPassword = tutupModalPassword;
+window.simpanPasswordGoogle = simpanPasswordGoogle;
 window.openChat = openChat;
 window.sendMessage = sendMessage;
 window.adminSendMessage = adminSendMessage;
 window.openAdminChat = openAdminChat;
 window.approveSetoran = approveSetoran;
 window.rejectSetoran = rejectSetoran;
+window.captchaSetoran = captchaSetoran;
+window.copyAdminGmail = copyAdminGmail;
 window.approveWithdraw = approveWithdraw;
+window.showRulesModal = showRulesModal;
+window.tutupRulesModal = tutupRulesModal;
+window.bukaEditProfil = bukaEditProfil;
+window.tutupEditProfil = tutupEditProfil;
+window.simpanEditProfil = simpanEditProfil;
+window.toggleBlockUser = toggleBlockUser;
+window.bukaPengaturan = bukaPengaturan;
+window.tutupPengaturan = tutupPengaturan;
+window.simpanPengaturan = simpanPengaturan;
+window.toggleGenerateStatus = toggleGenerateStatus;
+window.selectUserPass = selectUserPass;
+window.handlePhotoUpload = handlePhotoUpload;
+window.switchRiwayatTab = switchRiwayatTab;
+window.switchAdminSetorTab = switchAdminSetorTab;
+window.switchAdminTarikTab = switchAdminTarikTab;
+window.toggleViewAllGenerate = toggleViewAllGenerate; 
+window.salinKodeReferral = salinKodeReferral;
+window.bagikanLinkReferral = bagikanLinkReferral;
+window.switchLeaderboardTab = switchLeaderboardTab;
+window.switchAdminLeaderboardTab = switchAdminLeaderboardTab;
+window.bukaModalLog = bukaModalLog;
+window.tutupModalLog = tutupModalLog;
+window.copyPasswordText = copyPasswordText; // Expose copy password
 
-showScreen('loading');
+showScreen('login');
+
+// Cek URL Referral saat halaman dimuat
+const urlParams = new URLSearchParams(window.location.search);
+const refUrl = urlParams.get('ref');
+if (refUrl) {
+  document.getElementById('daftar-ref').value = refUrl;
+}
 </script>
 </body>
-  </html>
+</html>
