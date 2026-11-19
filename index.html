@@ -1483,8 +1483,7 @@ let siteSettings = {
   admOvo: true,
   ratePerGmail: 2800,
   notifMsg: "Gmail di terima, Gmail di tolak, Pendapatan Referral", // Default pesan notif
-  marqueeMsg: "Selamat datang di IzzGmail Pedia! Dilarang menyetorkan Gmail palsu atau hasil curian.", // Default marquee
-  lastNotifTime: null // Untuk cek notif baru
+  marqueeMsg: "Selamat datang di IzzGmail Pedia! Dilarang menyetorkan Gmail palsu atau hasil curian." // Default marquee
 };
 
 let selectedUserPass = ""; 
@@ -1840,9 +1839,10 @@ onAuthStateChanged(auth, async (user) => {
     // JALANKAN LISTENER NOTIFIKASI REAL-TIME
     if (isAdmin(user.email)) {
       startAdminNotifListener();
+      startAdminBellListener(); // Panggil listener lonceng admin
     } else {
       startUserNotifListener();
-      startUserBellListener(); // Listener khusus lonceng user
+      startUserBellListener(); // Panggil listener lonceng user
     }
 
     // Jalankan Jam Digital
@@ -1938,12 +1938,6 @@ function applySiteSettingsUI() {
   const marqueeEl = document.getElementById('marquee-text-user');
   if (marqueeEl) {
     marqueeEl.textContent = siteSettings.marqueeMsg || "Belum ada pesan.";
-  }
-
-  // Tampilkan Notif di Lonceng jika ada pesan
-  const notifMsgEl = document.getElementById('notif-msg-content');
-  if (notifMsgEl) {
-    notifMsgEl.textContent = siteSettings.notifMsg || "Belum ada notifikasi baru.";
   }
 }
 
@@ -3304,8 +3298,10 @@ function startAdminNotifListener() {
   });
 }
 
-/* ===== ADMIN BELL ===== */
-async function startAdminBellListener() {
+/* ===== LISTENER LONCENG ADMIN ===== */
+function startAdminBellListener() {
+  if (!currentUser || !isAdmin(currentUser.email)) return;
+  
   // Pantau log_saldo terbaru untuk admin
   const qLog = query(collection(db, 'log_saldo'), orderBy('createdAt', 'desc'), limit(1));
   
